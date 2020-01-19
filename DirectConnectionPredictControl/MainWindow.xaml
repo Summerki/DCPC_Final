@@ -1,0 +1,307 @@
+﻿<Window x:Class="DirectConnectionPredictControl.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DirectConnectionPredictControl"
+        mc:Ignorable="d" 
+        Style="{StaticResource NormalWinStyle}"
+        WindowStartupLocation="CenterScreen"
+        Title="直通预控维护软件"
+        x:Name="MyWindow"
+        Loaded="MyWindow_Loaded"
+       AllowsTransparency="True" Icon="Asserts/Image/speed_test_120px_1118805_easyicon.net.ico">
+ <!--sb-->
+    <Window.Resources>
+      <!--test-->
+        <Storyboard x:Key="open">
+            <DoubleAnimation From="0" To="1" Duration="0:0:0.5"
+                                 Storyboard.TargetName="MyWindow"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Offset"/>
+            <DoubleAnimation From="0" To="1" BeginTime="0:0:0.1" Duration="0:0:0.4"
+                                 Storyboard.TargetName="MyWindow"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Offset"/>
+            <ColorAnimation BeginTime="0:0:0.5" Duration="0:0:0" From="Transparent" To="Yellow" Storyboard.TargetName="MyWindow"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Color" />
+        </Storyboard>
+        <Storyboard x:Key="close"  Completed="Storyboard_Completed">
+            <DoubleAnimation From="1" To="0" Duration="0:0:0.4"
+                                 Storyboard.TargetName="MyWindow"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Offset"/>
+            <DoubleAnimation Duration="0:0:.3" BeginTime="0:0:0.1" From="1" To="0"
+                                 Storyboard.TargetName="MyWindow"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Offset"/>
+            <ColorAnimation  Duration="0" From="Yellow" To="Transparent"
+                                Storyboard.TargetName="MyWindow"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Color"/>
+        </Storyboard>
+    </Window.Resources>
+  
+    <!--透明掩码-->
+    <Window.OpacityMask>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="Transparent"></GradientStop>
+            <GradientStop Offset="0" Color="Yellow"></GradientStop>
+        </LinearGradientBrush>
+    </Window.OpacityMask>
+    
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Button.Click">
+            <BeginStoryboard Storyboard="{StaticResource close}"></BeginStoryboard>
+            <EventTrigger.SourceName>closeBtn</EventTrigger.SourceName>
+        </EventTrigger>
+    </Window.Triggers>
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+            <GradientStop Color="#36BAFE" Offset="1"/>
+            <GradientStop Color="#4E8DFE" Offset="0"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
+
+    <DockPanel>
+        <local:DashboardControls x:Name="MainDashboard" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Bottom"/>
+       
+        <Grid DockPanel.Dock="Top">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"/>
+          
+         
+
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#36BAFE" Offset="1"/>
+                    <GradientStop Color="#3399ff" Offset="0"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal"  HorizontalAlignment="Left" >
+                <Image Source="Asserts/Image/speed_test_120px_1118805_easyicon.net.ico" Margin="8" Height="20"></Image>
+                    <Label FontWeight="Normal"  VerticalContentAlignment="Center" FontSize="16"  Foreground="White" >DZ-1型制动系统维护软件</Label>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="miniumBtn" Content="-"  Click="miniumBtn_Click" VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>
+                <Button Name="maximunBtn" Content="□" Click="maximun_Click"  HorizontalContentAlignment="Center"  VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>
+                <Button Name="closeBtn"  Content="×" VerticalAlignment="Center" Style="{StaticResource CloseButtonStyle}" Click="ButtonClick"/>
+            </StackPanel>
+        </Grid>
+        <Menu Grid.Row="1"  FontFamily="Microsoft YaHei UI" FontSize="15" Grid.RowSpan="2" >
+            <Menu.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#36BAFE" Offset="1"/>
+                    <GradientStop Color="#3399ff" Offset="0"/>
+                </LinearGradientBrush>
+    
+            </Menu.Background>
+            <MenuItem Name="fileItem" Header="文件"  Style="{StaticResource MenuItemStyle}" >
+                    <MenuItem Name="openFileItem" Header="打开文件" Style="{StaticResource SubMenuItemStyle}" Click="fileItem_Click" />
+                    <MenuItem Name="exportXls" Header="导出为excel文件" Style="{StaticResource SubMenuItemStyle}" Click="exportXls_Click"></MenuItem>
+            </MenuItem>  
+            <MenuItem Name="checkItem" Header="查看" Style="{StaticResource MenuItemStyle}"  >
+                    <MenuItem Name="OverViewItem" Header="整车详细" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                    <MenuItem Name="chartView" Header="曲线数据" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick">
+                        <MenuItem Name="chartViewItem" Header="数据分类" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                        <MenuItem Name="singleViewItem" Header="单架分类" Style="{StaticResource SubMenuItemStyle }" Click="ButtonClick"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Name="nodeViewItem" Header="节点视图" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                <MenuItem Name="vehicleViewItem" Header="车辆视图" Style="{StaticResource SubMenuItemStyle}">
+                    <MenuItem Name="car1View" Header="A1车" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                        <MenuItem Name="car2View" Header="A2车" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                        <MenuItem Name="car3View" Header="B1车" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                        <MenuItem Name="car4View" Header="B2车" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                        <MenuItem Name="car5View" Header="C1车" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                        <MenuItem Name="car6View" Header="C2车" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                </MenuItem>
+                <MenuItem Name="netViewItem" Header="网络视图" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                <MenuItem Name="toolBarItem" Header="工具栏" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                <MenuItem Name="stateBarItem" Header="状态栏" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                <MenuItem Name="AntiskidItem" Header="防滑分析" Style="{StaticResource SubMenuItemStyle}" >
+                        <MenuItem Name="Antiskid_Display_Item" Header="防滑分析显示" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"/>
+                        <MenuItem Name="Antiskid_Setting_Item" Header="防滑分析设置" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick" />
+                    </MenuItem>
+                    <MenuItem Name="TChartItem" Header="TChart显示" Style="{StaticResource SubMenuItemStyle}" Click="TChartItem_Click"></MenuItem>
+                </MenuItem>
+            <MenuItem Name="diagnosisItem" Header="诊断"  Margin="6,0,0,0" Style="{StaticResource MenuItemStyle}" >
+                <MenuItem Name="curFaultItem" Header="当前错误" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                <MenuItem Name="eventLogItem" Header="事件记录" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+            </MenuItem>
+            <MenuItem Name="maintainItem" Header="维护"  Style="{StaticResource MenuItemStyle}" >
+                    <MenuItem Name="fileZileDownloadItem" Header="FTP下载(推荐)" Style="{StaticResource SubMenuItemStyle}" Click="fileZileDownloadItem_Click"></MenuItem>
+                    <MenuItem Name="ftpDownloadItem" Header="FTP下载" Style="{StaticResource SubMenuItemStyle}" Click="ftpDownloadItem_Click"></MenuItem>
+                <MenuItem Name="wheelDiaItem" Header="车轮直径" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                <MenuItem Name="rtcItem" Header="实时时钟" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                <MenuItem Name="mileageItem" Header="里程数" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                <MenuItem Name="uploadItem" Header="下载软件" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                <MenuItem Name="selfInspectItem" Header="自检" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                <MenuItem Name="resetGatewayItem" Header="重置网关\nFRAM记忆" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                <MenuItem Name="detectmmmItem" Header="检测MMM\n模式" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                <MenuItem Name="sendrioItem" Header="Send RIO\nOutput\nMessage" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+             </MenuItem>
+            <MenuItem Name="rtdataItem" Header="实时数据" Style="{StaticResource MenuItemStyle}" >
+                    <MenuItem Name="showPresentChartItem" Header="显示实时曲线" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick">
+                        <MenuItem Name="showSpeedChartItem" Header="显示速度曲线" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                        <MenuItem Name="showPressureChartItem" Header="显示制动压力曲线" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                        <MenuItem Name="showOtherChartItem" Header="显示其他压力曲线" Style="{StaticResource SubMenuItemStyle}" Click="ButtonClick"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Name="configScreenItem" Header="配置屏幕" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                    <MenuItem Name="newWndItem" Header="新窗口" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+            </MenuItem>
+            <MenuItem Name="optionItem" Header="选项" Style="{StaticResource MenuItemStyle}" >
+                    <MenuItem Name="connectMethod" Header="连接方式" Style="{StaticResource SubMenuItemStyle}">
+                        <MenuItem Name="byEthItem" Header="以太网" Style="{StaticResource SubMenuItemStyle}" Checked="byEthItem_Checked"></MenuItem>
+                        <MenuItem Name="byCanItem" Header="USB-CAN" Style="{StaticResource SubMenuItemStyle}" Checked="byCanItem_Checked"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Name="resumeItem" Header="恢复接收" Style="{StaticResource SubMenuItemStyle}" Click="resumeItem_Click"></MenuItem>
+                    <MenuItem Name="busItem" Header="总线" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                    <MenuItem Name="detectNetItem" Header="检测网络" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                    <MenuItem Name="recordConfigItem" Header="文件记录频率" Style="{StaticResource SubMenuItemStyle}">
+                        <MenuItem Name="frequent16" Header="16ms" Style="{StaticResource SubMenuItemStyle}" Click="RecordFreq"></MenuItem>
+                        <MenuItem Name="frequent32" Header="32ms" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                        <MenuItem Name="frequent64" Header="64ms" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                        <MenuItem Name="frequent128" Header="128ms" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                        <MenuItem Name="frequent256" Header="256ms" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                        <MenuItem Name="frequent512" Header="512ms" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                        <MenuItem Name="frequent1024" Header="1024ms" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                    </MenuItem>
+            </MenuItem>
+            <MenuItem Name="wndItem" Header="窗口" Style="{StaticResource MenuItemStyle}" >
+                <MenuItem Name="resetWndItem" Header="重置窗口" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                <MenuItem Name="tileWnDItem" Header="平铺窗口" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="帮助"  Style="{StaticResource MenuItemStyle}" >
+                    <MenuItem Name="aboutItem" Header="关于" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                    <MenuItem Name="userGuideItem" Header="用户指南" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                    <MenuItem Name="seriesNumItem" Header="序列号" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+             </MenuItem>
+        </Menu>
+
+
+        <ToolBar Grid.Row="3" Background="#EBEEF2" Loaded="ToolBar_Loaded">
+
+            <Button VerticalAlignment="Center" Style="{StaticResource ToolBarButtonStyle}" Width="Auto" Height="Auto" >
+                <Image Width="18" Source="Asserts/Image/openfile.ico"></Image>
+            </Button>
+            <Button VerticalAlignment="Center" Style="{StaticResource ToolBarButtonStyle}" Width="Auto"  Height="Auto" >
+                <Image Width="18" Source="Asserts/Image/search.ico"></Image>
+            </Button>
+            <Button VerticalAlignment="Center" Style="{StaticResource ToolBarButtonStyle}" Width="Auto"  Height="Auto">
+                <Image Width="18" Source="Asserts/Image/folder.ico"></Image>
+            </Button>
+            <Button VerticalAlignment="Center" Style="{StaticResource ToolBarButtonStyle}" Width="Auto"  Height="Auto">
+                <Image Width="18" Source="Asserts/Image/forward.ico"></Image>
+            </Button>
+            <Button VerticalAlignment="Center" Style="{StaticResource ToolBarButtonStyle}" Width="Auto"   Height="Auto">
+                <Image Width="18" Source="Asserts/Image/after.ico"></Image>
+            </Button>
+            <Button VerticalAlignment="Center" Style="{StaticResource ToolBarButtonStyle}" Width="Auto"  Height="Auto">
+                <Image Width="18" Source="Asserts/Image/about.ico"></Image>
+            </Button>
+        </ToolBar>
+
+
+         </Grid>
+         <Grid VerticalAlignment="Center" Margin="30,50,30,0">
+            <Image  Source="Asserts/train.png"></Image>
+            <Grid>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="trainHeaderFirstBtn" Click="ButtonClick" Style="{StaticResource TrainButtonStyle}" Content="①"  Grid.Column="2" Grid.ColumnSpan="2"  VerticalAlignment="Bottom" HorizontalAlignment="Center"   Margin="0,0,0,30" ></Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="trainHeaderSecondBtn" Click="ButtonClick" Style="{StaticResource TrainButtonStyle}" Content="②" Grid.Column="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,40" ></Button>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="trainMiddleFirstBtn" Click="ButtonClick" Style="{StaticResource TrainButtonStyle}" Content="③" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,40" ></Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="trainMiddleSecondBtn" Click="ButtonClick" Style="{StaticResource TrainButtonStyle}" Content="④" Grid.Column="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,40" ></Button>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="trainTailFirstBtn" Click="ButtonClick" Style="{StaticResource TrainButtonStyle}" Content="⑤"  Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,40" ></Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="trainTailSecondBtn" Click="ButtonClick" Style="{StaticResource TrainButtonStyle}" Content="⑥"  Grid.Column="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,40" ></Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>

@@ -1,0 +1,133 @@
+﻿<Window x:Class="DirectConnectionPredictControl.ParameterSetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:MYUI="clr-namespace:DirectConnectionPredictControl"
+        mc:Ignorable="d"
+        Style="{StaticResource NormalWinStyle}"
+        WindowStartupLocation="CenterScreen"
+        Title="ParameterSetWindow" Height="480" Width="400">
+    <DockPanel>
+
+        <Grid DockPanel.Dock="Top" Grid.Row="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#36BAFE" Offset="1"/>
+                    <GradientStop Color="#3399ff" Offset="0"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal"  HorizontalAlignment="Left" >
+                <Label FontWeight="Normal" Margin="8,4,0,4" FontSize="14" VerticalContentAlignment="Center" Foreground="White" >校准轮直径2A</Label>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="miniumBtn" Content="-"  Click="miniumBtn_Click" VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>
+                <Button Name="closeBtn"  Content="×" VerticalAlignment="Center" Style="{StaticResource CloseButtonStyle}" Click="closeBtn_Click"/>
+            </StackPanel>
+        </Grid>
+        <Grid DockPanel.Dock="Bottom" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1" ></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#EDF1F8" Offset="0"/>
+                    <GradientStop Color="#C6DDF2"  Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Button Grid.Column="0" Style="{StaticResource ParaButtontyle}">确定</Button>
+            <Separator Grid.Column="1" Background="White"></Separator>
+            <Button Grid.Column="2" Style="{StaticResource ParaButtontyle}" >取消</Button>
+        </Grid>
+        <StackPanel Grid.Row="1">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#EDF1F8" Offset="0"/>
+                    <GradientStop Color="#C6DDF2"  Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <TextBlock HorizontalAlignment="Center" Margin="8" FontSize="14">所有车轮测量以毫米为单位</TextBlock>
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="16,8,16,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">校准轴号</TextBlock>
+                    <MYUI:ComboBoxControl x:Name="CalibratedAxleNo" Grid.Column="1"></MYUI:ComboBoxControl>
+                </Grid>
+                <Grid Grid.Row="1" Margin="16,8,16,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">校准轮尺寸</TextBlock>
+                    <TextBlock Name="CalibratedWheelSize" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">740</TextBlock>
+                </Grid>
+                <Grid Grid.Row="2" Margin="16,8,16,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">公称轮径</TextBlock>
+                    <TextBlock Name="NominalWheelSize" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">740</TextBlock>
+                </Grid>
+                <Grid Grid.Row="3" Margin="16,8,16,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">每转脉冲</TextBlock>
+                    <TextBlock Name="PulsesPerRev" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">110</TextBlock>
+                </Grid>
+                <Grid Grid.Row="4" Margin="16,8,16,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">设定轮尺寸</TextBlock>
+                    <MYUI:ComboBoxControl x:Name="WheelSize" Grid.Column="1"></MYUI:ComboBoxControl>
+
+                </Grid>
+                <Grid Grid.Row="5" Margin="16,8,16,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">最大值</TextBlock>
+                    <TextBlock Name="MaxSize" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">860</TextBlock>
+                </Grid>
+                <Grid Grid.Row="6" Margin="16,8,16,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">最小值</TextBlock>
+                    <TextBlock Name="MinSize" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">780</TextBlock>
+                </Grid>
+
+
+            </Grid>
+
+        </StackPanel>
+
+    </DockPanel>
+</Window>

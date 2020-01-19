@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+    	h4 {text-align: center; color: #ffffff}
+    </style>
+</head>
+
+<body style="height: 100%; margin: 0 ;background: #515151;">
+    <div>
+        <input type="file" id="file" accept=".json" onchange="upload(this)">
+        
+    </div>
+    <div class="chartContainer" style="height: 100%; background: #515151;">
+    	<h4 class="header">图表 #1</h4>
+        <div id="container_1" style="float:left; width: 100%; height: 33%"></div>
+
+    </div>
+    <script type="text/javascript" src="echarts.js"></script>
+    <!--<script>-->
+
+        <!--function showTask() {-->
+
+            <!--var xmlHttp = new XMLHttpRequest();-->
+            <!--xmlHttp.open("GET", "http://localhost:8080/tasks.do");-->
+            <!--xmlHttp.setRequestHeader("Accept", "text/html,*/*;q=0.8");-->
+            <!--console.log("setHeader success");-->
+            <!--xmlHttp.send();-->
+            <!--xmlHttp.onreadystatechange = function (ev) {-->
+                <!--if (xmlHttp.readyState === 4 && xmlHttp.status === 200){-->
+                    <!--var data = xmlHttp.responseText;-->
+                    <!--var jsonData = JSON.parse(data);-->
+                    <!--document.write(jsonData);-->
+                    <!--alert(jsonData);-->
+                <!--}-->
+            <!--}-->
+        <!--}-->
+    <!--</script>-->
+    <script type="text/javascript">
+        var colors = ['#5793f3', '#d14a61', '#675bba', '#ffaf60', '#53FF53'];
+        var getFile = document.getElementById("file");
+        var jsonObj;
+
+        var dateTime = [];
+        var container = {
+            code : [],
+            msg : [],
+            dataid : [],
+            data : [],
+            trainid : [],
+            speed : [],
+            bcp1 : [],
+            bcp2 : [],
+
+        };
+
+        var header = {
+
+            dataID: "数据ID",
+            trainID: "车辆ID",
+            datetimeID: "运行时间",
+            speed: "车辆运行速度",
+            bcp1: "1号制动风缸压力",
+            bcp2: "2号制动风缸压力",
+        };
+
+        var xdatas = [];
+        var ydatas = [];
+        var int=self.setInterval("showTask()",1000);
+        function showTask() {
+
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", "http://localhost:8080/GenJson/json");
+            xmlHttp.setRequestHeader("Accept", "text/html,*/*;q=0.8");
+            xmlHttp.send();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState === 4 && xmlHttp.status === 200){
+                    var data = xmlHttp.responseText;
+                    jsonObj = JSON.parse(data);
+                    formatContainer1();
+                    draw1();
+                    alert(jsonData);
+                }
+            }
+        }
+
+        function upload(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                jsonObj = JSON.parse(this.result);
+                formatContainer1();
+                draw1();
+
+            }
+            reader.readAsText(event.files[0]);
+        }
+
+        function formatContainer1(){
+
+            container.code.push(jsonObj.code);
+            container.msg.push(jsonObj.msg);
+            container.dataid.push(jsonObj.data.dataId);
+            container.trainid.push(jsonObj.data.trainId);
+            container.speed.push(jsonObj.data.speed);
+            container.bcp1.push(jsonObj.data.bcp1);
+            container.bcp2.push(jsonObj.data.bcp2);
+            dateTime.push(jsonObj.datetime);
+
+
+        }
+
+
+        function draw1() {
+            var dom = document.getElementById("container_1");
+            var myChart = echarts.init(dom, 'dark');
+            var option = {
+                legend: {
+                    data: [header.dataID,header.trainID,header.speed,header.bcp1,header.bcp2],
+                    inactiveColor: '#777',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        animation: false,
+                        type: 'cross',
+                        lineStyle: {
+                            color: '#376df4',
+                            width: 2,
+                            opacity: 1
+                        }
+                    },
+                    position: function (pos, params, el, elRect, size) {
+                		var obj = {top: 10};
+                		obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+                		return obj;
+            		}
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dateTime,
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                yAxis: [{
+                    type: 'value',
+                    name: '速度 km/h',
+                    splitLine:{show: false},
+                    min: 0,
+                    max: 100,
+                    axisLine: { lineStyle: { color: colors[0] } }
+                },
+                {
+                    type: 'value',
+                    name: '压力 kPa',
+                    splitLine:{show: false},
+                    min: 0,
+                    max: 1000,
+                    axisLine: {lineStyle: {color: colors[1]}}
+                }
+
+                ],
+                // toolbox: {
+                //     feature: {
+                //         dataView: {show: true, readOnly: false},
+                //         restore: {show: true},
+                //         saveAsImage: {show: true}
+                //     }
+                // },
+                series: [
+
+                {name: header.speed, type: 'line', data: container.speed, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}, yAxisIndex: 0},
+
+                {name: header.bcp1, type: 'line', data: container.bcp1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}, yAxisIndex: 0},
+                {name: header.bcp2, type: 'line', data: container.bcp2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}, yAxisIndex: 3},
+                      ],
+                dataZoom: [
+                    {
+                        type: 'inside',
+                        start: 0,
+                        end: 100,
+                    }
+                ],
+            };
+            myChart.setOption(option);
+        }
+
+    </script>
+</body>
+
+</html>

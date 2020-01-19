@@ -1,0 +1,501 @@
+﻿<Window x:Class="DirectConnectionPredictControl.Antiskid_Setting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DirectConnectionPredictControl"
+        mc:Ignorable="d"
+        Title="防滑分析输入" Height="900" Width="1800"
+        Name="Antiskid_Setting_Window"
+        Style="{StaticResource NormalWinStyle}"
+        Closed="Antiskid_Setting_Window_Closed"
+        xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0">
+
+    <Window.Resources>
+
+        <Storyboard x:Key="open">
+            <DoubleAnimation From="0" To="1" Duration="0:0:0.5"
+                                 Storyboard.TargetName="Antiskid_Setting_Window"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Offset"/>
+            <DoubleAnimation From="0" To="1" BeginTime="0:0:0.1" Duration="0:0:0.4"
+                                 Storyboard.TargetName="Antiskid_Setting_Window"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Offset"/>
+            <ColorAnimation BeginTime="0:0:0.5" Duration="0:0:0" From="Transparent" To="Yellow" Storyboard.TargetName="Antiskid_Setting_Window"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Color" />
+        </Storyboard>
+        <Storyboard x:Key="close"  Completed="Storyboard_Completed">
+            <DoubleAnimation From="1" To="0" Duration="0:0:0.4"
+                                 Storyboard.TargetName="Antiskid_Setting_Window"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Offset"/>
+            <DoubleAnimation Duration="0:0:.3" BeginTime="0:0:0.1" From="1" To="0"
+                                 Storyboard.TargetName="Antiskid_Setting_Window"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Offset"/>
+            <ColorAnimation  Duration="0" From="Yellow" To="Transparent"
+                                Storyboard.TargetName="Antiskid_Setting_Window"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Color"/>
+        </Storyboard>
+        <Style x:Key="ellipse" TargetType="Ellipse">
+            <Setter Property="Width" Value="12"></Setter>
+            <Setter Property="Height" Value="12"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Fill" Value="LightGray"></Setter>
+        </Style>
+    </Window.Resources>
+
+    <!--透明掩码-->
+    <Window.OpacityMask>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="Transparent"></GradientStop>
+            <GradientStop Offset="0" Color="Yellow"></GradientStop>
+        </LinearGradientBrush>
+    </Window.OpacityMask>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Button.Click">
+            <BeginStoryboard Storyboard="{StaticResource close}"></BeginStoryboard>
+            <EventTrigger.SourceName>closeBtn</EventTrigger.SourceName>
+        </EventTrigger>
+    </Window.Triggers>
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+            <GradientStop Color="#36BAFE" Offset="1"/>
+            <GradientStop Color="#4E8DFE" Offset="0"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#36BAFE" Offset="1"/>
+                        <GradientStop Color="#3399ff" Offset="0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal"  HorizontalAlignment="Left" >
+                    <Image Source="Asserts/Image/speed_test_120px_1118805_easyicon.net.ico" Margin="8" Height="20"></Image>
+                    <Label FontWeight="Normal"  VerticalContentAlignment="Center" FontSize="16"  Foreground="White" >防滑分析设定</Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="miniumBtn" Content="-"  Click="miniumBtn_Click" VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>
+                    <!--<Button Name="maximunBtn" Content="□" Click="maximunBtn_Click"  HorizontalContentAlignment="Center"  VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>-->
+                    <Button Name="closeBtn"  Content="×" VerticalAlignment="Center" Style="{StaticResource CloseButtonStyle}" Click="closeBtn_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <!--=====-->
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    
+                </Grid.RowDefinitions>
+                <!--======-->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <!--<TextBlock  >速度差△1阈值</TextBlock>-->
+                        <!--<ComboBox />-->
+                        <!--<TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15">请选择设定架几：</TextBlock>-->
+                    </Grid>
+                    <!--<Grid Grid.Column="1">
+                        <ComboBox Name="comboBox" FontSize="12" VerticalAlignment="Stretch" Margin="0,0,86,0" HorizontalAlignment="Right" Width="70">
+                            <ComboBoxItem  IsSelected="True">架1</ComboBoxItem>
+                            <ComboBoxItem  >架2</ComboBoxItem>
+                            <ComboBoxItem  >架3</ComboBoxItem>
+                            <ComboBoxItem  >架4</ComboBoxItem>
+                            <ComboBoxItem  >架5</ComboBoxItem>
+                            <ComboBoxItem  >架6</ComboBoxItem>
+                        </ComboBox>
+                    </Grid>-->
+                    <Grid Grid.Column="3">
+                        <Button Name="Confirm_Button" Click="Confirm_Button_Click" Width="80"  >设置完成</Button>
+                        
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" >
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv1阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox TextChanged="TextBox_1_TextChanged" Name="TextBox_1" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black"  >1.1</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv2阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <TextBox TextChanged="TextBox_2_TextChanged" Name="TextBox_2" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >2.0</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="4">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv3阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="5">
+                        <TextBox TextChanged="TextBox_3_TextChanged" Name="TextBox_3" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >3.4</TextBox>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="3" Height="5">
+                    <Separator Background="LightGray" />
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv4阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox TextChanged="TextBox_4_TextChanged" Name="TextBox_4" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >6.7</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv5阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <TextBox TextChanged="TextBox_5_TextChanged" Name="TextBox_5" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0.0</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="4">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv6阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="5">
+                        <TextBox TextChanged="TextBox_6_TextChanged" Name="TextBox_6" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >1.7</TextBox>
+                    </Grid>
+                </Grid>
+                <!--=======-->
+            </Grid>
+            <!--=====-->
+            
+            <!--====-->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Height="5">
+                    <Separator Background="LightGray" />
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv7阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox TextChanged="TextBox_7_TextChanged" Name="TextBox_7" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >3.1</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv8阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <TextBox TextChanged="TextBox_8_TextChanged" Name="TextBox_8" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >4.2</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="4">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv9阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="5">
+                        <TextBox TextChanged="TextBox_9_TextChanged" Name="TextBox_9" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >7.4</TextBox>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="2" Height="5">
+                    <Separator Background="LightGray" />
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv10阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox TextChanged="TextBox_10_TextChanged" Name="TextBox_10" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0.0</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv11阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <TextBox TextChanged="TextBox_11_TextChanged" Name="TextBox_11" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >2.2</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="4">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv12阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="5">
+                        <TextBox TextChanged="TextBox_12_TextChanged" Name="TextBox_12" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >3.9</TextBox>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="4" Height="5">
+                    <Separator Background="LightGray" />
+                </Grid>
+
+            </Grid>
+            
+            <!--=====-->
+
+            <!--====-->
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv13阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox TextChanged="TextBox_13_TextChanged" Name="TextBox_13" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >4.8</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv14阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <TextBox TextChanged="TextBox_14_TextChanged" Name="TextBox_14" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >10.5</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="4">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度差Δv15阈值[0~25]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="5">
+                        <TextBox  TextChanged="TextBox_15_TextChanged" Name="TextBox_15" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0.0</TextBox>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1" Height="5">
+                    <Separator Background="LightGray" />
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >减速度阈值a1[-12.5~12.5]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox TextChanged="TextBox_16_TextChanged" Name="TextBox_16" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0.0</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >减速度阈值a2[-12.5~12.5]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <TextBox TextChanged="TextBox_17_TextChanged" Name="TextBox_17"  Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0.0</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="4">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >减速度阈值a3[-12.5~12.5]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="5">
+                        <TextBox TextChanged="TextBox_18_TextChanged" Name="TextBox_18" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0.0</TextBox>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="3" Height="5">
+                    <Separator Background="LightGray" />
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >阶段充风比率[0~100]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox TextChanged="TextBox_19_TextChanged" Name="TextBox_19" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >阶段充风周期[0~10]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <TextBox TextChanged="TextBox_20_TextChanged" Name="TextBox_20" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="4">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >阶段充风保压周期[0~10]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="5">
+                        <TextBox TextChanged="TextBox_21_TextChanged" Name="TextBox_21" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >6</TextBox>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <!--====-->
+
+            <!--=====-->
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Height="5">
+                    <Separator Background="LightGray" />
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >第一次排风比率[0~100]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox TextChanged="TextBox_22_TextChanged"  Name="TextBox_22" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >阶段排风比率[0~100]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <TextBox TextChanged="TextBox_23_TextChanged" Name="TextBox_23" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="4">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >阶段排风周期[0~10]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="5">
+                        <TextBox TextChanged="TextBox_24_TextChanged" Name="TextBox_24" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0</TextBox>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="2" Height="5">
+                    <Separator Background="LightGray" />
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >阶段排风保压周期[0~10]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox TextChanged="TextBox_25_TextChanged" Name="TextBox_25" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >4</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >一次排风比率[0~100]：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <TextBox TextChanged="TextBox_26_TextChanged" Name="TextBox_26" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Column="4">
+                        <TextBlock HorizontalAlignment="Right" FontSize="15" VerticalAlignment="Center" >速度大于70km/h百分比阈值：</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="5">
+                        <TextBox TextChanged="TextBox_27_TextChanged" Name="TextBox_27" Width="70" Height="30" FontSize="15" HorizontalAlignment="Left" BorderBrush="Black" >0</TextBox>
+                    </Grid>
+                </Grid>
+
+            </Grid>
+            <!--=====-->
+        </Grid>
+    </DockPanel>
+</Window>

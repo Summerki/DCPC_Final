@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="DirectConnectionPredictControl.DashboardControls"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ZUI="clr-namespace:DirectConnectionPredictControl"
+             xmlns:ec="http://schemas.microsoft.com/expression/2010/controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DirectConnectionPredictControl"
+             mc:Ignorable="d" 
+             Width="Auto" Height="Auto">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0" Width="Auto" Height="Auto">
+        <StackPanel Orientation="Vertical" Margin="0" >
+           
+            <Border Background="White" >
+
+                <ZUI:Dashboard x:Name="dashboard" Width="250" Height="250" Margin="20,20,20,0"
+                                   LongTickCount="9" Maximum="160" ShortTickCount="3" Skin="Flow"
+                                   Value="{Binding Path=Value,
+                                               ElementName=slider}" />
+            </Border>
+                <Slider x:Name="slider" Visibility="Hidden" Width="100" Height="1" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                        Maximum="160" Minimum="0" Value="40" Margin="10" />
+        </StackPanel>
+        <StackPanel Name="dashTextStack" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,80">
+            <TextBlock Name="speedtext" Text="车速" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+            <TextBlock Name="speed" HorizontalAlignment="Center" FontSize="26" Foreground="Gray"
+                                           Text="{Binding Path=Value,
+                                                          ElementName=dashboard}" />
+            <TextBlock Name="Kmphtext"  FontSize="12"  HorizontalAlignment="Center" Text="km/h" />
+        </StackPanel>
+    </Grid>
+  
+</UserControl>

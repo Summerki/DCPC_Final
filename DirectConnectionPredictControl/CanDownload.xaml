@@ -1,0 +1,114 @@
+﻿<Window x:Class="DirectConnectionPredictControl.CanDownload"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:MYUI="clr-namespace:DirectConnectionPredictControl"
+        mc:Ignorable="d"
+        Title="CanDownload" Height="450" Width="400"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource NormalWinStyle}"
+        >
+    <DockPanel>
+        
+        
+        <Grid DockPanel.Dock="Top" Grid.Row="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#36BAFE" Offset="1"/>
+                    <GradientStop Color="#3399ff" Offset="0"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal"  HorizontalAlignment="Left" >
+                <Label FontWeight="Normal" Margin="8,4,0,4" FontSize="14" VerticalContentAlignment="Center" Foreground="White" >程序下载</Label>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="miniumBtn" Content="-" VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}" Click="miniumBtn_Click"/>
+                <Button Name="closeBtn"  Content="×" VerticalAlignment="Center" Style="{StaticResource CloseButtonStyle}" Click="closeBtn_Click"/>
+            </StackPanel>
+        </Grid>
+
+        
+        
+        <Grid DockPanel.Dock="Bottom" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1" ></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#EDF1F8" Offset="0"/>
+                    <GradientStop Color="#C6DDF2"  Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Button Name="startDownloadBtn" Grid.Column="0" Style="{StaticResource ParaButtontyle}" Click="startDownloadBtn_Click">开始下载</Button>
+            <Separator Grid.Column="1" Background="White"></Separator>
+            <Button Name="cancelDownloadBtn" Grid.Column="2" Style="{StaticResource ParaButtontyle}" Click="cancelDownloadBtn_Click">取消</Button>
+        </Grid>
+
+
+        <StackPanel Grid.Row="1">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#EDF1F8" Offset="0"/>
+                    <GradientStop Color="#C6DDF2"  Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <TextBlock HorizontalAlignment="Center" Margin="8" FontSize="14">CAN下载器</TextBlock>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <Label HorizontalAlignment="Left" FontSize="13" VerticalContentAlignment="Center" >CAN设备操作</Label>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <Button Name="openCanBtn" HorizontalAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource canbtn}" >连接设备</Button>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                        <Button Name="closeCanBtn" HorizontalAlignment="Center" Style="{StaticResource canbtn}">关闭设备</Button>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <Label VerticalAlignment="Center" FontSize="13">选择程序文件</Label>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <TextBox Background="{x:Null}" VerticalContentAlignment="Center" FontSize="13" HorizontalContentAlignment="Right" Width="120" BorderBrush="LightBlue" BorderThickness="1.2">请选择文件路径</TextBox>
+                        <Button Name="chooseFileBtn" VerticalContentAlignment="Center" Margin="8,0,0,0" Style="{StaticResource canbtn}" Click="chooseFileBtn_Click">选择</Button>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="2" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <Label VerticalAlignment="Center" FontSize="13">选择波特率</Label>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <MYUI:ComboBoxControl x:Name="boundRateCbx"></MYUI:ComboBoxControl>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </StackPanel>
+    </DockPanel>
+</Window>

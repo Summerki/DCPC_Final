@@ -1,0 +1,504 @@
+﻿<Window x:Class="DirectConnectionPredictControl.SlaveDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ZUI="clr-namespace:DirectConnectionPredictControl"
+        mc:Ignorable="d"
+        x:Name="MySlaveDetailWindow"
+        Loaded="MySlaveDetailWindow_Loaded"
+        Style="{StaticResource NormalWinStyle}"
+        WindowStartupLocation="CenterScreen"
+        Title="SlaveDetailWindow" 
+        Closed="MySlaveDetailWindow_Closed">
+    <DockPanel>
+
+        <Grid DockPanel.Dock="Top">
+            <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown2" >
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#36BAFE" Offset="1"/>
+                        <GradientStop Color="#3399ff" Offset="0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal"  HorizontalAlignment="Left" >
+                    <Image Source="Asserts/Image/speed_test_120px_1118805_easyicon.net.ico" Margin="8" Height="20"></Image>
+                    <Label Name="titleLbl" FontWeight="Normal"  VerticalContentAlignment="Center" FontSize="16"  Foreground="White" >详情</Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="miniumBtn2" Content="-"  Click="miniumBtn2_Click" VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>
+                    <Button Name="closeBtn2"  Content="×"  Click="closeBtn2_Click"  VerticalAlignment="Center" Style="{StaticResource CloseButtonStyle}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer >
+                <StackPanel Grid.Column="0" Background="#F3F3F5">
+
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" ></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="生命信号：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte01Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="滑行：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte2Bit0Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="紧急制动激活：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte2Bit1Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="空气制动施加：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte2Bit2Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="制动风缸压力低：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte2Bit3Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="停放制动缓解：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte2Bit4Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="气制动状态：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte2Bit5Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="载荷信号有效：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte2Bit6Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="车架滑行" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte3Bit0Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="紧急制动施加:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte3Bit1Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="制动已缓解:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte3Bit3Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="制动风缸压力低:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte3Bit4Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="停放制动缓解（仅架2有）:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte3Bit5Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="气制动状态：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte3Bit6Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="载荷信号有效：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t7Byte3Bit7Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="1轴速度有效:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte4Bit0Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="2轴速度有效:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte4Bit1Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="1轴有滑行控制:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte4Bit2Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="2轴有滑行控制:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte4Bit3Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="空气制动有滑行控制:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte4Bit4Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="速度传感器1故障:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte6Bit0Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="速度传感器2故障:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte6Bit1Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="轴1WSP故障:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte6Bit2Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="轴2WSP故障:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte6Bit3Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="编码插头故障:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte6Bit4Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="空簧超限故障:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte6Bit5Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="制动不缓解故障：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte6Bit6Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="A1车BCP太低：" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte6Bit7Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="BCU严重故障:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte7Bit0Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="BCU中等故障:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte7Bit1Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="BCU轻微故障:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte7Bit2Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Text="紧急制动功能异常:" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                        <TextBlock Name="t10Byte7Bit3Tb" VerticalAlignment="Center" Grid.Column="1" Text="02类型1" TextAlignment="Center"></TextBlock>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+            <Label Grid.Column="1" Width="1" Background="#DDDDE1"></Label>
+            <DockPanel Grid.Column="2">
+                <ScrollViewer>
+                <StackPanel DockPanel.Dock="Top">
+
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0" Width="Auto" Height="Auto">
+                            <StackPanel Orientation="Vertical">
+                                <ZUI:Dashboard x:Name="t10Byte01Dashboard" Width="200" Height="200" Margin="10,20"
+                               LongTickCount="9" Maximum="160" ShortTickCount="2" Skin="Speed"
+                               Value="{Binding Path=Value,
+                                               ElementName=t10Byte01Slider}" />
+                                <Slider x:Name="t10Byte01Slider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                        Maximum="160" Minimum="0" Value="0"  />
+                            </StackPanel>
+                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="1轴检测速度"></TextBlock>
+                        </Grid>
+                        <Grid  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0" Width="Auto" Height="Auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Name="t8Byte01Tb" Text="1架空气制动目标值：800" Padding="4" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                                <TextBlock Grid.Row="1" Name="t9Byte23Tb" Text="2架空气制动目标值：800" Padding="4" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+                                <TextBlock Grid.Row="2" Name="t9Byte45Tb" Text="3架空气制动目标值：800" Padding="4" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+
+                            </Grid>
+                        <Grid Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0" Width="Auto" Height="Auto">
+                            <StackPanel Orientation="Vertical">
+                                    <ZUI:Dashboard x:Name="t10Byte23Dashboard" Width="200" Height="200" Margin="10,20"
+                               LongTickCount="9" Maximum="160" ShortTickCount="2" Skin="Speed"
+                               Value="{Binding Path=Value,
+                                               ElementName=t10Byte23Slider}" />
+                                <Slider x:Name="t10Byte23Slider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                        Maximum="160" Minimum="0" Value="0"  />
+                            </StackPanel>
+                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="2轴检测速度"></TextBlock>
+                        </Grid>
+                    </Grid>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0" Width="Auto" Height="Auto">
+                            <StackPanel Orientation="Vertical">
+                                <ZUI:Speedboard x:Name="t8Byte23Speedboard" Width="170" Height="170" 
+                               LongTickCount="7" Maximum="1200" ShortTickCount="2" Skin="Speed"
+                               Value="{Binding Path=Value,
+                                               ElementName=t8Byte23Slider}" 
+                               Foreground="Blue" FontSize="10" />
+                                <Slider x:Name="t8Byte23Slider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                        Maximum="1200" Minimum="0" Value="0"  />
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="制动风缸压力(kpa)"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0" Width="Auto" Height="Auto">
+                            <StackPanel Orientation="Vertical">
+                                <ZUI:Speedboard x:Name="t8Byte45Speedboard" Width="170" Height="170" 
+                               LongTickCount="11" Maximum="20" ShortTickCount="2" Skin="Speed"
+                               Value="{Binding Path=Value,
+                                               ElementName=t8Byte45Slider}" 
+                               Foreground="Blue" FontSize="10" />
+                                <Slider x:Name="t8Byte45Slider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                        Maximum="20" Minimum="0" Value="0"  />
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="载荷(ton)"></TextBlock>
+                        </Grid>
+                            <Grid Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0" Width="Auto" Height="Auto">
+                                <StackPanel Orientation="Vertical">
+                                    <ZUI:Speedboard x:Name="t8Byte67Speedboard" Width="170" Height="170" 
+                               LongTickCount="7" Maximum="1200" ShortTickCount="2" Skin="Speed"
+                               Value="{Binding Path=Value,
+                                               ElementName=t8Byte67Slider}" 
+                               Foreground="Blue" FontSize="10" />
+                                    <Slider x:Name="t8Byte67Slider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                        Maximum="1200" Minimum="0" Value="0"  />
+                                </StackPanel>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="停放缸压力(kpa)"></TextBlock>
+                            </Grid>
+                        </Grid>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0" Width="Auto" Height="Auto">
+                            <StackPanel Orientation="Vertical">
+                                <ZUI:Speedboard x:Name="t9Byte01Speedboard" Width="170" Height="170" 
+                            LongTickCount="7" Maximum="1200" ShortTickCount="2" Skin="Speed"
+                            Value="{Binding Path=Value,
+                                            ElementName=t9Byte01Slider}" 
+                            Foreground="Blue" FontSize="10" />
+                                <Slider x:Name="t9Byte01Slider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                    Maximum="1200" Minimum="0" Value="0"  />
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="VLD压力实际值(kpa)"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0" Width="Auto" Height="Auto">
+                            <StackPanel Orientation="Vertical">
+                                <ZUI:Speedboard x:Name="t7Byte45Speedboard" Width="170" Height="170" 
+                            LongTickCount="7" Maximum="1200" ShortTickCount="2" Skin="Speed"
+                            Value="{Binding Path=Value,
+                                            ElementName=t7Byte45Slider}" 
+                            Foreground="Blue" FontSize="10" />
+                                <Slider x:Name="t7Byte45Slider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                    Maximum="1200" Minimum="0" Value="6"  />
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="制动缸1压力(kpa)"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0" Width="Auto" Height="Auto">
+                            <StackPanel Orientation="Vertical">
+                                <ZUI:Speedboard x:Name="t7Byte67Speedboard" Width="170" Height="170"
+                            LongTickCount="7" Maximum="1200" ShortTickCount="2" Skin="Speed"
+                            Value="{Binding Path=Value,
+                                            ElementName=t7Byte67Slider}" 
+                            Foreground="Blue" FontSize="10" />
+                                <Slider x:Name="t7Byte67Slider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                    Maximum="1200" Minimum="0" Value="0"  />
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="制动缸2压力(kpa)"></TextBlock>
+                        </Grid>
+                    </Grid>
+                    <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Width="Auto" Height="Auto">
+                                <StackPanel Orientation="Vertical">
+                                    <ZUI:Speedboard x:Name="vldSetupPressureSpeedboard" Width="170" Height="170"
+                                                    LongTickCount="7" Maximum="1200" ShortTickCount="2" Skin="Speed"
+                                                    Foreground="Blue" FontSize="10"
+                                                    Value="{Binding Path=Value, ElementName=vldSetupPressureSlider}"></ZUI:Speedboard>
+                                    <Slider x:Name="vldSetupPressureSlider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                                            Maximum="1200" Minimum="0" Value="0"></Slider>
+                                </StackPanel>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="VLD压力设定值(kpa)"></TextBlock>
+                            </Grid>
+                            <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Width="Auto" Height="Auto">
+                                <StackPanel Orientation="Vertical">
+                                    <ZUI:Speedboard x:Name="air1PressureSpeedboard" Width="170" Height="170"
+                                                    LongTickCount="7" Maximum="1200" ShortTickCount="2" Skin="Speed"
+                                                    Foreground="Blue" FontSize="10"
+                                                    Value="{Binding Path=Value, ElementName=air1PressureSlider}"></ZUI:Speedboard>
+                                    <Slider x:Name="air1PressureSlider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                                            Maximum="1200" Minimum="0" Value="0"></Slider>
+                                </StackPanel>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="空簧1压力(kpa)"></TextBlock>
+                            </Grid>
+                            <Grid Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Width="Auto" Height="Auto">
+                                <StackPanel Orientation="Vertical">
+                                    <ZUI:Speedboard x:Name="air2PressureSpeedboard" Width="170" Height="170"
+                                                    LongTickCount="7" Maximum="1200" ShortTickCount="2" Skin="Speed"
+                                                    Foreground="Blue" FontSize="10"
+                                                    Value="{Binding Path=Value, ElementName=air2PressureSlider}"></ZUI:Speedboard>
+                                    <Slider x:Name="air2PressureSlider" Width="300" Height="1" Visibility="Hidden" VerticalAlignment="Bottom" IsMoveToPointEnabled="True"
+                                            Maximum="1200" Minimum="0" Value="0"></Slider>
+                                </StackPanel>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"  Text="空簧2压力(kpa)"></TextBlock>
+                            </Grid>
+                        </Grid>
+                        <StackPanel DockPanel.Dock="Bottom"  Margin="0,20,0,0" MinHeight="100">
+                            <TextBlock Margin="8,0,0,0">维修故障列表:</TextBlock>
+                            <ListView  IsEnabled="True" Name="faultListView2" IsSynchronizedWithCurrentItem="True" AllowDrop="True">
+                                <ListView.View>
+                                    <GridView x:Name="GridViewContro2l" >
+                                        <GridViewColumn  Header="故障名称"  DisplayMemberBinding="{Binding FaultName}"/>
+                                        <GridViewColumn Header="故障类型" DisplayMemberBinding="{Binding FaultType}"/>
+                                        <GridViewColumn Header="故障位置" DisplayMemberBinding="{Binding FaultPosition}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+                    </StackPanel>
+                
+                </ScrollViewer>
+            </DockPanel>
+        </Grid>
+
+    </DockPanel>
+
+
+</Window>

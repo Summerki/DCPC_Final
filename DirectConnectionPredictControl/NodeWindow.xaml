@@ -1,0 +1,107 @@
+﻿<Window x:Class="DirectConnectionPredictControl.NodeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DirectConnectionPredictControl"
+        mc:Ignorable="d"
+        xmlns:ZUI="clr-namespace:DirectConnectionPredictControl"
+        x:Name="MyNodeWindow"
+        Loaded="MyNodeWindow_Loaded"
+        Style="{StaticResource NormalWinStyle}"
+        WindowStartupLocation="CenterScreen"
+        Title="NodelWindow" >
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#36BAFE" Offset="1"/>
+                        <GradientStop Color="#3399ff" Offset="0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal"  HorizontalAlignment="Left" >
+                    <Image Source="Asserts/Image/speed_test_120px_1118805_easyicon.net.ico" Margin="8" Height="20"></Image>
+                    <Label FontWeight="Normal"  VerticalContentAlignment="Center" FontSize="16"  Foreground="White" >节点状况</Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="nodeMinBtn" Content="-"  Click="nodeMinBtn_Click" VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>
+                    <Button Name="nodeCloseBtn"  Content="×"  Click="nodeClose_Click"  VerticalAlignment="Top" Style="{StaticResource CloseButtonStyle}" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <DockPanel >
+            
+            <Grid VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" x:Name="node1Btn" Style="{StaticResource NodeButton}" Content="节 点 1" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="16,8,16,8" IsDefault="True" />
+                    <TextBlock x:Name="node1Tb" Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Center" Text="正常"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" x:Name="node2Btn" Style="{StaticResource NodeButton}" Content="节 点 2" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="16,8,16,8" IsDefault="True" />
+                    <TextBlock Name="node2Tb" Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Center" Text="正常"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" x:Name="node3Btn" Style="{StaticResource NodeButton}" Content="节 点 3" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="16,8,16,8" IsDefault="True" />
+                    <TextBlock Name="node3Tb" Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Center" Text="正常"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" x:Name="node4Btn" Style="{StaticResource NodeButton}" Content="节 点 4" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="16,8,16,8" IsDefault="True" />
+                    <TextBlock Name="node4Tb" Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Center" Text="正常"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" x:Name="node5Btn" Style="{StaticResource NodeButton}" Content="节 点 5" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="16,8,16,8" IsDefault="True" />
+                    <TextBlock Name="node5Tb" Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Center" Text="正常"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" x:Name="node6Btn" Style="{StaticResource NodeButton}" Content="节 点 6" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="16,8,16,8" IsDefault="True" />
+                    <TextBlock Name="node6Tb" Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Center" Text="正常"></TextBlock>
+                </Grid>
+            </Grid>
+          
+        </DockPanel>
+           
+       
+    </DockPanel>
+
+
+</Window>
+

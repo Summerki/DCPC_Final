@@ -1,0 +1,68 @@
+﻿<Window x:Class="DirectConnectionPredictControl.ConfigHistoryDataGrid"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DirectConnectionPredictControl"
+        mc:Ignorable="d"
+        Title="列配置窗口" Height="350" Width="350"
+        ResizeMode="CanMinimize">
+    <StackPanel>
+        <TextBlock FontSize="13" >模拟量数据</TextBlock>
+        <ComboBox Name="ComboBox1" Text="{Binding SelectedText}" IsEditable="False" ItemsSource="{Binding Path=BookExs}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:AnalogDataClass}">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding IsChecked}" />
+                        <TextBlock Text="{Binding AnalogDataClass.AnalogData}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock FontSize="13" >数字量输入</TextBlock>
+        <ComboBox Name="ComboBox2" Text="{Binding SelectedText}" IsEditable="False" ItemsSource="{Binding Path=BookExs}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:DigitalInputClass}">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding IsChecked}" />
+                        <TextBlock Text="{Binding DigitalInputClass.DigitalInput}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock FontSize="13" >数字量输出</TextBlock>
+        <ComboBox Name="ComboBox3" Text="{Binding SelectedText}" IsEditable="False" ItemsSource="{Binding Path=BookExs}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:DigitalOutputClass}">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding IsChecked}" />
+                        <TextBlock Text="{Binding DigitalOutputClass.DigitalOutput}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock FontSize="13" >故障数据</TextBlock>
+        <ComboBox Name="ComboBox4" Text="{Binding SelectedText}" IsEditable="False" ItemsSource="{Binding Path=BookExs}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:FaultDataClass}">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding IsChecked}" />
+                        <TextBlock Text="{Binding FaultDataClass.FaultData}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock FontSize="13" >防滑数据</TextBlock>
+        <ComboBox Name="ComboBox5" Text="{Binding SelectedText}" IsEditable="False" ItemsSource="{Binding Path=BookExs}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:AntiskidDataClass}">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding IsChecked}" />
+                        <TextBlock Text="{Binding AntiskidDataClass.AntiskidData}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Height="50" Content="确定" Name="showSelectBtn" Click="showSelectBtn_Click"></Button>
+    </StackPanel>
+</Window>

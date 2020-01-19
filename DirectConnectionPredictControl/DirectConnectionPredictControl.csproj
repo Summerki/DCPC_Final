@@ -1,0 +1,1333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.Wpf.69.0.0\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf.69.0.0\build\CefSharp.Wpf.props')" />
+  <Import Project="..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.3.3497.1841\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.3.3497.1841\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.3.3497.1841\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.3.3497.1841\build\cef.redist.x64.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{30CC8AAB-B46F-46FD-94B3-32A26418F018}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DirectConnectionPredictControl</RootNamespace>
+    <AssemblyName>DirectConnectionPredictControl</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\kslio\Desktop\publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>E2EB1A467BD36CFD80A3DC60BDD3647EFDB7CFA0</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>DirectConnectionPredictControl_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DynamicDataDisplay">
+      <HintPath>..\..\..\..\..\项目\lib\DynamicDataDisplay.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJson">
+      <HintPath>C:\Users\Summerki\Desktop\LitJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Controls">
+      <HintPath>..\..\..\WPF\originalcode\WPF.UI-master\ZdfFlatUI\DLL\Microsoft.Expression.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing">
+      <HintPath>..\..\..\WPF\originalcode\WPF.UI-master\ZdfFlatUI\DLL\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TeeChart">
+      <HintPath>..\..\..\..\TeeChart.dll</HintPath>
+    </Reference>
+    <Reference Include="TeeChart.WPF">
+      <HintPath>..\..\..\..\TrueDLL\TeeChart.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Antiskid_Display.xaml.cs">
+      <DependentUpon>Antiskid_Display.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Antiskid_Setting.xaml.cs">
+      <DependentUpon>Antiskid_Setting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CanDownload.xaml.cs">
+      <DependentUpon>CanDownload.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CanDTO.cs" />
+    <Compile Include="ChartWindow.xaml.cs">
+      <DependentUpon>ChartWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ComboBoxControl.xaml.cs">
+      <DependentUpon>ComboBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommenTool\CanHelper.cs" />
+    <Compile Include="CommenTool\ExcelUtils.cs" />
+    <Compile Include="CommenTool\HistoryDataModel.cs" />
+    <Compile Include="CommenTool\HistoryModel.cs" />
+    <Compile Include="CommenTool\SliverDataContainer.cs" />
+    <Compile Include="CommenTool\UserDateTime.cs" />
+    <Compile Include="CommenTool\Utils.cs" />
+    <Compile Include="ConfigHistoryDataGrid.xaml.cs">
+      <DependentUpon>ConfigHistoryDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DetailWindow.xaml.cs">
+      <DependentUpon>DetailWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DownLoadTaskDescribe.cs" />
+    <Compile Include="FaultModel.cs" />
+    <Compile Include="FileInfo.cs" />
+    <Compile Include="FileSystemObjectViewModel.cs" />
+    <Compile Include="FileSystemView.xaml.cs" />
+    <Compile Include="FTP.cs" />
+    <Compile Include="FTPLogin.xaml.cs" />
+    <Compile Include="FTPWindow.xaml.cs">
+      <DependentUpon>FTPWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryChartDetail.xaml.cs">
+      <DependentUpon>HistoryChartDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryDetail.xaml.cs">
+      <DependentUpon>HistoryDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IconConverter.cs" />
+    <Compile Include="IconExtractor.cs" />
+    <Compile Include="IO\Ethernet.cs" />
+    <Compile Include="NewComboBox.cs" />
+    <Compile Include="Converters\WordAngleConverter.cs" />
+    <Compile Include="Dashboard.cs" />
+    <Compile Include="DashboardControls.xaml.cs">
+      <DependentUpon>DashboardControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardSkinEnum.cs" />
+    <Compile Include="NewToggleButton.cs" />
+    <Compile Include="NodeWindow.xaml.cs">
+      <DependentUpon>NodeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OverviewWindow.xaml.cs">
+      <DependentUpon>OverviewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OverviewWindowHis.xaml.cs">
+      <DependentUpon>OverviewWindowHis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParameterSetWindow.xaml.cs">
+      <DependentUpon>ParameterSetWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\StringIsEmptyConverter.cs" />
+    <Compile Include="RealTimeOtherWindow.xaml.cs">
+      <DependentUpon>RealTimeOtherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RealTimePressureChartWindow.xaml.cs">
+      <DependentUpon>RealTimePressureChartWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RealTimeSpeedChartWindow.xaml.cs">
+      <DependentUpon>RealTimeSpeedChartWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReNameWindow.xaml.cs" />
+    <Compile Include="SlaveDetailWindow.xaml.cs">
+      <DependentUpon>SlaveDetailWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Speedboardl.cs" />
+    <Compile Include="TChartDisplay.xaml.cs">
+      <DependentUpon>TChartDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Antiskid_Display.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Antiskid_Setting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CanDownload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComboBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComboxGeneric.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CommenResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ConfigHistoryDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DashboardControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FileSystemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FTPLogin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FTPWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HistoryChartDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HistoryDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CommenTool\MainDevDataContains.cs" />
+    <Compile Include="IO\FileBuilding.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="NodeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OverviewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OverviewWindowHis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParameterSetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RealTimeOtherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RealTimePressureChartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RealTimeSpeedChartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReNameWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SlaveDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SpeedboardRes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TChartDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Charts\Test.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FileZilla-3.37.0\AUTHORS" />
+    <None Include="FileZilla-3.37.0\docs\fzdefaults.xml.example" />
+    <None Include="FileZilla-3.37.0\laomoit.com\queue.sqlite3" />
+    <None Include="FileZilla-3.37.0\locales\an\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ar\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\az\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\bg_BG\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ca\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ca_ES%40valencia\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\co\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\cs_CZ\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\cy\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\da\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\de\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\el\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\es\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\et\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\eu\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\fa_IR\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\fi_FI\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\fr\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\gl_ES\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\he_IL\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\hr\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\hu_HU\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\hy\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\id_ID\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\is\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\it\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ja_JP\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\kab\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ka\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\km_KH\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ko_KR\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ku\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ky\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\lo_LA\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\lt_LT\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\lv_LV\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\mk_MK\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\nb_NO\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ne\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\nl\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\nn_NO\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\oc\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\pl_PL\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\pt_BR\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\pt_PT\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ro_RO\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\ru\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\sk_SK\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\sl_SI\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\sr\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\sv\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\th_TH\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\tr\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\uk_UA\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\vi_VN\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\zh_CN\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\locales\zh_TW\filezilla.mo" />
+    <None Include="FileZilla-3.37.0\NEWS" />
+    <None Include="FileZilla-3.37.0\resources\xrc\certificate.xrc" />
+    <None Include="FileZilla-3.37.0\resources\xrc\dialogs.xrc" />
+    <None Include="FileZilla-3.37.0\resources\xrc\inputdialog.xrc" />
+    <None Include="FileZilla-3.37.0\resources\xrc\netconfwizard.xrc" />
+    <None Include="FileZilla-3.37.0\resources\xrc\settings.xrc" />
+    <None Include="FileZilla-3.37.0\resources\xrc\sitemanager.xrc" />
+    <None Include="FileZilla-3.37.0\resources\xrc\storj.xrc" />
+    <None Include="FileZilla-3.37.0\resources\xrc\update.xrc" />
+    <None Include="packages.config" />
+    <None Include="Properties\Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="candownloadconfig.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ControlCAN.lib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DirectConnectionPredictControl_TemporaryKey.pfx" />
+    <None Include="kerneldlls\kerneldll.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Asserts\Image\speed_test_120px_1118805_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Asserts\Image\close.png" />
+    <Resource Include="Asserts\Image\maximun.png" />
+    <Resource Include="Asserts\Image\minim.png" />
+    <Resource Include="Asserts\Image\recover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Asserts\Image\about.ico" />
+    <Resource Include="Asserts\Image\after.ico" />
+    <Resource Include="Asserts\Image\folder.ico" />
+    <Resource Include="Asserts\Image\forward.ico" />
+    <Resource Include="Asserts\Image\openfile.ico" />
+    <Resource Include="Asserts\Image\saveFile.ico" />
+    <Resource Include="Asserts\Image\search.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Asserts\train.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Charts\echarts.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Charts\echarts.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Charts\test.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLLs\DynamicDataDisplay.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLLs\LitJson.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLLs\Microsoft.Expression.Controls.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLLs\Microsoft.Expression.Drawing.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FileZilla-3.37.0\filezilla.exe" />
+    <Resource Include="FileZilla-3.37.0\fzdefaults.xml" />
+    <Content Include="FileZilla-3.37.0\fzputtygen.exe" />
+    <Content Include="FileZilla-3.37.0\fzsftp.exe" />
+    <Content Include="FileZilla-3.37.0\fzshellext.dll" />
+    <Content Include="FileZilla-3.37.0\fzshellext_64.dll" />
+    <Content Include="FileZilla-3.37.0\fzstorj.exe" />
+    <Content Include="FileZilla-3.37.0\GPL.html" />
+    <Resource Include="FileZilla-3.37.0\laomoit.com\filezilla.xml" />
+    <Resource Include="FileZilla-3.37.0\laomoit.com\layout.xml" />
+    <Content Include="FileZilla-3.37.0\libfilezilla-0.dll" />
+    <Content Include="FileZilla-3.37.0\libgcc_s_seh-1.dll" />
+    <Content Include="FileZilla-3.37.0\libgmp-10.dll" />
+    <Content Include="FileZilla-3.37.0\libgnutls-30.dll" />
+    <Content Include="FileZilla-3.37.0\libhogweed-4.dll" />
+    <Content Include="FileZilla-3.37.0\libjson-c-4.dll" />
+    <Content Include="FileZilla-3.37.0\libnettle-6.dll" />
+    <Content Include="FileZilla-3.37.0\libpng16-16.dll" />
+    <Content Include="FileZilla-3.37.0\libstdc++-6.dll" />
+    <Content Include="FileZilla-3.37.0\libwinpthread-1.dll" />
+    <Resource Include="FileZilla-3.37.0\resources\16x16\filezilla.png" />
+    <Resource Include="FileZilla-3.37.0\resources\16x16\throbber.gif" />
+    <Resource Include="FileZilla-3.37.0\resources\16x16\unknown.png" />
+    <Resource Include="FileZilla-3.37.0\resources\20x20\unknown.png" />
+    <Resource Include="FileZilla-3.37.0\resources\24x24\unknown.png" />
+    <Resource Include="FileZilla-3.37.0\resources\32x32\filezilla.png" />
+    <Resource Include="FileZilla-3.37.0\resources\480x480\filezilla.png" />
+    <Resource Include="FileZilla-3.37.0\resources\48x48\filezilla.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\bookmarks.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\16x16\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\bookmarks.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\32x32\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\bookmarks.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\48x48\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\blukis\theme.xml" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\symlink.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\16x16\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\classic\theme.xml" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\16x16\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\cyril\theme.xml" />
+    <Resource Include="FileZilla-3.37.0\resources\defaultfilters.xml" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\bookmarks.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\close.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\dropdown.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\leds.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\sort_down_dark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\sort_down_light.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\sort_up_dark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\sort_up_light.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\symlink.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\synctransfer.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\480x480\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\default\theme.xml" />
+    <Content Include="FileZilla-3.37.0\resources\finished.wav" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\leds.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\16x16\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\leds.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\24x24\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\leds.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\32x32\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\leds.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\48x48\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\flatzilla\theme.xml" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\16x16\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\32x32\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\48x48\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\lone\theme.xml" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\bookmarks.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\16x16\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\32x32\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\minimal\theme.xml" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\16x16\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\20x20\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\24x24\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\32x32\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\48x48\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\opencrystal\theme.xml" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\folderback.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\folderup.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\help.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\showhidden.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\speedlimits.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\48x48\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\sun\theme.xml" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\unknown.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\16x16\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\unknown.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\32x32\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\ascii.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\auto.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\binary.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\bookmark.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\cancel.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\compare.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\disconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\download.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\downloadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\file.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\filter.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\find.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\folder.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\folderclosed.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\localtreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\lock.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\logview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\processqueue.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\queueview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\reconnect.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\refresh.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\remotetreeview.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\server.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\sitemanager.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\synchronize.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\unknown.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\upload.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\48x48\uploadadd.png" />
+    <Resource Include="FileZilla-3.37.0\resources\tango\theme.xml" />
+    <Content Include="FileZilla-3.37.0\zlib1.dll" />
+    <Content Include="LitJson.dll" />
+    <Resource Include="Asserts\header.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="CANJieMianMFC.exe" />
+    <Content Include="ControlCAN.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ControlCAN.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="header.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="kerneldlls\CAN232.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\CANETE.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\CANET_TCP.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\CANWIFI_TCP.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\CANWIFI_UDP.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\gisadll.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\gpcidll.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\isa5420.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\PC104C2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\PC104CAN.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\PCI5121.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\pci9810b.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\pci9820b.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\pci9820i.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\pci9840b.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\pec9920.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="kerneldlls\usbcan.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\cef.redist.x64.3.3497.1841\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.3497.1841\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.3.3497.1841\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.3497.1841\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Wpf.69.0.0\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.69.0.0\build\CefSharp.Wpf.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Wpf.69.0.0\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.69.0.0\build\CefSharp.Wpf.targets'))" />
+  </Target>
+  <Import Project="..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.69.0.0\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\CefSharp.Wpf.69.0.0\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.69.0.0\build\CefSharp.Wpf.targets')" />
+</Project>

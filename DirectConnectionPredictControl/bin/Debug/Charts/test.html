@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body style="height: 100%; margin: 0">
+    <div>
+        <input type="file" id="file" accept=".json" onchange="upload(this)">
+        
+    </div>
+    <div class="chartContainer" style=" height: 100%; background: #515151;">
+        <div id="container_1" style="float:left; width: 70%; height: 33%"></div>
+        <div id="label_1" style="float:right; width: 30%; height: 33%;">
+            <span id="SpeedShaft1View_1"></span><span id="SpeedShaft2View_1"></span><br>
+            <span id="MassValueView_1"></span><span id="Bcp1PressureView_1"></span><br>
+            <span id="Bcp2PressureView_1"></span><span id="BrakeCylinderSourcePressureView_1"></span><br>
+            <span id="AirSpringPressure1View_1"></span><span id="AirSpringPressure2View_1"></span><br>
+            <span id="AccValue1View_1"></span><span id="AccValue2View_1"></span><br>
+
+            <span id="AbCapacity0View_1"></span><span id="AbCapacity1View_1"></span><br>
+            <span id="AbCapacity2View_1"></span><span id="AbCapacity3View_1"></span><br>
+            <span id="AbCapacity4View_1"></span><span id="AbCapacity5View_1"></span>
+        </div>
+
+        <div id="container_2" style="float:left; width: 70%; height: 33%"></div>
+        <div id="label_2" style="float:right; width: 30%; height: 33%;">
+            <span id="SpeedShaft1View_2"></span><span id="SpeedShaft2View_2"></span><br>
+            <span id="MassValueView_2"></span><span id="Bcp1PressureView_2"></span><br>
+            <span id="Bcp2PressureView_2"></span><span id="BrakeCylinderSourcePressureView_2"></span><br>
+            <span id="AirSpringPressure1View_2"></span><span id="AirSpringPressure2View_2"></span><br>
+            <span id="AccValue1View_2"></span><span id="AccValue2View_2"></span><br>
+        </div>
+
+        <div id="container_3" style="float:left; width: 70%; height: 33%"></div>
+        <div id="label_3" style="float:right; width: 30%; height: 33%;">
+            <span id="SpeedShaft1View_3"></span><span id="SpeedShaft2View_3"></span><br>
+            <span id="MassValueView_3"></span><span id="Bcp1PressureView_3"></span><br>
+            <span id="Bcp2PressureView_3"></span><span id="BrakeCylinderSourcePressureView_3"></span><br>
+            <span id="AirSpringPressure1View_3"></span><span id="AirSpringPressure2View_3"></span><br>
+            <span id="AccValue1View_3"></span><span id="AccValue2View_3"></span><br>
+        </div>
+            
+        <div id="container_4" style="float:left; width: 70%; height: 33%"></div>
+        <div id="label_4" style="float:right; width: 30%; height: 33%;">
+            <span id="SpeedShaft1View_4"></span><span id="SpeedShaft2View_4"></span><br>
+            <span id="MassValueView_4"></span><span id="Bcp1PressureView_4"></span><br>
+            <span id="Bcp2PressureView_4"></span><span id="BrakeCylinderSourcePressureView_4"></span><br>
+            <span id="AirSpringPressure1View_4"></span><span id="AirSpringPressure2View_4"></span><br>
+            <span id="AccValue1View_4"></span><span id="AccValue2View_4"></span><br>
+        </div>
+
+        <div id="container_5" style="float:left; width: 70%; height: 33%"></div>
+        <div id="label_5" style="float:right; width: 30%; height: 33%;">
+            <span id="SpeedShaft1View_5"></span><span id="SpeedShaft2View_5"></span><br>
+            <span id="MassValueView_5"></span><span id="Bcp1PressureView_5"></span><br>
+            <span id="Bcp2PressureView_5"></span><span id="BrakeCylinderSourcePressureView_5"></span><br>
+            <span id="AirSpringPressure1View_5"></span><span id="AirSpringPressure2View_5"></span><br>
+            <span id="AccValue1View_5"></span><span id="AccValue2View_5"></span><br>
+        </div>
+
+        <div id="container_6" style="float:left; width: 70%; height: 33%"></div>
+        <div id="label_6" style="float:right; width: 30%; height: 33%;">
+            <span id="SpeedShaft1View_6"></span><span id="SpeedShaft2View_6"></span><br>
+            <span id="MassValueView_6"></span><span id="Bcp1PressureView_6"></span><br>
+            <span id="Bcp2PressureView_6"></span><span id="BrakeCylinderSourcePressureView_6"></span><br>
+            <span id="AirSpringPressure1View_6"></span><span id="AirSpringPressure2View_6"></span><br>
+            <span id="AccValue1View_6"></span><span id="AccValue2View_6"></span><br>
+
+            <span id="AbCapacity0View_6"></span><span id="AbCapacity1View_6"></span><br>
+            <span id="AbCapacity2View_6"></span><span id="AbCapacity3View_6"></span><br>
+            <span id="AbCapacity4View_6"></span><span id="AbCapacity5View_6"></span>
+        </div>
+    </div>
+    <script type="text/javascript" src="echarts.js"></script>
+    <script type="text/javascript">
+        var getFile = document.getElementById("file");
+        var jsonObj;
+        var speedArray = [];
+        var dateTime = [];
+        var container_1 = {
+            AccValue1 : [],
+            AccValue2 : [],
+            AbCapacity0 : [],
+            AbCapacity1 : [],
+            AbCapacity2 : [],
+            AbCapacity3 : [],
+            AbCapacity4 : [],
+            AbCapacity5 : [],
+            AbRealValue0 : [],
+            AbRealValue1 : [],
+            AbRealValue2 : [],
+            AbRealValue3 : [],
+            AbRealValue4 : [],
+            AbRealValue5 : [],
+            AirSpring1PressureA1Car1 : [],
+            AirSpring2PressureA1Car1 : [],
+            Bcp1PressureAx1 : [],
+            Bcp1PressureAx2 : [],
+            BrakeCylinderSourcePressure : [],
+            BrakeLevel : [],
+            DcuEbRealValue0 : [],
+            DcuEbRealValue1 : [],
+            DcuEbRealValue2 : [],
+            DcuEbRealValue3 : [],
+            DcuLifeSig0 : [],
+            DcuLifeSig1 : [],
+            DcuLifeSig2 : [],
+            DcuLifeSig3 : [],
+            DcuMax0 : [],
+            DcuMax1 : [],
+            DcuMax2 : [],
+            DcuMax3 : [],
+            LifeSig : [],
+            MassA1 : [],
+            ParkPressureA1 : [],
+            RefSpeed : [],
+            SelfTestSetup : [],
+            SlipLvl1 : [],
+            SlipLvl2 : [],
+            SpeedA1Shaft1 : [],
+            SpeedA1Shaft2 : [],
+            TrainBrakeForce : [],
+            VCMLifeSig : [],
+            VldPressureSetupAx1 : [],
+            VldRealPressureAx1 : []
+        };
+        var container_2 = {
+            AccValue1 : [],
+            AccValue2 : [],
+            AirSpringPressure1 : [],
+            AirSpringPressure2 : [],
+            Bcp1Pressure : [],
+            Bcp2Pressure : [],
+            BrakeCylinderSourcePressure : [],
+            LifeSig : [],
+            MassValue : [],
+            SelfTestSetup : [],
+            SlipLvl1 : [],
+            SlipLvl2 : [],
+            SpeedShaft1 : [],
+            SpeedShaft2 : [],
+            VldPressureSetup : [],
+            VldRealPressure : []
+        };
+        var container_3 = {
+            AccValue1 : [],
+            AccValue2 : [],
+            AirSpringPressure1 : [],
+            AirSpringPressure2 : [],
+            Bcp1Pressure : [],
+            Bcp2Pressure : [],
+            BrakeCylinderSourcePressure : [],
+            LifeSig : [],
+            MassValue : [],
+            SelfTestSetup : [],
+            SlipLvl1 : [],
+            SlipLvl2 : [],
+            SpeedShaft1 : [],
+            SpeedShaft2 : [],
+            VldPressureSetup : [],
+            VldRealPressure : []
+        };
+        var container_4 = {
+            AccValue1 : [],
+            AccValue2 : [],
+            AirSpringPressure1 : [],
+            AirSpringPressure2 : [],
+            Bcp1Pressure : [],
+            Bcp2Pressure : [],
+            BrakeCylinderSourcePressure : [],
+            LifeSig : [],
+            MassValue : [],
+            SelfTestSetup : [],
+            SlipLvl1 : [],
+            SlipLvl2 : [],
+            SpeedShaft1 : [],
+            SpeedShaft2 : [],
+            VldPressureSetup : [],
+            VldRealPressure : []
+        };
+        var container_5 = {
+            AccValue1 : [],
+            AccValue2 : [],
+            AirSpringPressure1 : [],
+            AirSpringPressure2 : [],
+            Bcp1Pressure : [],
+            Bcp2Pressure : [],
+            BrakeCylinderSourcePressure : [],
+            LifeSig : [],
+            MassValue : [],
+            SelfTestSetup : [],
+            SlipLvl1 : [],
+            SlipLvl2 : [],
+            SpeedShaft1 : [],
+            SpeedShaft2 : [],
+            VldPressureSetup : [],
+            VldRealPressure : []
+        };
+        var container_6 = {
+            AccValue1 : [],
+            AccValue2 : [],
+            AbCapacity0 : [],
+            AbCapacity1 : [],
+            AbCapacity2 : [],
+            AbCapacity3 : [],
+            AbCapacity4 : [],
+            AbCapacity5 : [],
+            AbRealValue0 : [],
+            AbRealValue1 : [],
+            AbRealValue2 : [],
+            AbRealValue3 : [],
+            AbRealValue4 : [],
+            AbRealValue5 : [],
+            AirSpring1PressureA1Car1 : [],
+            AirSpring2PressureA1Car1 : [],
+            Bcp1PressureAx1 : [],
+            Bcp1PressureAx2 : [],
+            BrakeCylinderSourcePressure : [],
+            BrakeLevel : [],
+            DcuEbRealValue0 : [],
+            DcuEbRealValue1 : [],
+            DcuEbRealValue2 : [],
+            DcuEbRealValue3 : [],
+            DcuLifeSig0 : [],
+            DcuLifeSig1 : [],
+            DcuLifeSig2 : [],
+            DcuLifeSig3 : [],
+            DcuMax0 : [],
+            DcuMax1 : [],
+            DcuMax2 : [],
+            DcuMax3 : [],
+            LifeSig : [],
+            MassA1 : [],
+            ParkPressureA1 : [],
+            RefSpeed : [],
+            SelfTestSetup : [],
+            SlipLvl1 : [],
+            SlipLvl2 : [],
+            SpeedA1Shaft1 : [],
+            SpeedA1Shaft2 : [],
+            TrainBrakeForce : [],
+            VCMLifeSig : [],
+            VldPressureSetupAx1 : [],
+            VldRealPressureAx1 : []
+        };
+
+        var header = {
+            AbCapacity0 : "1架空气制动能力值",
+            AbCapacity1 : '2架空气制动能力值',
+            AbCapacity2 : '3架空气制动能力值',
+            AbCapacity3 : '4架空气制动能力值',
+            AbCapacity4 : '5架空气制动能力值',
+            AbCapacity5 : '6架空气制动能力值',
+
+            AbRealValue0 : '1架空气制动实际值',
+            AbRealValue1 : '2架空气制动实际值',
+            AbRealValue2 : '3架空气制动实际值',
+            AbRealValue3 : '4架空气制动实际值',
+            AbRealValue4 : '5架空气制动实际值',
+            AbRealValue5 : '6架空气制动实际值',
+
+            AccValue1 : '1轴减速度',
+            AccValue2 : '2轴减速度',
+
+            LifeSig : '生命信号',
+
+            RefSpeed : '参考速度',
+
+            AirSpringPressure1 : '空簧1压力',
+            AirSpringPressure2 : '空簧2压力',
+
+            Bcp1Pressure : '1轴BCP压力',
+            Bcp2Pressure : '2轴BCP压力',
+            BrakeCylinderSourcePressure : '制动风缸压力',
+            TrainBrakeForce : '整车制动力',
+
+            MassValue : '载荷',
+
+            SlipLvl1 : '1轴滑行等级',
+            SlipLvl2 : '2轴滑行等级',
+
+            SpeedShaft1 : '1轴速度',
+            SpeedShaft2 : '2轴速度',
+            ParkPressureA1 : '停放缸压力'
+        }
+
+        var xdatas = [];
+        var ydatas = [];
+
+        // 1架标签绑定
+        var SpeedShaft1View_1 = document.getElementById("SpeedShaft1View_1");
+        var SpeedShaft2View_1 = document.getElementById("SpeedShaft2View_1");
+        var MassValueView_1 = document.getElementById("MassValueView_1");
+        var Bcp1PressureView_1 = document.getElementById("Bcp1PressureView_1");
+        var Bcp2PressureView_1 = document.getElementById("Bcp2PressureView_1");
+        var BrakeCylinderSourcePressureView_1 = document.getElementById("BrakeCylinderSourcePressureView_1");
+        var AirSpringPressure1View_1 = document.getElementById("AirSpringPressure1View_1");
+        var AirSpringPressure2View_1 = document.getElementById("AirSpringPressure2View_1");
+        var AccValue1View_1 = document.getElementById("AccValue1View_1");
+        var AccValue2View_1 = document.getElementById("AccValue2View_1");
+
+        // 2架标签绑定
+        var SpeedShaft1View_2 = document.getElementById("SpeedShaft1View_2");
+        var SpeedShaft2View_2 = document.getElementById("SpeedShaft2View_2");
+        var MassValueView_2 = document.getElementById("MassValueView_2");
+        var Bcp1PressureView_2 = document.getElementById("Bcp1PressureView_2");
+        var Bcp2PressureView_2 = document.getElementById("Bcp2PressureView_2");
+        var BrakeCylinderSourcePressureView_2 = document.getElementById("BrakeCylinderSourcePressureView_2");
+        var AirSpringPressure1View_2 = document.getElementById("AirSpringPressure1View_2");
+        var AirSpringPressure2View_2 = document.getElementById("AirSpringPressure2View_2");
+        var AccValue1View_2 = document.getElementById("AccValue1View_2");
+        var AccValue2View_2 = document.getElementById("AccValue2View_2");
+
+        // 3架标签绑定
+        var SpeedShaft1View_3 = document.getElementById("SpeedShaft1View_3");
+        var SpeedShaft2View_3 = document.getElementById("SpeedShaft2View_3");
+        var MassValueView_3 = document.getElementById("MassValueView_3");
+        var Bcp1PressureView_3 = document.getElementById("Bcp1PressureView_3");
+        var Bcp2PressureView_3 = document.getElementById("Bcp2PressureView_3");
+        var BrakeCylinderSourcePressureView_3 = document.getElementById("BrakeCylinderSourcePressureView_3");
+        var AirSpringPressure1View_3 = document.getElementById("AirSpringPressure1View_3");
+        var AirSpringPressure2View_3 = document.getElementById("AirSpringPressure2View_3");
+        var AccValue1View_3 = document.getElementById("AccValue1View_3");
+        var AccValue2View_3 = document.getElementById("AccValue2View_3");
+
+        // 4架标签绑定
+        var SpeedShaft1View_4 = document.getElementById("SpeedShaft1View_4");
+        var SpeedShaft2View_4 = document.getElementById("SpeedShaft2View_4");
+        var MassValueView_4 = document.getElementById("MassValueView_4");
+        var Bcp1PressureView_4 = document.getElementById("Bcp1PressureView_4");
+        var Bcp2PressureView_4 = document.getElementById("Bcp2PressureView_4");
+        var BrakeCylinderSourcePressureView_4 = document.getElementById("BrakeCylinderSourcePressureView_4");
+        var AirSpringPressure1View_4 = document.getElementById("AirSpringPressure1View_4");
+        var AirSpringPressure2View_4 = document.getElementById("AirSpringPressure2View_4");
+        var AccValue1View_4 = document.getElementById("AccValue1View_4");
+        var AccValue2View_4 = document.getElementById("AccValue2View_4");
+
+        // 5架标签绑定
+        var SpeedShaft1View_5 = document.getElementById("SpeedShaft1View_5");
+        var SpeedShaft2View_5 = document.getElementById("SpeedShaft2View_5");
+        var MassValueView_5 = document.getElementById("MassValueView_5");
+        var Bcp1PressureView_5 = document.getElementById("Bcp1PressureView_5");
+        var Bcp2PressureView_5 = document.getElementById("Bcp2PressureView_5");
+        var BrakeCylinderSourcePressureView_5 = document.getElementById("BrakeCylinderSourcePressureView_5");
+        var AirSpringPressure1View_5 = document.getElementById("AirSpringPressure1View_5");
+        var AirSpringPressure2View_5 = document.getElementById("AirSpringPressure2View_5");
+        var AccValue1View_5 = document.getElementById("AccValue1View_5");
+        var AccValue2View_5 = document.getElementById("AccValue2View_5");
+
+        // 6架标签绑定
+        var SpeedShaft1View_6 = document.getElementById("SpeedShaft1View_6");
+        var SpeedShaft2View_6 = document.getElementById("SpeedShaft2View_6");
+        var MassValueView_6 = document.getElementById("MassValueView_6");
+        var Bcp1PressureView_6 = document.getElementById("Bcp1PressureView_6");
+        var Bcp2PressureView_6 = document.getElementById("Bcp2PressureView_6");
+        var BrakeCylinderSourcePressureView_6 = document.getElementById("BrakeCylinderSourcePressureView_6");
+        var AirSpringPressure1View_6 = document.getElementById("AirSpringPressure1View_6");
+        var AirSpringPressure2View_6 = document.getElementById("AirSpringPressure2View_6");
+        var AccValue1View_6 = document.getElementById("AccValue1View_6");
+        var AccValue2View_6 = document.getElementById("AccValue2View_6");
+
+        function upload(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                jsonObj = JSON.parse(this.result);
+                formatContainer1();
+                formatContainer2();
+                formatContainer3();
+                formatContainer4();
+                formatContainer5();
+                formatContainer6();
+                draw1();
+                draw2();
+                draw3();
+                draw4();
+                draw5();
+                draw6();
+            }
+            reader.readAsText(event.files[0]);
+        }
+
+        function formatContainer1(){
+            for (let index = 0; index < jsonObj.Container_1.length; index++) {
+                container_1.SpeedA1Shaft1.push(jsonObj.Container_1[index].SpeedA1Shaft1);
+                container_1.SpeedA1Shaft2.push(jsonObj.Container_1[index].SpeedA1Shaft2);
+                container_1.LifeSig.push(jsonObj.Container_1[index].LifeSig);
+
+                container_1.AbCapacity0.push(jsonObj.Container_1[index].AbCapacity0);
+                container_1.AbCapacity1.push(jsonObj.Container_1[index].AbCapacity1);
+                container_1.AbCapacity2.push(jsonObj.Container_1[index].AbCapacity2);
+                container_1.AbCapacity3.push(jsonObj.Container_1[index].AbCapacity3);
+                container_1.AbCapacity4.push(jsonObj.Container_1[index].AbCapacity4);
+                container_1.AbCapacity5.push(jsonObj.Container_1[index].AbCapacity5);
+
+                container_1.AbRealValue0.push(jsonObj.Container_1[index].AbRealValue0);
+                container_1.AbRealValue1.push(jsonObj.Container_1[index].AbRealValue1);
+                container_1.AbRealValue2.push(jsonObj.Container_1[index].AbRealValue2);
+                container_1.AbRealValue3.push(jsonObj.Container_1[index].AbRealValue3);
+                container_1.AbRealValue4.push(jsonObj.Container_1[index].AbRealValue4);
+                container_1.AbRealValue5.push(jsonObj.Container_1[index].AbRealValue5);
+
+                container_1.AccValue1.push(jsonObj.Container_1[index].AccValue1);
+                container_1.AccValue2.push(jsonObj.Container_1[index].AccValue2);
+
+                container_1.AirSpring1PressureA1Car1.push(jsonObj.Container_1[index].AirSpring1PressureA1Car1);
+                container_1.AirSpring2PressureA1Car1.push(jsonObj.Container_1[index].AirSpring2PressureA1Car1);
+
+                container_1.Bcp1PressureAx1.push(jsonObj.Container_1[index].Bcp1PressureAx1);
+                container_1.Bcp1PressureAx2.push(jsonObj.Container_1[index].Bcp1PressureAx2);
+
+                container_1.BrakeCylinderSourcePressure.push(jsonObj.Container_1[index].BrakeCylinderSourcePressure);
+
+                container_1.ParkPressureA1.push(jsonObj.Container_1[index].ParkPressureA1);
+
+                container_1.RefSpeed.push(jsonObj.Container_1[index].RefSpeed);
+
+                container_1.TrainBrakeForce.push(jsonObj.Container_1[index].TrainBrakeForce);
+
+                container_1.VldPressureSetupAx1.push(jsonObj.Container_1[index].VldPressureSetupAx1);
+                container_1.VldRealPressureAx1.push(jsonObj.Container_1[index].VldRealPressureAx1);
+
+                container_1.SlipLvl1.push(jsonObj.Container_1[index].SlipLvl1);
+                container_1.SlipLvl2.push(jsonObj.Container_1[index].SlipLvl2);
+
+                container_1.MassA1.push(jsonObj.Container_1[index].MassA1);
+                dateTime.push(jsonObj.Container_1[index].DateTime);
+            }
+        }
+
+        function formatContainer2() {
+            for (let index = 0; index < jsonObj.Container_2.length; index++) {
+                container_2.AccValue1.push(jsonObj.Container_2[index].AccValue1);
+                container_2.AccValue2.push(jsonObj.Container_2[index].AccValue2);
+                container_2.AirSpringPressure1.push(jsonObj.Container_2[index].AirSpringPressure1);
+                container_2.AirSpringPressure2.push(jsonObj.Container_2[index].AirSpringPressure2);
+                container_2.Bcp1Pressure.push(jsonObj.Container_2[index].Bcp1Pressure);
+                container_2.Bcp2Pressure.push(jsonObj.Container_2[index].Bcp2Pressure);
+                container_2.BrakeCylinderSourcePressure.push(jsonObj.Container_2[index].BrakeCylinderSourcePressure);
+                container_2.MassValue.push(jsonObj.Container_2[index].MassValue);
+                container_2.SlipLvl1.push(jsonObj.Container_2[index].SlipLvl1);
+                container_2.SlipLvl2.push(jsonObj.Container_2[index].SlipLvl2);
+                container_2.SpeedShaft1.push(jsonObj.Container_2[index].SpeedShaft1);
+                container_2.SpeedShaft2.push(jsonObj.Container_2[index].SpeedShaft2);
+                container_2.VldRealPressure.push(jsonObj.Container_2[index].VldRealPressure);
+                container_2.VldPressureSetup.push(jsonObj.Container_2[index].VldPressureSetup);
+            }
+        }
+
+        function formatContainer3() {
+            for (let index = 0; index < jsonObj.Container_3.length; index++) {
+                container_3.AccValue1.push(jsonObj.Container_3[index].AccValue1);
+                container_3.AccValue2.push(jsonObj.Container_3[index].AccValue2);
+                container_3.AirSpringPressure1.push(jsonObj.Container_3[index].AirSpringPressure1);
+                container_3.AirSpringPressure2.push(jsonObj.Container_3[index].AirSpringPressure2);
+                container_3.Bcp1Pressure.push(jsonObj.Container_3[index].Bcp1Pressure);
+                container_3.Bcp2Pressure.push(jsonObj.Container_3[index].Bcp2Pressure);
+                container_3.BrakeCylinderSourcePressure.push(jsonObj.Container_3[index].BrakeCylinderSourcePressure);
+                container_3.MassValue.push(jsonObj.Container_3[index].MassValue);
+                container_3.SlipLvl1.push(jsonObj.Container_3[index].SlipLvl1);
+                container_3.SlipLvl2.push(jsonObj.Container_3[index].SlipLvl2);
+                container_3.SpeedShaft1.push(jsonObj.Container_3[index].SpeedShaft1);
+                container_3.SpeedShaft2.push(jsonObj.Container_3[index].SpeedShaft2);
+                container_3.VldRealPressure.push(jsonObj.Container_3[index].VldRealPressure);
+                container_3.VldPressureSetup.push(jsonObj.Container_3[index].VldPressureSetup);
+            }
+        }
+
+        function formatContainer4() {
+            for (let index = 0; index < jsonObj.Container_4.length; index++) {
+                container_4.AccValue1.push(jsonObj.Container_4[index].AccValue1);
+                container_4.AccValue2.push(jsonObj.Container_4[index].AccValue2);
+                container_4.AirSpringPressure1.push(jsonObj.Container_4[index].AirSpringPressure1);
+                container_4.AirSpringPressure2.push(jsonObj.Container_4[index].AirSpringPressure2);
+                container_4.Bcp1Pressure.push(jsonObj.Container_4[index].Bcp1Pressure);
+                container_4.Bcp2Pressure.push(jsonObj.Container_4[index].Bcp2Pressure);
+                container_4.BrakeCylinderSourcePressure.push(jsonObj.Container_4[index].BrakeCylinderSourcePressure);
+                container_4.MassValue.push(jsonObj.Container_4[index].MassValue);
+                container_4.SlipLvl1.push(jsonObj.Container_4[index].SlipLvl1);
+                container_4.SlipLvl2.push(jsonObj.Container_4[index].SlipLvl2);
+                container_4.SpeedShaft1.push(jsonObj.Container_4[index].SpeedShaft1);
+                container_4.SpeedShaft2.push(jsonObj.Container_4[index].SpeedShaft2);
+                container_4.VldRealPressure.push(jsonObj.Container_4[index].VldRealPressure);
+                container_4.VldPressureSetup.push(jsonObj.Container_4[index].VldPressureSetup);
+            }
+        }
+
+        function formatContainer5() {
+            for (let index = 0; index < jsonObj.Container_5.length; index++) {
+                container_5.AccValue1.push(jsonObj.Container_5[index].AccValue1);
+                container_5.AccValue2.push(jsonObj.Container_5[index].AccValue2);
+                container_5.AirSpringPressure1.push(jsonObj.Container_5[index].AirSpringPressure1);
+                container_5.AirSpringPressure2.push(jsonObj.Container_5[index].AirSpringPressure2);
+                container_5.Bcp1Pressure.push(jsonObj.Container_5[index].Bcp1Pressure);
+                container_5.Bcp2Pressure.push(jsonObj.Container_5[index].Bcp2Pressure);
+                container_5.BrakeCylinderSourcePressure.push(jsonObj.Container_5[index].BrakeCylinderSourcePressure);
+                container_5.MassValue.push(jsonObj.Container_5[index].MassValue);
+                container_5.SlipLvl1.push(jsonObj.Container_5[index].SlipLvl1);
+                container_5.SlipLvl2.push(jsonObj.Container_5[index].SlipLvl2);
+                container_5.SpeedShaft1.push(jsonObj.Container_5[index].SpeedShaft1);
+                container_5.SpeedShaft2.push(jsonObj.Container_5[index].SpeedShaft2);
+                container_5.VldRealPressure.push(jsonObj.Container_5[index].VldRealPressure);
+                container_5.VldPressureSetup.push(jsonObj.Container_5[index].VldPressureSetup);
+            }
+        }
+
+        function formatContainer6(){
+            for (let index = 0; index < jsonObj.Container_6.length; index++) {
+                container_6.SpeedA1Shaft1.push(jsonObj.Container_6[index].SpeedA1Shaft1);
+                container_6.SpeedA1Shaft2.push(jsonObj.Container_6[index].SpeedA1Shaft2);
+                container_6.LifeSig.push(jsonObj.Container_6[index].LifeSig);
+
+                container_6.AbCapacity0.push(jsonObj.Container_6[index].AbCapacity0);
+                container_6.AbCapacity1.push(jsonObj.Container_6[index].AbCapacity1);
+                container_6.AbCapacity2.push(jsonObj.Container_6[index].AbCapacity2);
+                container_6.AbCapacity3.push(jsonObj.Container_6[index].AbCapacity3);
+                container_6.AbCapacity4.push(jsonObj.Container_6[index].AbCapacity4);
+                container_6.AbCapacity5.push(jsonObj.Container_6[index].AbCapacity5);
+
+                container_6.AbRealValue0.push(jsonObj.Container_6[index].AbRealValue0);
+                container_6.AbRealValue1.push(jsonObj.Container_6[index].AbRealValue1);
+                container_6.AbRealValue2.push(jsonObj.Container_6[index].AbRealValue2);
+                container_6.AbRealValue3.push(jsonObj.Container_6[index].AbRealValue3);
+                container_6.AbRealValue4.push(jsonObj.Container_6[index].AbRealValue4);
+                container_6.AbRealValue5.push(jsonObj.Container_6[index].AbRealValue5);
+
+                container_6.AccValue1.push(jsonObj.Container_6[index].AccValue1);
+                container_6.AccValue2.push(jsonObj.Container_6[index].AccValue2);
+
+                container_6.AirSpring1PressureA1Car1.push(jsonObj.Container_6[index].AirSpring1PressureA1Car1);
+                container_6.AirSpring2PressureA1Car1.push(jsonObj.Container_6[index].AirSpring2PressureA1Car1);
+
+                container_6.Bcp1PressureAx1.push(jsonObj.Container_6[index].Bcp1PressureAx1);
+                container_6.Bcp1PressureAx2.push(jsonObj.Container_6[index].Bcp1PressureAx2);
+
+                container_6.BrakeCylinderSourcePressure.push(jsonObj.Container_6[index].BrakeCylinderSourcePressure);
+
+                container_6.ParkPressureA1.push(jsonObj.Container_6[index].ParkPressureA1);
+
+                container_6.RefSpeed.push(jsonObj.Container_6[index].RefSpeed);
+
+                container_6.TrainBrakeForce.push(jsonObj.Container_6[index].TrainBrakeForce);
+
+                container_6.VldPressureSetupAx1.push(jsonObj.Container_6[index].VldPressureSetupAx1);
+                container_6.VldRealPressureAx1.push(jsonObj.Container_6[index].VldRealPressureAx1);
+
+                container_6.SlipLvl1.push(jsonObj.Container_6[index].SlipLvl1);
+                container_6.SlipLvl2.push(jsonObj.Container_6[index].SlipLvl2);
+
+                container_6.MassA1.push(jsonObj.Container_6[index].MassA1);
+                dateTime.push(jsonObj.Container_6[index].DateTime);
+            }
+        }
+        function draw1() {
+            var dom = document.getElementById("container_1");
+            var myChart = echarts.init(dom, 'dark');
+            var option = {
+                legend: {
+                    data: [ header.RefSpeed, header.SpeedShaft1, header.SpeedShaft2, header.AccValue1, header.AccValue2, header.Bcp1Pressure, 
+                            header.Bcp2Pressure, header.BrakeCylinderSourcePressure, header.MassValue, 
+                            header.TrainBrakeForce, header.AirSpringPressure1, header.AirSpringPressure2,],
+                    inactiveColor: '#777',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        animation: false,
+                        type: 'cross',
+                        lineStyle: {
+                            color: '#376df4',
+                            width: 2,
+                            opacity: 1
+                        }
+                    },
+                    formatter: function(p){
+                        SpeedShaft1View_1.innerText = header.SpeedShaft1 + " : " + p[1].value;
+                        SpeedShaft2View_1.innerText = header.SpeedShaft2 + " : " + p[2].value;
+                        AccValue1View_1.innerText = header.AccValue1 + " : " + p[3].value;
+                        AccValue2View_1.innerText = header.AccValue2 + " : " + p[4].value;
+                        Bcp1PressureView_1.innerText = header.Bcp1Pressure + " : " + p[5].value;
+                        Bcp2PressureView_1.innerText = header.Bcp2Pressure + " : " + p[6].value;
+                        BrakeCylinderSourcePressureView_1.innerText = header.BrakeCylinderSourcePressure + " : " + p[7].value;
+                        MassValueView_1.innerText = header.MassValue + " : " + p[8].value;
+                        
+                        return [SpeedShaft1View_1.innerText, SpeedShaft2View_1.innerText, AccValue1View_1.innerText, 
+                                    AccValue2View_1.innerText, Bcp1PressureView_1.innerText, Bcp2PressureView_1.innerText, BrakeCylinderSourcePressureView_1.innerText, 
+                                    MassValueView_1.innerText].join('<br>');
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dateTime,
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                yAxis: {
+                    type: 'category',
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                series: [
+
+                {name: header.RefSpeed, type: 'line', data: container_1.RefSpeed, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {
+                    name : header.SpeedShaft1,
+                    type : 'line',
+                    data : container_1.SpeedA1Shaft1,
+                    smooth : true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    }
+                },
+                {name: header.SpeedShaft2, type: 'line', data: container_1.SpeedA1Shaft2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue1, type: 'line', data: container_1.AccValue1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue2, type: 'line', data: container_1.AccValue2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp1Pressure, type: 'line', data: container_1.Bcp1PressureAx1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp2Pressure, type: 'line', data: container_1.Bcp1PressureAx2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.BrakeCylinderSourcePressure, type: 'line', data: container_1.BrakeCylinderSourcePressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.MassValue, type: 'line', data: container_1.MassA1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.TrainBrakeForce, type: 'line', data: container_1.TrainBrakeForce, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                
+                {name: header.AirSpringPressure1, type: 'line', data: container_1.AirSpring1PressureA1Car1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AirSpringPressure2, type: 'line', data: container_1.AirSpring2PressureA1Car1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                ],
+                dataZoom: [
+                    {
+                        type: 'slider',
+                        start: 10,
+                        end: 80,
+                    },
+                    {
+                        type: 'inside',
+                        start: 10,
+                        end: 80,
+                    }
+                ],
+            };
+            myChart.setOption(option);
+        }
+
+        function draw2() {
+            var dom = document.getElementById("container_2");
+            var myChart = echarts.init(dom, 'dark');
+            var option = {
+                legend: {
+                    data: [header.RefSpeed, header.SpeedShaft1, header.SpeedShaft2, header.AccValue1, header.AccValue2, header.Bcp1Pressure, 
+                            header.Bcp2Pressure, header.BrakeCylinderSourcePressure, header.MassValue, 
+                            header.AirSpringPressure1, header.AirSpringPressure2,],
+                    inactiveColor: '#777',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        animation: false,
+                        type: 'cross',
+                        lineStyle: {
+                            color: '#376df4',
+                            width: 2,
+                            opacity: 1
+                        }
+                    },
+                    formatter: function(p){
+                        SpeedShaft1View_2.innerText = header.SpeedShaft1 + " : " + p[1].value;
+                        SpeedShaft2View_2.innerText = header.SpeedShaft2 + " : " + p[2].value;
+                        AccValue1View_2.innerText = header.AccValue1 + " : " + p[3].value;
+                        AccValue2View_2.innerText = header.AccValue2 + " : " + p[4].value;
+                        Bcp1PressureView_2.innerText = header.Bcp1Pressure + " : " + p[5].value;
+                        Bcp2PressureView_2.innerText = header.Bcp2Pressure + " : " + p[6].value;
+                        BrakeCylinderSourcePressureView_2.innerText = header.BrakeCylinderSourcePressure + " : " + p[7].value;
+                        MassValueView_2.innerText = header.MassValue + " : " + p[8].value;
+                        return ['轴1速度：', p[0].value, '<br>速度：', p[1].value].join('');
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dateTime,
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                yAxis: {
+                    type: 'category',
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                series: [
+
+                {name: header.RefSpeed, type: 'line', data: container_2.RefSpeed, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {
+                    name : header.SpeedShaft1,
+                    type : 'line',
+                    data : container_2.SpeedShaft1,
+                    smooth : true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    }
+                },
+                {name: header.SpeedShaft2, type: 'line', data: container_2.SpeedShaft2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue1, type: 'line', data: container_2.AccValue1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue2, type: 'line', data: container_2.AccValue2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp1Pressure, type: 'line', data: container_2.Bcp1Pressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp2Pressure, type: 'line', data: container_2.Bcp2Pressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.BrakeCylinderSourcePressure, type: 'line', data: container_2.BrakeCylinderSourcePressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.MassValue, type: 'line', data: container_2.MassValue, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.TrainBrakeForce, type: 'line', data: container_2.TrainBrakeForce, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                
+                {name: header.AirSpringPressure1, type: 'line', data: container_2.AirSpringPressure1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AirSpringPressure2, type: 'line', data: container_2.AirSpringPressure2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                ],
+                dataZoom: [
+                    {
+                        type: 'slider',
+                        start: 10,
+                        end: 80,
+                    },
+                    {
+                        type: 'inside',
+                        start: 10,
+                        end: 80,
+                    }
+                ],
+            }
+            myChart.setOption(option);
+        }
+
+        function draw3() {
+            var dom = document.getElementById("container_3");
+            var myChart = echarts.init(dom, 'dark');
+            var option = {
+                legend: {
+                    data: [header.RefSpeed, header.SpeedShaft1, header.SpeedShaft2, header.AccValue1, header.AccValue2, header.Bcp1Pressure, 
+                            header.Bcp2Pressure, header.BrakeCylinderSourcePressure, header.MassValue, 
+                            header.AirSpringPressure1, header.AirSpringPressure2,],
+                    inactiveColor: '#777',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        animation: false,
+                        type: 'cross',
+                        lineStyle: {
+                            color: '#376df4',
+                            width: 2,
+                            opacity: 1
+                        }
+                    },
+                    formatter: function(p){
+                        SpeedShaft1View_3.innerText = header.SpeedShaft1 + " : " + p[1].value;
+                        SpeedShaft2View_3.innerText = header.SpeedShaft2 + " : " + p[2].value;
+                        AccValue1View_3.innerText = header.AccValue1 + " : " + p[3].value;
+                        AccValue2View_3.innerText = header.AccValue2 + " : " + p[4].value;
+                        Bcp1PressureView_3.innerText = header.Bcp1Pressure + " : " + p[5].value;
+                        Bcp2PressureView_3.innerText = header.Bcp2Pressure + " : " + p[6].value;
+                        BrakeCylinderSourcePressureView_3.innerText = header.BrakeCylinderSourcePressure + " : " + p[7].value;
+                        MassValueView_3.innerText = header.MassValue + " : " + p[8].value;
+                        return ['轴1速度：', p[0].value, '<br>速度：', p[1].value].join('');
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dateTime,
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                yAxis: {
+                    type: 'category',
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                series: [
+
+                {name: header.RefSpeed, type: 'line', data: container_3.RefSpeed, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {
+                    name : header.SpeedShaft1,
+                    type : 'line',
+                    data : container_3.SpeedShaft1,
+                    smooth : true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    }
+                },
+                {name: header.SpeedShaft2, type: 'line', data: container_3.SpeedShaft2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue1, type: 'line', data: container_3.AccValue1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue2, type: 'line', data: container_3.AccValue2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp1Pressure, type: 'line', data: container_3.Bcp1Pressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp2Pressure, type: 'line', data: container_3.Bcp2Pressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.BrakeCylinderSourcePressure, type: 'line', data: container_3.BrakeCylinderSourcePressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.MassValue, type: 'line', data: container_3.MassValue, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.TrainBrakeForce, type: 'line', data: container_3.TrainBrakeForce, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                
+                {name: header.AirSpringPressure1, type: 'line', data: container_3.AirSpringPressure1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AirSpringPressure2, type: 'line', data: container_3.AirSpringPressure2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                ],
+                dataZoom: [
+                    {
+                        type: 'slider',
+                        start: 10,
+                        end: 80,
+                    },
+                    {
+                        type: 'inside',
+                        start: 10,
+                        end: 80,
+                    }
+                ],
+            }
+            myChart.setOption(option);
+        }
+
+        function draw4() {
+            var dom = document.getElementById("container_4");
+            var myChart = echarts.init(dom, 'dark');
+            var option = {
+                legend: {
+                    data: [header.RefSpeed, header.SpeedShaft1, header.SpeedShaft2, header.AccValue1, header.AccValue2, header.Bcp1Pressure, 
+                            header.Bcp2Pressure, header.BrakeCylinderSourcePressure, header.MassValue, 
+                            header.AirSpringPressure1, header.AirSpringPressure2,],
+                    inactiveColor: '#777',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        animation: false,
+                        type: 'cross',
+                        lineStyle: {
+                            color: '#376df4',
+                            width: 2,
+                            opacity: 1
+                        }
+                    },
+                    formatter: function(p){
+                        SpeedShaft1View_4.innerText = header.SpeedShaft1 + " : " + p[1].value;
+                        SpeedShaft2View_4.innerText = header.SpeedShaft2 + " : " + p[2].value;
+                        AccValue1View_4.innerText = header.AccValue1 + " : " + p[3].value;
+                        AccValue2View_4.innerText = header.AccValue2 + " : " + p[4].value;
+                        Bcp1PressureView_4.innerText = header.Bcp1Pressure + " : " + p[5].value;
+                        Bcp2PressureView_4.innerText = header.Bcp2Pressure + " : " + p[6].value;
+                        BrakeCylinderSourcePressureView_4.innerText = header.BrakeCylinderSourcePressure + " : " + p[7].value;
+                        MassValueView_4.innerText = header.MassValue + " : " + p[8].value;
+                        return ['轴1速度：', p[0].value, '<br>速度：', p[1].value].join('');
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dateTime,
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                yAxis: {
+                    type: 'category',
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                series: [
+
+                {name: header.RefSpeed, type: 'line', data: container_4.RefSpeed, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {
+                    name : header.SpeedShaft1,
+                    type : 'line',
+                    data : container_4.SpeedShaft1,
+                    smooth : true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    }
+                },
+                {name: header.SpeedShaft2, type: 'line', data: container_4.SpeedShaft2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue1, type: 'line', data: container_4.AccValue1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue2, type: 'line', data: container_4.AccValue2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp1Pressure, type: 'line', data: container_4.Bcp1Pressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp2Pressure, type: 'line', data: container_4.Bcp2Pressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.BrakeCylinderSourcePressure, type: 'line', data: container_4.BrakeCylinderSourcePressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.MassValue, type: 'line', data: container_4.MassValue, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.TrainBrakeForce, type: 'line', data: container_4.TrainBrakeForce, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                
+                {name: header.AirSpringPressure1, type: 'line', data: container_4.AirSpringPressure1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AirSpringPressure2, type: 'line', data: container_4.AirSpringPressure2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                ],
+                dataZoom: [
+                    {
+                        type: 'slider',
+                        start: 10,
+                        end: 80,
+                    },
+                    {
+                        type: 'inside',
+                        start: 10,
+                        end: 80,
+                    }
+                ],
+            }
+            myChart.setOption(option);
+        }
+
+        function draw5() {
+            var dom = document.getElementById("container_5");
+            var myChart = echarts.init(dom, 'dark');
+            var option = {
+                legend: {
+                    data: [header.RefSpeed, header.SpeedShaft1, header.SpeedShaft2, header.AccValue1, header.AccValue2, header.Bcp1Pressure, 
+                            header.Bcp2Pressure, header.BrakeCylinderSourcePressure, header.MassValue, 
+                            header.AirSpringPressure1, header.AirSpringPressure2,],
+                    inactiveColor: '#777',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        animation: false,
+                        type: 'cross',
+                        lineStyle: {
+                            color: '#376df4',
+                            width: 2,
+                            opacity: 1
+                        }
+                    },
+                    formatter: function(p){
+                        SpeedShaft1View_5.innerText = header.SpeedShaft1 + " : " + p[1].value;
+                        SpeedShaft2View_5.innerText = header.SpeedShaft2 + " : " + p[2].value;
+                        AccValue1View_5.innerText = header.AccValue1 + " : " + p[3].value;
+                        AccValue2View_5.innerText = header.AccValue2 + " : " + p[4].value;
+                        Bcp1PressureView_5.innerText = header.Bcp1Pressure + " : " + p[5].value;
+                        Bcp2PressureView_5.innerText = header.Bcp2Pressure + " : " + p[6].value;
+                        BrakeCylinderSourcePressureView_5.innerText = header.BrakeCylinderSourcePressure + " : " + p[7].value;
+                        MassValueView_5.innerText = header.MassValue + " : " + p[8].value;
+                        return ['轴1速度：', p[0].value, '<br>速度：', p[1].value].join('');
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dateTime,
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                yAxis: {
+                    type: 'category',
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                series: [
+
+                {name: header.RefSpeed, type: 'line', data: container_5.RefSpeed, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {
+                    name : header.SpeedShaft1,
+                    type : 'line',
+                    data : container_5.SpeedShaft1,
+                    smooth : true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    }
+                },
+                {name: header.SpeedShaft2, type: 'line', data: container_5.SpeedShaft2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue1, type: 'line', data: container_5.AccValue1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue2, type: 'line', data: container_5.AccValue2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp1Pressure, type: 'line', data: container_5.Bcp1Pressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp2Pressure, type: 'line', data: container_5.Bcp2Pressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.BrakeCylinderSourcePressure, type: 'line', data: container_5.BrakeCylinderSourcePressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.MassValue, type: 'line', data: container_5.MassValue, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.TrainBrakeForce, type: 'line', data: container_5.TrainBrakeForce, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                
+                {name: header.AirSpringPressure1, type: 'line', data: container_5.AirSpringPressure1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AirSpringPressure2, type: 'line', data: container_5.AirSpringPressure2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                ],
+                dataZoom: [
+                    {
+                        type: 'slider',
+                        start: 10,
+                        end: 80,
+                    },
+                    {
+                        type: 'inside',
+                        start: 10,
+                        end: 80,
+                    }
+                ],
+            }
+            myChart.setOption(option);
+        }     
+
+        function draw6() {
+            var dom = document.getElementById("container_6");
+            var myChart = echarts.init(dom, 'dark');
+            var option = {
+                legend: {
+                    data: [ header.RefSpeed, header.SpeedShaft1, header.SpeedShaft2, header.AccValue1, header.AccValue2, header.Bcp1Pressure, 
+                            header.Bcp2Pressure, header.BrakeCylinderSourcePressure, header.MassValue, 
+                            header.TrainBrakeForce, header.AirSpringPressure1, header.AirSpringPressure2,],
+                    inactiveColor: '#777',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        animation: false,
+                        type: 'cross',
+                        lineStyle: {
+                            color: '#376df4',
+                            width: 2,
+                            opacity: 1
+                        }
+                    },
+                    formatter: function(p){
+                        SpeedShaft1View_6.innerText = header.SpeedShaft1 + " : " + p[1].value;
+                        SpeedShaft2View_6.innerText = header.SpeedShaft2 + " : " + p[2].value;
+                        AccValue1View_6.innerText = header.AccValue1 + " : " + p[3].value;
+                        AccValue2View_6.innerText = header.AccValue2 + " : " + p[4].value;
+                        Bcp1PressureView_6.innerText = header.Bcp1Pressure + " : " + p[5].value;
+                        Bcp2PressureView_6.innerText = header.Bcp2Pressure + " : " + p[6].value;
+                        BrakeCylinderSourcePressureView_6.innerText = header.BrakeCylinderSourcePressure + " : " + p[7].value;
+                        MassValueView_6.innerText = header.MassValue + " : " + p[8].value;
+                        return ['轴1速度：', p[0].value, '<br>速度：', p[1].value].join('');
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dateTime,
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                yAxis: {
+                    type: 'category',
+                    axisLine: { lineStyle: { color: '#8392A5' } }
+                },
+                series: [
+
+                {name: header.RefSpeed, type: 'line', data: container_6.RefSpeed, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {
+                    name : header.SpeedShaft1,
+                    type : 'line',
+                    data : container_6.SpeedA1Shaft1,
+                    smooth : true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    }
+                },
+                {name: header.SpeedShaft2, type: 'line', data: container_6.SpeedA1Shaft2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue1, type: 'line', data: container_6.AccValue1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AccValue2, type: 'line', data: container_6.AccValue2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp1Pressure, type: 'line', data: container_6.Bcp1PressureAx1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.Bcp2Pressure, type: 'line', data: container_6.Bcp1PressureAx2, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.BrakeCylinderSourcePressure, type: 'line', data: container_6.BrakeCylinderSourcePressure, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.MassValue, type: 'line', data: container_6.MassA1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.TrainBrakeForce, type: 'line', data: container_6.TrainBrakeForce, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                
+                {name: header.AirSpringPressure1, type: 'line', data: container_6.AirSpring1PressureA1Car1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                {name: header.AirSpringPressure2, type: 'line', data: container_6.AirSpring2PressureA1Car1, smooth: true, showSymbol: false, lineStyle: {normal:{width:1}}},
+                ],
+                dataZoom: [
+                    {
+                        type: 'slider',
+                        start: 10,
+                        end: 80,
+                    },
+                    {
+                        type: 'inside',
+                        start: 10,
+                        end: 80,
+                    }
+                ],
+            };
+            myChart.setOption(option);
+        }  
+    </script>
+</body>
+
+</html>

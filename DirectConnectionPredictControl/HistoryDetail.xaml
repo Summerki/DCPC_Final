@@ -1,0 +1,807 @@
+﻿<Window x:Class="DirectConnectionPredictControl.HistoryDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:MYUI="clr-namespace:DirectConnectionPredictControl"
+        xmlns:local="clr-namespace:DirectConnectionPredictControl"
+        mc:Ignorable="d"
+        Name="historyDetail"
+        Title="历史数据详情" Height="900" Width="1400"
+        Style="{StaticResource NormalWinStyle}" Closed="historyDetail_Closed">
+    <Window.Resources>
+
+        <Storyboard x:Key="open">
+            <DoubleAnimation From="0" To="1" Duration="0:0:0.5"
+                                 Storyboard.TargetName="historyDetail"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Offset"/>
+            <DoubleAnimation From="0" To="1" BeginTime="0:0:0.1" Duration="0:0:0.4"
+                                 Storyboard.TargetName="historyDetail"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Offset"/>
+            <ColorAnimation BeginTime="0:0:0.5" Duration="0:0:0" From="Transparent" To="Yellow" Storyboard.TargetName="historyDetail"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Color" />
+        </Storyboard>
+        <Storyboard x:Key="close"  Completed="Storyboard_Completed">
+            <DoubleAnimation From="1" To="0" Duration="0:0:0.4"
+                                 Storyboard.TargetName="historyDetail"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Offset"/>
+            <DoubleAnimation Duration="0:0:.3" BeginTime="0:0:0.1" From="1" To="0"
+                                 Storyboard.TargetName="historyDetail"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Offset"/>
+            <ColorAnimation  Duration="0" From="Yellow" To="Transparent"
+                                Storyboard.TargetName="historyDetail"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Color"/>
+        </Storyboard>
+    </Window.Resources>
+
+
+
+    <!--透明掩码-->
+    <Window.OpacityMask>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="Transparent"></GradientStop>
+            <GradientStop Offset="0" Color="Yellow"></GradientStop>
+        </LinearGradientBrush>
+    </Window.OpacityMask>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Button.Click">
+            <BeginStoryboard Storyboard="{StaticResource close}"></BeginStoryboard>
+            <EventTrigger.SourceName>closeBtn</EventTrigger.SourceName>
+        </EventTrigger>
+    </Window.Triggers>
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+            <GradientStop Color="#36BAFE" Offset="1"/>
+            <GradientStop Color="#4E8DFE" Offset="0"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"/>
+
+
+
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#36BAFE" Offset="1"/>
+                        <GradientStop Color="#3399ff" Offset="0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal"  HorizontalAlignment="Left" >
+                    <Image Source="Asserts/Image/speed_test_120px_1118805_easyicon.net.ico" Margin="8" Height="20"></Image>
+                    <Label FontWeight="Normal"  VerticalContentAlignment="Center" FontSize="16"  Foreground="White" >直通预控维护软件</Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="miniumBtn" Content="-"  Click="miniumBtn_Click" VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>
+                    <Button Name="maximunBtn" Content="□" Click="maximunBtn_Click"  HorizontalContentAlignment="Center"  VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>
+                    <Button Name="closeBtn"  Content="×" VerticalAlignment="Center" Style="{StaticResource CloseButtonStyle}" Click="closeBtn_Click"/>
+                </StackPanel>
+            </Grid>
+            <Menu Grid.Row="1">
+                <Menu.Background>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#36BAFE" Offset="1"/>
+                        <GradientStop Color="#3399ff" Offset="0"/>
+                    </LinearGradientBrush>
+                </Menu.Background>
+                <MenuItem Header="窗口配置" Style="{StaticResource MenuItemStyle}">
+                    <MenuItem Name="columnConfigItem" Header="列显示配置" Click="columnConfigItem_Click" Style="{StaticResource SubMenuItemStyle}"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <ToolBar Grid.Row="2" Background="#EBEEF2" Loaded="ToolBar_Loaded">
+                <!--<Button VerticalAlignment="Center" Name="preTool" Click="preEvent" Style="{StaticResource ToolBarButtonStyle}" Width="Auto"  Height="Auto">
+                    <Image Width="18" Source="Asserts/Image/forward.ico"></Image>
+                </Button>-->
+                <!--<Button VerticalAlignment="Center" Name="aftTool" Click="aftEvent" Style="{StaticResource ToolBarButtonStyle}" Width="Auto"   Height="Auto">
+                    <Image Width="18" Source="Asserts/Image/after.ico"></Image>
+                </Button>-->
+                <!--<CheckBox Name="showAnalog" IsChecked="True" Margin="15,0,0,0" Checked="showAnalog_Checked" Unchecked="showAnalog_Unchecked">模拟量</CheckBox>
+                <CheckBox Name="showDigital" IsChecked="True" Margin="5,0,0,0">数字量</CheckBox>-->
+
+
+                <DatePicker Margin="5,2,0,0"  Name="DateChoose" Focusable="False" ></DatePicker>
+                <!--现在先不加Focusable="False"，为了测试-->
+                <!--<MYUI:ComboBoxControl x:Name="HourSelect" ></MYUI:ComboBoxControl>-->
+                <ComboBox Height="27.2" Margin="5,2,0,0" Width="40" Name="HourComboBox" Focusable="False"></ComboBox>
+                <TextBlock HorizontalAlignment="Center"  VerticalAlignment="Center">时</TextBlock>
+                <ComboBox Height="27.2" Margin="5,2,0,0" Width="40" Name="MinuteComboBox" Focusable="False" />
+                <TextBlock HorizontalAlignment="Center"  VerticalAlignment="Center">分</TextBlock>
+                <ComboBox Height="27.2" Margin="5,2,0,0" Width="40" Name="SecondComboBox" Focusable="False"/>
+                <TextBlock HorizontalAlignment="Center"  VerticalAlignment="Center">秒</TextBlock>
+                <Button Margin="5,0,0,0" Content="搜索" Background="#b0d2f5" Name="HistoryDeatilSearchBtn" Click="HistoryDeatilSearchBtn_Click"></Button>
+                <Button Margin="5,0,0,0" Content="显示全部列" Background="#b0d2f5" Name="showAllColumnsBtn" Click="showAllColumnsBtn_Click"></Button>
+                <!--<Button Margin="5,0,0,0" Content="导出为JSON文件" Background="#b0d2f5" Name="exportToJsonBtn" Click="exportToJsonBtn_Click"></Button>-->
+
+
+
+
+            </ToolBar>
+
+        </Grid>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#36BAFE" Offset="1"/>
+                    <GradientStop Color="#3399ff" Offset="0"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <Label Foreground="White">已读取的行数:</Label>
+                <Label Name="lineHasReadLbl" Margin="5,0,0,0" Foreground="Orange"></Label>
+                <Label Foreground="White" Margin="50,0,0,0">总字节量:</Label>
+                <Label Name="byteHasReadLbl" Margin="5,0,0,0" Foreground="Orange"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+                <Button Name="preBtn" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="preEvent">←</Button>
+                <Label Name="nowPageLbl" Foreground="White">1</Label>
+                <Label Foreground="White">/</Label>
+                <Label Name="totalPageLbl" Foreground="White">200</Label>
+                <Button Name="aftBtn" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="aftEvent">→</Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                <Label Foreground="White">当前状态:</Label>
+                <Label Name="stateLbl" Margin="5,0,0,0" Foreground="Orange">就绪</Label>
+            </StackPanel>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <ListView Name="historyList" Grid.Row="0">
+                <ListView.View>
+                    <GridView>
+                        <!--模拟量数据-->
+                        <GridViewColumn Header="ID" Width="60" DisplayMemberBinding="{Binding ID}"></GridViewColumn>
+                        <GridViewColumn Header="本地时间" Width="Auto" DisplayMemberBinding="{Binding dateTime}"></GridViewColumn>
+                        <GridViewColumn Header="网络时间" Width="Auto" DisplayMemberBinding="{Binding UnixTime}" />
+                        <GridViewColumn Header="1架发送参考速度" Width="Auto" DisplayMemberBinding="{Binding RefSpeed_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送参考速度" Width="Auto" DisplayMemberBinding="{Binding RefSpeed_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送制动级位" Width="Auto" DisplayMemberBinding="{Binding BrakeLevel_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送制动级位" Width="Auto" DisplayMemberBinding="{Binding BrakeLevel_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送整车制动力" Width="Auto" DisplayMemberBinding="{Binding TrainBrakeForce_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送整车制动力" Width="Auto" DisplayMemberBinding="{Binding TrainBrakeForce_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1生命信号" DisplayMemberBinding="{Binding LifeSig_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2生命信号" DisplayMemberBinding="{Binding LifeSig_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3生命信号" DisplayMemberBinding="{Binding LifeSig_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4生命信号" DisplayMemberBinding="{Binding LifeSig_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5生命信号" DisplayMemberBinding="{Binding LifeSig_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6生命信号" DisplayMemberBinding="{Binding LifeSig_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1轴1速度信号" DisplayMemberBinding="{Binding SpeedAx1_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2轴1速度信号" DisplayMemberBinding="{Binding SpeedAx1_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3轴1速度信号" DisplayMemberBinding="{Binding SpeedAx1_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4轴1速度信号" DisplayMemberBinding="{Binding SpeedAx1_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5轴1速度信号" DisplayMemberBinding="{Binding SpeedAx1_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6轴1速度信号" DisplayMemberBinding="{Binding SpeedAx1_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1轴2速度信号" DisplayMemberBinding="{Binding SpeedAx2_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2轴2速度信号" DisplayMemberBinding="{Binding SpeedAx2_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3轴2速度信号" DisplayMemberBinding="{Binding SpeedAx2_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4轴2速度信号" DisplayMemberBinding="{Binding SpeedAx2_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5轴2速度信号" DisplayMemberBinding="{Binding SpeedAx2_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6轴2速度信号" DisplayMemberBinding="{Binding SpeedAx2_6}"></GridViewColumn>
+                        <!--这里制动缸目标值没有解析-->
+                        <GridViewColumn Header="架1制动风缸压力" DisplayMemberBinding="{Binding BrakeCylinderSourcePressure_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2制动风缸压力" DisplayMemberBinding="{Binding BrakeCylinderSourcePressure_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3制动风缸压力" DisplayMemberBinding="{Binding BrakeCylinderSourcePressure_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4制动风缸压力" DisplayMemberBinding="{Binding BrakeCylinderSourcePressure_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5制动风缸压力" DisplayMemberBinding="{Binding BrakeCylinderSourcePressure_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6制动风缸压力" DisplayMemberBinding="{Binding BrakeCylinderSourcePressure_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1空簧1压力" DisplayMemberBinding="{Binding AirSpringPressure1_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2空簧1压力" DisplayMemberBinding="{Binding AirSpringPressure1_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3空簧1压力" DisplayMemberBinding="{Binding AirSpringPressure1_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4空簧1压力" DisplayMemberBinding="{Binding AirSpringPressure1_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5空簧1压力" DisplayMemberBinding="{Binding AirSpringPressure1_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6空簧1压力" DisplayMemberBinding="{Binding AirSpringPressure1_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1空簧2压力" DisplayMemberBinding="{Binding AirSpringPressure2_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2空簧2压力" DisplayMemberBinding="{Binding AirSpringPressure2_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3空簧2压力" DisplayMemberBinding="{Binding AirSpringPressure2_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4空簧2压力" DisplayMemberBinding="{Binding AirSpringPressure2_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5空簧2压力" DisplayMemberBinding="{Binding AirSpringPressure2_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6空簧2压力" DisplayMemberBinding="{Binding AirSpringPressure2_6}"></GridViewColumn>
+                        <GridViewColumn Header="1车停放缸压力" DisplayMemberBinding="{Binding ParkPressure_1}"></GridViewColumn>
+                        <GridViewColumn Header="2车停放缸压力" DisplayMemberBinding="{Binding ParkPressure_2}"></GridViewColumn>
+                        <GridViewColumn Header="3车停放缸压力" DisplayMemberBinding="{Binding ParkPressure_3}"></GridViewColumn>
+                        <GridViewColumn Header="架1VLD压力实际值" DisplayMemberBinding="{Binding VldRealPressure_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2VLD压力实际值" DisplayMemberBinding="{Binding VldRealPressure_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3VLD压力实际值" DisplayMemberBinding="{Binding VldRealPressure_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4VLD压力实际值" DisplayMemberBinding="{Binding VldRealPressure_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5VLD压力实际值" DisplayMemberBinding="{Binding VldRealPressure_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6VLD压力实际值" DisplayMemberBinding="{Binding VldRealPressure_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1制动缸1压力" DisplayMemberBinding="{Binding Bcp1Pressure_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2制动缸1压力" DisplayMemberBinding="{Binding Bcp1Pressure_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3制动缸1压力" DisplayMemberBinding="{Binding Bcp1Pressure_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4制动缸1压力" DisplayMemberBinding="{Binding Bcp1Pressure_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5制动缸1压力" DisplayMemberBinding="{Binding Bcp1Pressure_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6制动缸1压力" DisplayMemberBinding="{Binding Bcp1Pressure_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1制动缸2压力" DisplayMemberBinding="{Binding Bcp2Pressure_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2制动缸2压力" DisplayMemberBinding="{Binding Bcp2Pressure_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3制动缸2压力" DisplayMemberBinding="{Binding Bcp2Pressure_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4制动缸2压力" DisplayMemberBinding="{Binding Bcp2Pressure_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5制动缸2压力" DisplayMemberBinding="{Binding Bcp2Pressure_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6制动缸2压力" DisplayMemberBinding="{Binding Bcp2Pressure_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1VLD设定值" DisplayMemberBinding="{Binding VldPressureSetup_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2VLD设定值" DisplayMemberBinding="{Binding VldPressureSetup_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3VLD设定值" DisplayMemberBinding="{Binding VldPressureSetup_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4VLD设定值" DisplayMemberBinding="{Binding VldPressureSetup_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5VLD设定值" DisplayMemberBinding="{Binding VldPressureSetup_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6VLD设定值" DisplayMemberBinding="{Binding VldPressureSetup_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1载荷" DisplayMemberBinding="{Binding Mass_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2载荷" DisplayMemberBinding="{Binding Mass_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3载荷" DisplayMemberBinding="{Binding Mass_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4载荷" DisplayMemberBinding="{Binding Mass_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5载荷" DisplayMemberBinding="{Binding Mass_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6载荷" DisplayMemberBinding="{Binding Mass_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架自检目标设定值" DisplayMemberBinding="{Binding SelfTestSetup_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架自检目标设定值" DisplayMemberBinding="{Binding SelfTestSetup_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架自检目标设定值" DisplayMemberBinding="{Binding SelfTestSetup_3}"></GridViewColumn>
+                        <GridViewColumn Header="4架自检目标设定值" DisplayMemberBinding="{Binding SelfTestSetup_4}"></GridViewColumn>
+                        <GridViewColumn Header="5架自检目标设定值" DisplayMemberBinding="{Binding SelfTestSetup_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架自检目标设定值" DisplayMemberBinding="{Binding SelfTestSetup_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架VCM生命信号" DisplayMemberBinding="{Binding VCMLifeSig_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架VCM生命信号" DisplayMemberBinding="{Binding VCMLifeSig_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU1生命信号" DisplayMemberBinding="{Binding DCULifeSig1_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU1生命信号" DisplayMemberBinding="{Binding DCULifeSig6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU2生命信号" DisplayMemberBinding="{Binding DCULifeSig1_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU2生命信号" DisplayMemberBinding="{Binding DCULifeSig6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU3生命信号" DisplayMemberBinding="{Binding DCULifeSig1_3}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU3生命信号" DisplayMemberBinding="{Binding DCULifeSig6_3}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU4生命信号" DisplayMemberBinding="{Binding DCULifeSig1_4}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU4生命信号" DisplayMemberBinding="{Binding DCULifeSig6_4}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU1电制动实际值" DisplayMemberBinding="{Binding DcuEbRealValue1_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU1电制动实际值" DisplayMemberBinding="{Binding DcuEbRealValue6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU1最大电制动可用值" DisplayMemberBinding="{Binding DcuMax1_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU1最大电制动可用值" DisplayMemberBinding="{Binding DcuMax6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU2电制动实际值" DisplayMemberBinding="{Binding DcuEbRealValue1_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU2电制动实际值" DisplayMemberBinding="{Binding DcuEbRealValue6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU2最大电制动可用值" DisplayMemberBinding="{Binding DcuMax1_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU2最大电制动可用值" DisplayMemberBinding="{Binding DcuMax6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU3电制动实际值" DisplayMemberBinding="{Binding DcuEbRealValue1_3}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU3电制动实际值" DisplayMemberBinding="{Binding DcuEbRealValue6_3}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU3最大电制动可用值" DisplayMemberBinding="{Binding DcuMax1_3}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU3最大电制动可用值" DisplayMemberBinding="{Binding DcuMax6_3}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU4电制动实际值" DisplayMemberBinding="{Binding DcuEbRealValue1_4}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU4电制动实际值" DisplayMemberBinding="{Binding DcuEbRealValue6_4}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU4最大电制动可用值" DisplayMemberBinding="{Binding DcuMax1_4}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU4最大电制动可用值" DisplayMemberBinding="{Binding DcuMax6_4}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送1架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue1_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送2架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue1_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送3架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue1_3}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送4架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue1_4}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送5架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue1_5}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送6架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue1_6}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送1架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue6_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送2架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue6_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送3架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue6_3}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送4架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue6_4}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送5架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue6_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送6架空气制动实际值" DisplayMemberBinding="{Binding AbRealValue6_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送1架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity1_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送2架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity1_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送3架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity1_3}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送4架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity1_4}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送5架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity1_5}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送6架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity1_6}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送1架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity6_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送2架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity6_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送3架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity6_3}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送4架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity6_4}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送5架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity6_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送6架空气制动能力值" DisplayMemberBinding="{Binding AbCapacity6_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架CPU版本" DisplayMemberBinding="{Binding SoftwareVersionCPU_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架CPU版本" DisplayMemberBinding="{Binding SoftwareVersionCPU_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架CPU版本" DisplayMemberBinding="{Binding SoftwareVersionCPU_3}"></GridViewColumn>
+                        <GridViewColumn Header="4架CPU版本" DisplayMemberBinding="{Binding SoftwareVersionCPU_4}"></GridViewColumn>
+                        <GridViewColumn Header="5架CPU版本" DisplayMemberBinding="{Binding SoftwareVersionCPU_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架CPU版本" DisplayMemberBinding="{Binding SoftwareVersionCPU_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架EP版本" DisplayMemberBinding="{Binding SoftwareVersionEP_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架EP版本" DisplayMemberBinding="{Binding SoftwareVersionEP_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架EP版本" DisplayMemberBinding="{Binding SoftwareVersionEP_3}"></GridViewColumn>
+                        <GridViewColumn Header="4架EP版本" DisplayMemberBinding="{Binding SoftwareVersionEP_4}"></GridViewColumn>
+                        <GridViewColumn Header="5架EP版本" DisplayMemberBinding="{Binding SoftwareVersionEP_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架EP版本" DisplayMemberBinding="{Binding SoftwareVersionEP_6}"></GridViewColumn>
+                        <!--这里还有MVB轮径、存储轮径没有解析-->
+                        <GridViewColumn Header="4车主风管压力" DisplayMemberBinding="{Binding ParkPressure_4}"></GridViewColumn>
+
+                        <!--数字量输入-->
+                        <GridViewColumn Header="1架发送制动命令" DisplayMemberBinding="{Binding BrakeCmd_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送制动命令" DisplayMemberBinding="{Binding BrakeCmd_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送牵引命令" DisplayMemberBinding="{Binding DriveCmd_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送牵引命令" DisplayMemberBinding="{Binding DriveCmd_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送惰行命令" DisplayMemberBinding="{Binding LazyCmd_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送惰行命令" DisplayMemberBinding="{Binding LazyCmd_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送快速制动命令" DisplayMemberBinding="{Binding FastBrakeCmd_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送快速制动命令" DisplayMemberBinding="{Binding FastBrakeCmd_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送紧急制动命令" DisplayMemberBinding="{Binding EmergencyBrakeCmd_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送紧急制动命令" DisplayMemberBinding="{Binding EmergencyBrakeCmd_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1紧急制动激活" DisplayMemberBinding="{Binding EmergencyBrakeActive_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2紧急制动激活" DisplayMemberBinding="{Binding EmergencyBrakeActive_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3紧急制动激活" DisplayMemberBinding="{Binding EmergencyBrakeActive_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4紧急制动激活" DisplayMemberBinding="{Binding EmergencyBrakeActive_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5紧急制动激活" DisplayMemberBinding="{Binding EmergencyBrakeActive_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6紧急制动激活" DisplayMemberBinding="{Binding EmergencyBrakeActive_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1空气制动施加" DisplayMemberBinding="{Binding AbActive_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2空气制动施加" DisplayMemberBinding="{Binding AbActive_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3空气制动施加" DisplayMemberBinding="{Binding AbActive_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4空气制动施加" DisplayMemberBinding="{Binding AbActive_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5空气制动施加" DisplayMemberBinding="{Binding AbActive_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6空气制动施加" DisplayMemberBinding="{Binding AbActive_6}"></GridViewColumn>
+                        <!--这里只有1架的停放制动缓解-->
+                        <GridViewColumn Header="1架停放制动缓解" DisplayMemberBinding="{Binding ParkBreakRealease_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送硬线牵引" DisplayMemberBinding="{Binding HardDrive_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送硬线牵引" DisplayMemberBinding="{Binding HardDrive_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送硬线快速制动" DisplayMemberBinding="{Binding HardFastBrake_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送硬线快速制动" DisplayMemberBinding="{Binding HardFastBrake_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送硬线紧急制动" DisplayMemberBinding="{Binding HardEmergencyBrake_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送硬线紧急制动" DisplayMemberBinding="{Binding HardEmergencyBrake_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送硬线紧急牵引" DisplayMemberBinding="{Binding HardEmergencyDrive_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送硬线紧急牵引" DisplayMemberBinding="{Binding HardEmergencyDrive_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送网络牵引" DisplayMemberBinding="{Binding NetDrive_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送网络牵引" DisplayMemberBinding="{Binding NetDrive_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送网络制动" DisplayMemberBinding="{Binding NetBrake_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送网络制动" DisplayMemberBinding="{Binding NetBrake_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送CAN单元A架自检命令" DisplayMemberBinding="{Binding CanTestA_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送CAN单元A架自检命令" DisplayMemberBinding="{Binding CanTestA_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送CAN单元B架自检命令" DisplayMemberBinding="{Binding CanTestB_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送CAN单元B架自检命令" DisplayMemberBinding="{Binding CanTestB_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送保持制动缓解" DisplayMemberBinding="{Binding KeepBrakeRelease_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送保持制动缓解" DisplayMemberBinding="{Binding KeepBrakeRelease_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送自检命令" DisplayMemberBinding="{Binding SelfTestCmd_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送自检命令" DisplayMemberBinding="{Binding SelfTestCmd_6}"></GridViewColumn>
+
+                        <!--数字量输出-->
+                        <GridViewColumn Header="1架运行模式" DisplayMemberBinding="{Binding Mode_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架运行模式" DisplayMemberBinding="{Binding Mode_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送惰行命令" DisplayMemberBinding="{Binding LazyCmd_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送惰行命令" DisplayMemberBinding="{Binding LazyCmd_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送保持制动状态" DisplayMemberBinding="{Binding KeepStateBreak_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送保持制动状态" DisplayMemberBinding="{Binding KeepStateBreak_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送惰性状态" DisplayMemberBinding="{Binding LazyState_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送惰性状态" DisplayMemberBinding="{Binding LazyState_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送牵引状态" DisplayMemberBinding="{Binding DriveState_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送牵引状态" DisplayMemberBinding="{Binding DriveState_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送常用制动状态" DisplayMemberBinding="{Binding NormalBrakeState_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送常用制动状态" DisplayMemberBinding="{Binding NormalBrakeState_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送紧急制动状态" DisplayMemberBinding="{Binding EmergencyBrakeState_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送紧急制动状态" DisplayMemberBinding="{Binding EmergencyBrakeState_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送零速" DisplayMemberBinding="{Binding ZeroSpeed_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送零速" DisplayMemberBinding="{Binding ZeroSpeed_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送自检失败" DisplayMemberBinding="{Binding SelfFail_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送自检失败" DisplayMemberBinding="{Binding SelfFail_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送24小时未自检" DisplayMemberBinding="{Binding UnTest24_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送24小时未自检" DisplayMemberBinding="{Binding UnTest24_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送26小时未自检" DisplayMemberBinding="{Binding UnTest26_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送26小时未自检" DisplayMemberBinding="{Binding UnTest26_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送网关阀状态" DisplayMemberBinding="{Binding GatewayValveState_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送网关阀状态" DisplayMemberBinding="{Binding GatewayValveState_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送CAN单元自检启动" DisplayMemberBinding="{Binding CanUnitTestOn_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送CAN单元自检启动" DisplayMemberBinding="{Binding CanUnitTestOn_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送CAN单元单个阀紧急激活" DisplayMemberBinding="{Binding CanValveActive_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送CAN单元单个阀紧急激活" DisplayMemberBinding="{Binding CanValveActive_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送CAN单元自检结束" DisplayMemberBinding="{Binding CanUnitTestOff_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送CAN单元自检结束" DisplayMemberBinding="{Binding CanUnitTestOff_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送运输模式" DisplayMemberBinding="{Binding TowingMode_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送运输模式" DisplayMemberBinding="{Binding TowingMode_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送ATO模式" DisplayMemberBinding="{Binding ATOMode_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送ATO模式" DisplayMemberBinding="{Binding ATOMode_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送ATO模式保持制动施加" DisplayMemberBinding="{Binding ATOHold_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送ATO模式保持制动施加" DisplayMemberBinding="{Binding ATOHold_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送制动级位有效" DisplayMemberBinding="{Binding BrakeLevelActive_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送制动级位有效" DisplayMemberBinding="{Binding BrakeLevelActive_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU1电制动OK" DisplayMemberBinding="{Binding DCU_Ed_Ok_1_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU1电制动OK" DisplayMemberBinding="{Binding DCU_Ed_Ok_1_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU1电制动准备淡出" DisplayMemberBinding="{Binding DCU_Ed_Fadeout_1_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU1电制动准备淡出" DisplayMemberBinding="{Binding DCU_Ed_Fadeout_1_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU1电制动滑行" DisplayMemberBinding="{Binding DCU_Ed_Slip_1_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU1电制动滑行" DisplayMemberBinding="{Binding DCU_Ed_Slip_1_6}"></GridViewColumn>
+                        <!--DCU1电制动不可用 没写-->
+                        <GridViewColumn Header="1架发送DCU2电制动OK" DisplayMemberBinding="{Binding DCU_Ed_Ok_2_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU2电制动OK" DisplayMemberBinding="{Binding DCU_Ed_Ok_2_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU2电制动准备淡出" DisplayMemberBinding="{Binding DCU_Ed_Fadeout_2_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU2电制动准备淡出" DisplayMemberBinding="{Binding DCU_Ed_Fadeout_2_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU2电制动滑行" DisplayMemberBinding="{Binding DCU_Ed_Slip_2_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU2电制动滑行" DisplayMemberBinding="{Binding DCU_Ed_Slip_2_6}"></GridViewColumn>
+                        <!--DCU2电制动不可用 没写-->
+                        <GridViewColumn Header="1架发送DCU3电制动OK" DisplayMemberBinding="{Binding DCU_Ed_Ok_3_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU3电制动OK" DisplayMemberBinding="{Binding DCU_Ed_Ok_3_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU3电制动准备淡出" DisplayMemberBinding="{Binding DCU_Ed_Fadeout_3_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU3电制动准备淡出" DisplayMemberBinding="{Binding DCU_Ed_Fadeout_3_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU3电制动滑行" DisplayMemberBinding="{Binding DCU_Ed_Slip_3_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU3电制动滑行" DisplayMemberBinding="{Binding DCU_Ed_Slip_3_6}"></GridViewColumn>
+                        <!--DCU3电制动不可用 没写-->
+                        <GridViewColumn Header="1架发送DCU4电制动OK" DisplayMemberBinding="{Binding DCU_Ed_Ok_4_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU4电制动OK" DisplayMemberBinding="{Binding DCU_Ed_Ok_4_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU4电制动准备淡出" DisplayMemberBinding="{Binding DCU_Ed_Fadeout_4_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU4电制动准备淡出" DisplayMemberBinding="{Binding DCU_Ed_Fadeout_4_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送DCU4电制动滑行" DisplayMemberBinding="{Binding DCU_Ed_Slip_4_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送DCU4电制动滑行" DisplayMemberBinding="{Binding DCU_Ed_Slip_4_6}"></GridViewColumn>
+                        <!--DCU4电制动不可用 没写-->
+                        <GridViewColumn Header="1架与VCM间MVB通讯状态" DisplayMemberBinding="{Binding VCM2MVBState_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架与VCM间MVB通讯状态" DisplayMemberBinding="{Binding VCM2MVBState_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架滑行" DisplayMemberBinding="{Binding Slip_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架滑行" DisplayMemberBinding="{Binding Slip_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架滑行" DisplayMemberBinding="{Binding Slip_3}"></GridViewColumn>
+                        <GridViewColumn Header="4架滑行" DisplayMemberBinding="{Binding Slip_4}"></GridViewColumn>
+                        <GridViewColumn Header="5架滑行" DisplayMemberBinding="{Binding Slip_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架滑行" DisplayMemberBinding="{Binding Slip_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架气制动状态" DisplayMemberBinding="{Binding AbStatues_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架气制动状态" DisplayMemberBinding="{Binding AbStatues_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架气制动状态" DisplayMemberBinding="{Binding AbStatues_3}"></GridViewColumn>
+                        <GridViewColumn Header="4架气制动状态" DisplayMemberBinding="{Binding AbStatues_4}"></GridViewColumn>
+                        <GridViewColumn Header="5架气制动状态" DisplayMemberBinding="{Binding AbStatues_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架气制动状态" DisplayMemberBinding="{Binding AbStatues_6}"></GridViewColumn>
+                        <!--风缸压力低 没有
+                    空簧信号有效 没有-->
+                        <GridViewColumn Header="1架发送自检中断" DisplayMemberBinding="{Binding SelfInt_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送自检中断" DisplayMemberBinding="{Binding SelfInt_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送自检激活" DisplayMemberBinding="{Binding SelfActive_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送自检激活" DisplayMemberBinding="{Binding SelfActive_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送自检成功" DisplayMemberBinding="{Binding SelfSuccess_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送自检成功" DisplayMemberBinding="{Binding SelfSuccess_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送电制动力淡出" DisplayMemberBinding="{Binding AbFadeOut_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送电制动力淡出" DisplayMemberBinding="{Binding AbFadeOut_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送整车制动力有效" DisplayMemberBinding="{Binding TrainBrakeEnable_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送整车制动力有效" DisplayMemberBinding="{Binding TrainBrakeEnable_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送B车电制动切除" DisplayMemberBinding="{Binding EDoutB_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送B车电制动切除" DisplayMemberBinding="{Binding EDoutB_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送C车电制动切除" DisplayMemberBinding="{Binding EDoutC_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送C车电制动切除" DisplayMemberBinding="{Binding EDoutC_6}"></GridViewColumn>
+                        <!--后面还有一些自检的，不写了-->
+
+                        <!--故障数据-->
+                        <GridViewColumn Header="架1制动风缸传感器故障" DisplayMemberBinding="{Binding BSSRSenorFault_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2制动风缸传感器故障" DisplayMemberBinding="{Binding BSSRSenorFault_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3制动风缸传感器故障" DisplayMemberBinding="{Binding BSSRSenorFault_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4制动风缸传感器故障" DisplayMemberBinding="{Binding BSSRSenorFault_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5制动风缸传感器故障" DisplayMemberBinding="{Binding BSSRSenorFault_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6制动风缸传感器故障" DisplayMemberBinding="{Binding BSSRSenorFault_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1空簧传感器1故障" DisplayMemberBinding="{Binding AirSpringSenorFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2空簧传感器1故障" DisplayMemberBinding="{Binding AirSpringSenorFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3空簧传感器1故障" DisplayMemberBinding="{Binding AirSpringSenorFault1_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4空簧传感器1故障" DisplayMemberBinding="{Binding AirSpringSenorFault1_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5空簧传感器1故障" DisplayMemberBinding="{Binding AirSpringSenorFault1_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6空簧传感器1故障" DisplayMemberBinding="{Binding AirSpringSenorFault1_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1空簧传感器2故障" DisplayMemberBinding="{Binding AirSpringSenorFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2空簧传感器2故障" DisplayMemberBinding="{Binding AirSpringSenorFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3空簧传感器2故障" DisplayMemberBinding="{Binding AirSpringSenorFault2_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4空簧传感器2故障" DisplayMemberBinding="{Binding AirSpringSenorFault2_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5空簧传感器2故障" DisplayMemberBinding="{Binding AirSpringSenorFault2_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6空簧传感器2故障" DisplayMemberBinding="{Binding AirSpringSenorFault2_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1停放缸传感器故障" DisplayMemberBinding="{Binding ParkCylinderSenorFault_1}"></GridViewColumn>
+                        <GridViewColumn Header="架3停放缸传感器故障" DisplayMemberBinding="{Binding ParkCylinderSenorFault_3}"></GridViewColumn>
+                        <GridViewColumn Header="架5停放缸传感器故障" DisplayMemberBinding="{Binding ParkCylinderSenorFault_5}"></GridViewColumn>
+                        <!--4架主风管传感器故障 没有-->
+                        <GridViewColumn Header="架1VLD传感器故障" DisplayMemberBinding="{Binding VLDSensorFault_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2VLD传感器故障" DisplayMemberBinding="{Binding VLDSensorFault_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3VLD传感器故障" DisplayMemberBinding="{Binding VLDSensorFault_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4VLD传感器故障" DisplayMemberBinding="{Binding VLDSensorFault_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5VLD传感器故障" DisplayMemberBinding="{Binding VLDSensorFault_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6VLD传感器故障" DisplayMemberBinding="{Binding VLDSensorFault_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1制动缸传感器1故障" DisplayMemberBinding="{Binding BSRSenorFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2制动缸传感器1故障" DisplayMemberBinding="{Binding BSRSenorFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3制动缸传感器1故障" DisplayMemberBinding="{Binding BSRSenorFault1_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4制动缸传感器1故障" DisplayMemberBinding="{Binding BSRSenorFault1_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5制动缸传感器1故障" DisplayMemberBinding="{Binding BSRSenorFault1_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6制动缸传感器1故障" DisplayMemberBinding="{Binding BSRSenorFault1_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1制动缸传感器2故障" DisplayMemberBinding="{Binding BSRSenorFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2制动缸传感器2故障" DisplayMemberBinding="{Binding BSRSenorFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3制动缸传感器2故障" DisplayMemberBinding="{Binding BSRSenorFault2_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4制动缸传感器2故障" DisplayMemberBinding="{Binding BSRSenorFault2_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5制动缸传感器2故障" DisplayMemberBinding="{Binding BSRSenorFault2_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6制动缸传感器2故障" DisplayMemberBinding="{Binding BSRSenorFault2_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1空簧1压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow1_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2空簧1压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow1_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3空簧1压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow1_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4空簧1压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow1_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5空簧1压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow1_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6空簧1压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow1_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1空簧2压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow2_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2空簧2压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow2_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3空簧2压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow2_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4空簧2压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow2_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5空簧2压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow2_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6空簧2压力超出范围" DisplayMemberBinding="{Binding AirSpringOverflow2_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1制动风缸压力超低" DisplayMemberBinding="{Binding BSRLow_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2制动风缸压力超低" DisplayMemberBinding="{Binding BSRLow_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3制动风缸压力超低" DisplayMemberBinding="{Binding BSRLow_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4制动风缸压力超低" DisplayMemberBinding="{Binding BSRLow_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5制动风缸压力超低" DisplayMemberBinding="{Binding BSRLow_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6制动风缸压力超低" DisplayMemberBinding="{Binding BSRLow_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1BCU严重故障" DisplayMemberBinding="{Binding BCUFail_Serious_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2BCU严重故障" DisplayMemberBinding="{Binding BCUFail_Serious_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3BCU严重故障" DisplayMemberBinding="{Binding BCUFail_Serious_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4BCU严重故障" DisplayMemberBinding="{Binding BCUFail_Serious_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5BCU严重故障" DisplayMemberBinding="{Binding BCUFail_Serious_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6BCU严重故障" DisplayMemberBinding="{Binding BCUFail_Serious_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1BCP中等故障" DisplayMemberBinding="{Binding BCUFail_Middle_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2BCP中等故障" DisplayMemberBinding="{Binding BCUFail_Middle_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3BCP中等故障" DisplayMemberBinding="{Binding BCUFail_Middle_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4BCP中等故障" DisplayMemberBinding="{Binding BCUFail_Middle_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5BCP中等故障" DisplayMemberBinding="{Binding BCUFail_Middle_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6BCP中等故障" DisplayMemberBinding="{Binding BCUFail_Middle_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1BCU轻微故障" DisplayMemberBinding="{Binding BCUFail_Slight_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2BCU轻微故障" DisplayMemberBinding="{Binding BCUFail_Slight_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3BCU轻微故障" DisplayMemberBinding="{Binding BCUFail_Slight_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4BCU轻微故障" DisplayMemberBinding="{Binding BCUFail_Slight_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5BCU轻微故障" DisplayMemberBinding="{Binding BCUFail_Slight_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6BCU轻微故障" DisplayMemberBinding="{Binding BCUFail_Slight_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1紧急制动不可用" DisplayMemberBinding="{Binding EmergencyBrakeFault_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2紧急制动不可用" DisplayMemberBinding="{Binding EmergencyBrakeFault_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3紧急制动不可用" DisplayMemberBinding="{Binding EmergencyBrakeFault_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4紧急制动不可用" DisplayMemberBinding="{Binding EmergencyBrakeFault_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5紧急制动不可用" DisplayMemberBinding="{Binding EmergencyBrakeFault_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6紧急制动不可用" DisplayMemberBinding="{Binding EmergencyBrakeFault_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送CAN全部ASP有效" DisplayMemberBinding="{Binding CanASPEnable_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送CAN全部ASP有效" DisplayMemberBinding="{Binding CanASPEnable_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送A车BCP太低" DisplayMemberBinding="{Binding BCPLowA_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送A车BCP太低" DisplayMemberBinding="{Binding BCPLowA_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送B车BCP太低" DisplayMemberBinding="{Binding BCPLowB_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送B车BCP太低" DisplayMemberBinding="{Binding BCPLowB_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架发送C车BCP太低" DisplayMemberBinding="{Binding BCPLowC_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架发送C车BCP太低" DisplayMemberBinding="{Binding BCPLowC_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1速度传感器1故障" DisplayMemberBinding="{Binding SpeedSenorFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2速度传感器1故障" DisplayMemberBinding="{Binding SpeedSenorFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3速度传感器1故障" DisplayMemberBinding="{Binding SpeedSenorFault1_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4速度传感器1故障" DisplayMemberBinding="{Binding SpeedSenorFault1_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5速度传感器1故障" DisplayMemberBinding="{Binding SpeedSenorFault1_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6速度传感器1故障" DisplayMemberBinding="{Binding SpeedSenorFault1_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1速度传感器2故障" DisplayMemberBinding="{Binding SpeedSenorFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2速度传感器2故障" DisplayMemberBinding="{Binding SpeedSenorFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3速度传感器2故障" DisplayMemberBinding="{Binding SpeedSenorFault2_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4速度传感器2故障" DisplayMemberBinding="{Binding SpeedSenorFault2_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5速度传感器2故障" DisplayMemberBinding="{Binding SpeedSenorFault2_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6速度传感器2故障" DisplayMemberBinding="{Binding SpeedSenorFault2_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1轴1WSP故障" DisplayMemberBinding="{Binding WSPFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2轴1WSP故障" DisplayMemberBinding="{Binding WSPFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3轴1WSP故障" DisplayMemberBinding="{Binding WSPFault1_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4轴1WSP故障" DisplayMemberBinding="{Binding WSPFault1_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5轴1WSP故障" DisplayMemberBinding="{Binding WSPFault1_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6轴1WSP故障" DisplayMemberBinding="{Binding WSPFault1_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1轴2WSP故障" DisplayMemberBinding="{Binding WSPFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2轴2WSP故障" DisplayMemberBinding="{Binding WSPFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3轴2WSP故障" DisplayMemberBinding="{Binding WSPFault2_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4轴2WSP故障" DisplayMemberBinding="{Binding WSPFault2_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5轴2WSP故障" DisplayMemberBinding="{Binding WSPFault2_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6轴2WSP故障" DisplayMemberBinding="{Binding WSPFault2_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1编码插头故障" DisplayMemberBinding="{Binding CodeConnectorFault_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2编码插头故障" DisplayMemberBinding="{Binding CodeConnectorFault_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3编码插头故障" DisplayMemberBinding="{Binding CodeConnectorFault_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4编码插头故障" DisplayMemberBinding="{Binding CodeConnectorFault_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5编码插头故障" DisplayMemberBinding="{Binding CodeConnectorFault_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6编码插头故障" DisplayMemberBinding="{Binding CodeConnectorFault_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1空簧压力超限" DisplayMemberBinding="{Binding AirSpringLimit_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2空簧压力超限" DisplayMemberBinding="{Binding AirSpringLimit_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3空簧压力超限" DisplayMemberBinding="{Binding AirSpringLimit_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4空簧压力超限" DisplayMemberBinding="{Binding AirSpringLimit_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5空簧压力超限" DisplayMemberBinding="{Binding AirSpringLimit_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6空簧压力超限" DisplayMemberBinding="{Binding AirSpringLimit_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1制动不缓解故障" DisplayMemberBinding="{Binding BrakeNotRealease_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2制动不缓解故障" DisplayMemberBinding="{Binding BrakeNotRealease_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3制动不缓解故障" DisplayMemberBinding="{Binding BrakeNotRealease_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4制动不缓解故障" DisplayMemberBinding="{Binding BrakeNotRealease_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5制动不缓解故障" DisplayMemberBinding="{Binding BrakeNotRealease_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6制动不缓解故障" DisplayMemberBinding="{Binding BrakeNotRealease_6}"></GridViewColumn>
+                        <GridViewColumn Header="架1BCP太低" DisplayMemberBinding="{Binding BCPLow_1}"></GridViewColumn>
+                        <GridViewColumn Header="架2BCP太低" DisplayMemberBinding="{Binding BCPLow_2}"></GridViewColumn>
+                        <GridViewColumn Header="架3BCP太低" DisplayMemberBinding="{Binding BCPLow_3}"></GridViewColumn>
+                        <GridViewColumn Header="架4BCP太低" DisplayMemberBinding="{Binding BCPLow_4}"></GridViewColumn>
+                        <GridViewColumn Header="架5BCP太低" DisplayMemberBinding="{Binding BCPLow_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6BCP太低" DisplayMemberBinding="{Binding BCPLow_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架速度检测故障" DisplayMemberBinding="{Binding SpeedDetection_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架速度检测故障" DisplayMemberBinding="{Binding SpeedDetection_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架CAN1总线故障" DisplayMemberBinding="{Binding CanBusFail1_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架CAN1总线故障" DisplayMemberBinding="{Binding CanBusFail1_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架CAN2总线故障" DisplayMemberBinding="{Binding CanBusFail1_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架CAN2总线故障" DisplayMemberBinding="{Binding CanBusFail6_2}"></GridViewColumn>
+                        <!--发送制动指令不一致 没有-->
+                        <GridViewColumn Header="1架制动系统大事件" DisplayMemberBinding="{Binding Event_High_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架制动系统大事件" DisplayMemberBinding="{Binding Event_High_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架制动系统中等事件" DisplayMemberBinding="{Binding Event_Middle_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架制动系统中等事件" DisplayMemberBinding="{Binding Event_Middle_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架制动系统小事件" DisplayMemberBinding="{Binding Event_Low_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架制动系统小事件" DisplayMemberBinding="{Binding Event_Low_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架ICAN1通讯故障" DisplayMemberBinding="{Binding ICANFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架ICAN1通讯故障" DisplayMemberBinding="{Binding ICANFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架ICAN1通讯故障" DisplayMemberBinding="{Binding ICANFault3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架ICAN1通讯故障" DisplayMemberBinding="{Binding ICANFault4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架ICAN1通讯故障" DisplayMemberBinding="{Binding ICANFault5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架ICAN1通讯故障" DisplayMemberBinding="{Binding ICANFault6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架ICAN2通讯故障" DisplayMemberBinding="{Binding ICANFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架ICAN2通讯故障" DisplayMemberBinding="{Binding ICANFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架ICAN2通讯故障" DisplayMemberBinding="{Binding ICANFault3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架ICAN2通讯故障" DisplayMemberBinding="{Binding ICANFault4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架ICAN2通讯故障" DisplayMemberBinding="{Binding ICANFault5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架ICAN2通讯故障" DisplayMemberBinding="{Binding ICANFault6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架OCAN1通讯故障" DisplayMemberBinding="{Binding OCANFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架OCAN1通讯故障" DisplayMemberBinding="{Binding OCANFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架OCAN1通讯故障" DisplayMemberBinding="{Binding OCANFault3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架OCAN1通讯故障" DisplayMemberBinding="{Binding OCANFault4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架OCAN1通讯故障" DisplayMemberBinding="{Binding OCANFault5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架OCAN1通讯故障" DisplayMemberBinding="{Binding OCANFault6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架OCAN2通讯故障" DisplayMemberBinding="{Binding OCANFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架OCAN2通讯故障" DisplayMemberBinding="{Binding OCANFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架OCAN2通讯故障" DisplayMemberBinding="{Binding OCANFault3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架OCAN2通讯故障" DisplayMemberBinding="{Binding OCANFault4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架OCAN2通讯故障" DisplayMemberBinding="{Binding OCANFault5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架OCAN2通讯故障" DisplayMemberBinding="{Binding OCANFault6_2}"></GridViewColumn>
+                        <!--2018-12-28-->
+                        <GridViewColumn Header="1架轴1排风故障" DisplayMemberBinding="{Binding exhaustFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴1排风故障" DisplayMemberBinding="{Binding exhaustFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴1排风故障" DisplayMemberBinding="{Binding exhaustFault3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴1排风故障" DisplayMemberBinding="{Binding exhaustFault4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴1排风故障" DisplayMemberBinding="{Binding exhaustFault5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴1排风故障" DisplayMemberBinding="{Binding exhaustFault6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴2排风故障" DisplayMemberBinding="{Binding exhuastFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴2排风故障" DisplayMemberBinding="{Binding exhuastFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴2排风故障" DisplayMemberBinding="{Binding exhuastFault3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴2排风故障" DisplayMemberBinding="{Binding exhuastFault4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴2排风故障" DisplayMemberBinding="{Binding exhuastFault5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴2排风故障" DisplayMemberBinding="{Binding exhuastFault6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴1保压故障" DisplayMemberBinding="{Binding keepPressureFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴1保压故障" DisplayMemberBinding="{Binding keepPressureFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴1保压故障" DisplayMemberBinding="{Binding keepPressureFault3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴1保压故障" DisplayMemberBinding="{Binding keepPressureFault4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴1保压故障" DisplayMemberBinding="{Binding keepPressureFault5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴1保压故障" DisplayMemberBinding="{Binding keepPressureFault6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴2保压故障" DisplayMemberBinding="{Binding keepPressureFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴2保压故障" DisplayMemberBinding="{Binding keepPressureFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴2保压故障" DisplayMemberBinding="{Binding keepPressureFault3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴2保压故障" DisplayMemberBinding="{Binding keepPressureFault4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴2保压故障" DisplayMemberBinding="{Binding keepPressureFault5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴2保压故障" DisplayMemberBinding="{Binding keepPressureFault6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴1充风故障" DisplayMemberBinding="{Binding chargingFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴1充风故障" DisplayMemberBinding="{Binding chargingFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴1充风故障" DisplayMemberBinding="{Binding chargingFault3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴1充风故障" DisplayMemberBinding="{Binding chargingFault4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴1充风故障" DisplayMemberBinding="{Binding chargingFault5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴1充风故障" DisplayMemberBinding="{Binding chargingFault6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴2充风故障" DisplayMemberBinding="{Binding chargingFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴2充风故障" DisplayMemberBinding="{Binding chargingFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴2充风故障" DisplayMemberBinding="{Binding chargingFault3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴2充风故障" DisplayMemberBinding="{Binding chargingFault4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴2充风故障" DisplayMemberBinding="{Binding chargingFault5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴2充风故障" DisplayMemberBinding="{Binding chargingFault6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架连接阀充风故障" DisplayMemberBinding="{Binding connectionValveAirFillingFailure_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架连接阀充风故障" DisplayMemberBinding="{Binding connectionValveAirFillingFailure_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架连接阀充风故障" DisplayMemberBinding="{Binding connectionValveAirFillingFailure_3}"></GridViewColumn>
+                        <GridViewColumn Header="4架连接阀充风故障" DisplayMemberBinding="{Binding connectionValveAirFillingFailure_4}"></GridViewColumn>
+                        <GridViewColumn Header="5架连接阀充风故障" DisplayMemberBinding="{Binding connectionValveAirFillingFailure_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架连接阀充风故障" DisplayMemberBinding="{Binding connectionValveAirFillingFailure_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架连接阀排风故障" DisplayMemberBinding="{Binding connectionValveVentilationFailure_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架连接阀排风故障" DisplayMemberBinding="{Binding connectionValveVentilationFailure_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架连接阀排风故障" DisplayMemberBinding="{Binding connectionValveVentilationFailure_3}"></GridViewColumn>
+                        <GridViewColumn Header="4架连接阀排风故障" DisplayMemberBinding="{Binding connectionValveVentilationFailure_4}"></GridViewColumn>
+                        <GridViewColumn Header="5架连接阀排风故障" DisplayMemberBinding="{Binding connectionValveVentilationFailure_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架连接阀排风故障" DisplayMemberBinding="{Binding connectionValveVentilationFailure_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架VLD充风故障" DisplayMemberBinding="{Binding VLDChargingFault_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架VLD充风故障" DisplayMemberBinding="{Binding VLDChargingFault_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架VLD充风故障" DisplayMemberBinding="{Binding VLDChargingFault_3}"></GridViewColumn>
+                        <GridViewColumn Header="4架VLD充风故障" DisplayMemberBinding="{Binding VLDChargingFault_4}"></GridViewColumn>
+                        <GridViewColumn Header="5架VLD充风故障" DisplayMemberBinding="{Binding VLDChargingFault_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架VLD充风故障" DisplayMemberBinding="{Binding VLDChargingFault_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架VLD排风故障" DisplayMemberBinding="{Binding VLDExhuastFault_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架VLD排风故障" DisplayMemberBinding="{Binding VLDExhuastFault_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架VLD排风故障" DisplayMemberBinding="{Binding VLDExhuastFault_3}"></GridViewColumn>
+                        <GridViewColumn Header="4架VLD排风故障" DisplayMemberBinding="{Binding VLDExhuastFault_4}"></GridViewColumn>
+                        <GridViewColumn Header="5架VLD排风故障" DisplayMemberBinding="{Binding VLDExhuastFault_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架VLD排风故障" DisplayMemberBinding="{Binding VLDExhuastFault_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架VLD保压故障" DisplayMemberBinding="{Binding VLDKeepPressureFault_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架VLD保压故障" DisplayMemberBinding="{Binding VLDKeepPressureFault_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架VLD保压故障" DisplayMemberBinding="{Binding VLDKeepPressureFault_3}"></GridViewColumn>
+                        <GridViewColumn Header="4架VLD保压故障" DisplayMemberBinding="{Binding VLDKeepPressureFault_4}"></GridViewColumn>
+                        <GridViewColumn Header="5架VLD保压故障" DisplayMemberBinding="{Binding VLDKeepPressureFault_5}"></GridViewColumn>
+                        <GridViewColumn Header="6架VLD保压故障" DisplayMemberBinding="{Binding VLDKeepPressureFault_6}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴1WSP排风故障" DisplayMemberBinding="{Binding WSPExhuastFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴1WSP排风故障" DisplayMemberBinding="{Binding WSPExhuastFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴1WSP排风故障" DisplayMemberBinding="{Binding WSPExhuastFault3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴1WSP排风故障" DisplayMemberBinding="{Binding WSPExhuastFault4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴1WSP排风故障" DisplayMemberBinding="{Binding WSPExhuastFault5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴1WSP排风故障" DisplayMemberBinding="{Binding WSPExhuastFault6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴1WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴1WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴1WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴1WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴1WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴1WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴2排风故障" DisplayMemberBinding="{Binding WSPExhuastFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴2排风故障" DisplayMemberBinding="{Binding WSPExhuastFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴2排风故障" DisplayMemberBinding="{Binding WSPExhuastFault3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴2排风故障" DisplayMemberBinding="{Binding WSPExhuastFault4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴2排风故障" DisplayMemberBinding="{Binding WSPExhuastFault5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴2排风故障" DisplayMemberBinding="{Binding WSPExhuastFault6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴2WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴2WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴2WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴2WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴2WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴2WSP充风故障" DisplayMemberBinding="{Binding WSPChargingFault6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴1WSP连续排风超时故障" DisplayMemberBinding="{Binding WSPContinueExaustAirTimeOutFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴1WSP连续排风超时故障" DisplayMemberBinding="{Binding WSPContinueExaustAirTimeOutFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴1WSP连续排风超时故障" DisplayMemberBinding="{Binding WSPContinueExaustAirTimeOutFault3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴1WSP连续排风超时故障" DisplayMemberBinding="{Binding WSPContinueExaustAirTimeOutFault4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴1WSP连续排风超时故障" DisplayMemberBinding="{Binding WSPContinueExaustAirTimeOutFault5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴1WSP连续排风超时故障" DisplayMemberBinding="{Binding WSPContinueExaustAirTimeOutFault6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴2WSP连续排风故障" DisplayMemberBinding="{Binding WSPContinuousExhaustFailure1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴2WSP连续排风故障" DisplayMemberBinding="{Binding WSPContinuousExhaustFailure2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴2WSP连续排风故障" DisplayMemberBinding="{Binding WSPContinuousExhaustFailure3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴2WSP连续排风故障" DisplayMemberBinding="{Binding WSPContinuousExhaustFailure4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴2WSP连续排风故障" DisplayMemberBinding="{Binding WSPContinuousExhaustFailure5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴2WSP连续排风故障" DisplayMemberBinding="{Binding WSPContinuousExhaustFailure6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴1WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴1WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴1WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴1WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴1WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴1WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴2WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴2WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴2WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴2WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴2WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴2WSP连续保压超时故障" DisplayMemberBinding="{Binding WSPContinueKeepPressureTimeOutFault6_2}"></GridViewColumn>
+
+                        <!--防滑数据-->
+                        <GridViewColumn Header="1架轴1滑行等级" DisplayMemberBinding="{Binding SlipLv1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴1滑行等级" DisplayMemberBinding="{Binding SlipLv2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴1滑行等级" DisplayMemberBinding="{Binding SlipLv3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴1滑行等级" DisplayMemberBinding="{Binding SlipLv4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴1滑行等级" DisplayMemberBinding="{Binding SlipLv5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴1滑行等级" DisplayMemberBinding="{Binding SlipLv6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴2滑行等级" DisplayMemberBinding="{Binding SlipLv1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴2滑行等级" DisplayMemberBinding="{Binding SlipLv2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴2滑行等级" DisplayMemberBinding="{Binding SlipLv3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴2滑行等级" DisplayMemberBinding="{Binding SlipLv4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴2滑行等级" DisplayMemberBinding="{Binding SlipLv5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴2滑行等级" DisplayMemberBinding="{Binding SlipLv6_2}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴1减速度" DisplayMemberBinding="{Binding AccValue1_1}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴1减速度" DisplayMemberBinding="{Binding AccValue2_1}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴1减速度" DisplayMemberBinding="{Binding AccValue3_1}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴1减速度" DisplayMemberBinding="{Binding AccValue4_1}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴1减速度" DisplayMemberBinding="{Binding AccValue5_1}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴1减速度" DisplayMemberBinding="{Binding AccValue6_1}"></GridViewColumn>
+                        <GridViewColumn Header="1架轴2减速度" DisplayMemberBinding="{Binding AccValue1_2}"></GridViewColumn>
+                        <GridViewColumn Header="2架轴2减速度" DisplayMemberBinding="{Binding AccValue2_2}"></GridViewColumn>
+                        <GridViewColumn Header="3架轴2减速度" DisplayMemberBinding="{Binding AccValue3_2}"></GridViewColumn>
+                        <GridViewColumn Header="4架轴2减速度" DisplayMemberBinding="{Binding AccValue4_2}"></GridViewColumn>
+                        <GridViewColumn Header="5架轴2减速度" DisplayMemberBinding="{Binding AccValue5_2}"></GridViewColumn>
+                        <GridViewColumn Header="6架轴2减速度" DisplayMemberBinding="{Binding AccValue6_2}"></GridViewColumn>
+
+                        <!--2020-1-6新加-->
+                        <GridViewColumn Header="架1发出架1空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy1_1}"></GridViewColumn>
+                        <GridViewColumn Header="架1发出架2空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy1_2}"></GridViewColumn>
+                        <GridViewColumn Header="架1发出架3空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy1_3}"></GridViewColumn>
+                        <GridViewColumn Header="架1发出架4空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy1_4}"></GridViewColumn>
+                        <GridViewColumn Header="架1发出架5空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy1_5}"></GridViewColumn>
+                        <GridViewColumn Header="架1发出架6空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy1_6}"></GridViewColumn>
+
+                        <GridViewColumn Header="架6发出架1空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy6_1}"></GridViewColumn>
+                        <GridViewColumn Header="架6发出架2空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy6_2}"></GridViewColumn>
+                        <GridViewColumn Header="架6发出架3空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy6_3}"></GridViewColumn>
+                        <GridViewColumn Header="架6发出架4空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy6_4}"></GridViewColumn>
+                        <GridViewColumn Header="架6发出架5空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy6_5}"></GridViewColumn>
+                        <GridViewColumn Header="架6发出架6空气制动目标值" DisplayMemberBinding="{Binding AirBrakeTargetValueBy6_6}"></GridViewColumn>
+                    </GridView>
+
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+    </DockPanel>
+</Window>

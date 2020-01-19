@@ -1,0 +1,16 @@
+﻿<Application x:Class="DirectConnectionPredictControl.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DirectConnectionPredictControl"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="CommenResource.xaml"/>
+                <ResourceDictionary Source="Generic.xaml"/>
+                <ResourceDictionary Source="ComboxGeneric.xaml"/>
+                <ResourceDictionary Source="SpeedboardRes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

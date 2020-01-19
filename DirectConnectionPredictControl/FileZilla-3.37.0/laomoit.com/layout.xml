@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FileZilla3 version="3.37.0" platform="windows">
+	<Layout Builddate="2018-09-17" Buildtime="09:26:55">
+		<Resources>
+			<xrc file="certificate.xrc" date="1537169438" />
+			<xrc file="dialogs.xrc" date="1537169438" />
+			<xrc file="inputdialog.xrc" date="1537169438" />
+			<xrc file="netconfwizard.xrc" date="1537169438" />
+			<xrc file="settings.xrc" date="1537169438" />
+			<xrc file="sitemanager.xrc" date="1537169438" />
+			<xrc file="storj.xrc" date="1537169438" />
+			<xrc file="update.xrc" date="1537169438" />
+		</Resources>
+		<Language id="zh_CN" date="1537169438">
+			<Font font="0;-15;0;0;0;400;0;0;0;1;0;0;0;0;Microsoft YaHei UI" width="930" height="20" />
+		</Language>
+	</Layout>
+</FileZilla3>

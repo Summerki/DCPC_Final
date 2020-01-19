@@ -1,0 +1,109 @@
+﻿<Window x:Class="DirectConnectionPredictControl.FTPLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DirectConnectionPredictControl"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Title="My_FTPDownloader登录界面" Height="175" Width="270"
+        Icon="Asserts/Image/speed_test_120px_1118805_easyicon.net.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" >远程IP地址:</TextBlock>
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBox Text="192.168.0.10" VerticalAlignment="Center" HorizontalAlignment="Center" Name="remoteIP" Width="110" BorderBrush="Black"  />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Separator Background="LightGray" />
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" >远程Port:</TextBlock>
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBox Text="21" VerticalAlignment="Center" HorizontalAlignment="Center" Name="remotePort" Width="110" BorderBrush="Black" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Separator Background="LightGray" />
+        </Grid>
+        
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" >用户名:</TextBlock>
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBox Text="ifx" VerticalAlignment="Center" HorizontalAlignment="Center" Name="loginUser" Width="110" BorderBrush="Black" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Separator Background="LightGray" />
+        </Grid>
+        
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" >密码:</TextBlock>
+            </Grid>
+            <Grid Grid.Column="1">
+                <!--输入密码的box使用 PasswordBox-->
+                <PasswordBox Password="ifx123" VerticalAlignment="Center" HorizontalAlignment="Center" Name="loginPassword" Width="110" BorderBrush="Black" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="7">
+            <Separator Background="LightGray" />
+        </Grid>
+        
+        <Grid Grid.Row="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <!--设置 IsDefault 的值可以实现：用WPF写一个登录界面，我想在输入完密码后按回车就能够验证登陆，而不需要用鼠标单击登陆按钮-->
+                <Button Content="登录" Name="loginBtn" Click="loginBtn_Click" Width="100" IsDefault="True" />
+            </Grid>
+            <Grid Grid.Column="1">
+                <!--写成cancel_Btn主要是为了和MainWindow.xaml里的cancelBtn做区别-->
+                <Button Content="取消" Name="cancel_Btn" Click="cancel_Btn_Click" Width="100" />
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

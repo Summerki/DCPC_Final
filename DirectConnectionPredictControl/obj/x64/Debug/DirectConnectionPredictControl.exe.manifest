@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="DirectConnectionPredictControl.exe" version="1.0.0.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="amd64" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="DirectConnectionPredictControl" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
+    <commandLine file="DirectConnectionPredictControl.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC 清单选项
+         若想要更改 Windows 用户帐户控制级别，请
+         将 requestedExecutionLevel 节点替换为下述某项。
+
+       <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+       <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+       <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+        若想要使用文件和注册表虚拟化以实现向后
+        兼容，请删除 requestedExecutionLevel 节点。
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DirectConnectionPredictControl.exe" size="2023392">
+      <assemblyIdentity name="DirectConnectionPredictControl" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4mQCVIzWIJaU/2DsEB0x9SvZo1wG2qSrpUq15I7l/68=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DynamicDataDisplay.dll" size="316416">
+      <assemblyIdentity name="DynamicDataDisplay" version="0.3.0.0" publicKeyToken="5B7D744A7263923F" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>1o2t6wBWk+LOR3WTPZl80b0zCFDtDuZobq2XOFOeBO0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LitJson.dll" size="49664">
+      <assemblyIdentity name="LitJson" version="2.3.7.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>fg1FDTI1UIWxfuiOKMnwjvWA192lmLn9kELh+E0/ckM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Expression.Controls.dll" size="71808">
+      <assemblyIdentity name="Microsoft.Expression.Controls" version="4.5.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>+jbtEjbNo236NL51enkeyUAR1D0Z5z0L2dD5+AJHOiI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Expression.Drawing.dll" size="144496">
+      <assemblyIdentity name="Microsoft.Expression.Drawing" version="4.5.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>HWnq9TgAjg/hp+ss4BJKSblcSReXdJZAyDUe1GQ/XJc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="CANJieMianMFC.exe" size="6462464">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jTsnXxwHzfKsYSdvjzyis85mpCp+Wq5KNRpoI/AaL9M=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Charts\echarts.js" size="2870015">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>XrOyYBjAp6JY30VWwkc8C+lEoLOBN1mfse6hf6diYJE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Charts\echarts.min.js" size="744702">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>FvuggLW/e7EKcT+vgpZq4W/akiuNX1Ab3573cg7Sfgw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Charts\test.html" size="59195">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>MlKqQV6jDwD3FI2z0XIpVuA13GO5w1y2ro2f13dSKvo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ControlCAN.dll" size="53248">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>4x7gEyuzpoK+dEaz6bjbGrMt/synkvnUIsD3I1DulTc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ControlCAN.h" size="5603">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jO+0qG9tnC78xOLSZCSG5iLLAjnJGfn31uzLVmF3diA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DirectConnectionPredictControl.exe.config" size="184">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>FqWy0dfMmRS85zkU1NlW07p6LsNOPUHodvLiZcFdgJY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DLLs\DynamicDataDisplay.dll" size="316416">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>1o2t6wBWk+LOR3WTPZl80b0zCFDtDuZobq2XOFOeBO0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DLLs\LitJson.dll" size="49664">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>fg1FDTI1UIWxfuiOKMnwjvWA192lmLn9kELh+E0/ckM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DLLs\Microsoft.Expression.Controls.dll" size="71808">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>+jbtEjbNo236NL51enkeyUAR1D0Z5z0L2dD5+AJHOiI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DLLs\Microsoft.Expression.Drawing.dll" size="144496">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>HWnq9TgAjg/hp+ss4BJKSblcSReXdJZAyDUe1GQ/XJc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\CAN232.dll" size="53248">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>wic1YjbAD1aYaq/onzVQEC0hlLQCPVS87t/GrOgBZfo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\CANET_TCP.dll" size="303104">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>mBQTGfVqiGk2PKCfRCH6NhGj4ecwnF4AxfGwDHkaC/8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\CANETE.dll" size="237568">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>cGUg2exrP7F7GfeQNmgAg/lDTY5pTUaylG94RcMvVx4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\CANWIFI_TCP.dll" size="303104">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>vRCEmqd2rxNGxm+vh6QnfIRBcQS/eYR+ejXGsmCMxPo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\CANWIFI_UDP.dll" size="233472">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Vfomac+QJ1a+vH8SGh5BYXFRMIQ9Xau6Cbg+PvvXThM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\gisadll.dll" size="40960">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>WtlMmBGNipfye4TI5QyRGQSm3r8a9PgsJLklHtDyxX0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\gpcidll.dll" size="40960">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Kkb5+8tN2W5p2NBX1WnkevZCoNOCq60nRbTYNWRkO/E=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\isa5420.dll" size="45056">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>2SQV3we9E0Z3wjH6sgyUPJy1YSDwR4dZU2FXYZW5Ngw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\PC104C2.dll" size="45056">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>SqWKKyk5AwwmV0jMwzqeyqA+Etqk6rgZ6FOGH0U05IA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\PC104CAN.dll" size="57344">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>XXOnka4Q5xYFZIeHHujtBcfEbDTPi52hO+6+HhGJqPE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\PCI5121.dll" size="53248">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>5r74qhEV6gV5uEQX9bFYOgYAQ4Vy+w4kMIOHX+FcXDM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\pci9810b.dll" size="69120">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>MYaiVHuAHDB9DmWyI1QLp8pmSAmD2UgVVRH89YZ4hKU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\pci9820b.dll" size="69120">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>t6VYdveKvxb24P4Tix5NFJ+gbJHRKy1sHIN0QgGDTOk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\pci9820i.dll" size="69120">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>FZ3wbQwp73T1COfAC93fdXCBh1cBz+t1bvhUGzybp8g=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\pci9840b.dll" size="69120">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>6lprFTLbdQUy50T9vHmq4mJ7JpgPkIIyr/q4RWnMaLY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\pec9920.dll" size="89600">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>RaCBOplo0s9mKns0UenbW/wCcioWkpyIwMk2sWWbpbk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="kerneldlls\usbcan.dll" size="35928">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>dVOL5EwaUtc5aERReTOgBpBGGZmnrHMQc8v/3MQ6J5I=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LitJson.dll" size="49664">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>fg1FDTI1UIWxfuiOKMnwjvWA192lmLn9kELh+E0/ckM=</dsig:DigestValue>
+    </hash>
+  </file>
+</asmv1:assembly>

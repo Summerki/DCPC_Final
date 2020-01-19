@@ -1,0 +1,840 @@
+﻿<Window x:Class="DirectConnectionPredictControl.SingleChart"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
+        mc:Ignorable="d"
+        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+        Name="singleChart"
+        Title="SingleChart" Height="900" Width="1400"
+        Style="{StaticResource NormalWinStyle}" Closed="singleChart_Closed">
+    <Window.Resources>
+
+        <Storyboard x:Key="open">
+            <DoubleAnimation From="0" To="1" Duration="0:0:0.5"
+                                 Storyboard.TargetName="singleChart"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Offset"/>
+            <DoubleAnimation From="0" To="1" BeginTime="0:0:0.1" Duration="0:0:0.4"
+                                 Storyboard.TargetName="singleChart"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Offset"/>
+            <ColorAnimation BeginTime="0:0:0.5" Duration="0:0:0" From="Transparent" To="Yellow" Storyboard.TargetName="singleChart"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Color" />
+        </Storyboard>
+        <Storyboard x:Key="close"  Completed="Storyboard_Completed">
+            <DoubleAnimation From="1" To="0" Duration="0:0:0.4"
+                                 Storyboard.TargetName="singleChart"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].Offset"/>
+            <DoubleAnimation Duration="0:0:.3" BeginTime="0:0:0.1" From="1" To="0"
+                                 Storyboard.TargetName="singleChart"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Offset"/>
+            <ColorAnimation  Duration="0" From="Yellow" To="Transparent"
+                                Storyboard.TargetName="singleChart"
+                                 Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].Color"/>
+        </Storyboard>
+        <Color x:Key="YMainCOlor">#FF1A2DF3</Color>
+        <Color x:Key="YSecondColor">#FFF10C0C</Color>
+    </Window.Resources>
+
+    <!--透明掩码-->
+    <Window.OpacityMask>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="Transparent"></GradientStop>
+            <GradientStop Offset="0" Color="Yellow"></GradientStop>
+        </LinearGradientBrush>
+    </Window.OpacityMask>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Button.Click">
+            <BeginStoryboard Storyboard="{StaticResource close}"></BeginStoryboard>
+            <EventTrigger.SourceName>closeBtn</EventTrigger.SourceName>
+        </EventTrigger>
+    </Window.Triggers>
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+            <GradientStop Color="#36BAFE" Offset="1"/>
+            <GradientStop Color="#4E8DFE" Offset="0"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"/>
+
+
+
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#36BAFE" Offset="1"/>
+                        <GradientStop Color="#3399ff" Offset="0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal"  HorizontalAlignment="Left" >
+                    <Image Source="Asserts/Image/speed_test_120px_1118805_easyicon.net.ico" Margin="8" Height="20"></Image>
+                    <Label FontWeight="Normal"  VerticalContentAlignment="Center" FontSize="16"  Foreground="White" >直通预控维护软件</Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="miniumBtn" Content="-"  Click="miniumBtn_Click" VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>
+                    <Button Name="maximunBtn" Content="□" Click="maximunBtn_Click"  HorizontalContentAlignment="Center"  VerticalAlignment="Center" Style="{StaticResource MinMaxButtonStyle}"/>
+                    <Button Name="closeBtn"  Content="×" VerticalAlignment="Center" Style="{StaticResource CloseButtonStyle}" Click="closeBtn_Click"/>
+                </StackPanel>
+            </Grid>
+            <Menu Grid.Row="1">
+                <Menu.Background>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#36BAFE" Offset="1"/>
+                        <GradientStop Color="#3399ff" Offset="0"/>
+                    </LinearGradientBrush>
+                </Menu.Background>
+                <MenuItem Header="文件" Style="{StaticResource MenuItemStyle}">
+                    <MenuItem Name="openFileItem" Header="打开文件" Style="{StaticResource SubMenuItemStyle}" Click="openFileItem_Click"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </Grid>
+
+        <Grid>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--<lc:CartesianChart Height="400" Name="chartAx1" DisableAnimations="True" LegendLocation="Bottom" >
+                            <lc:CartesianChart.AxisX>
+                                <lc:Axis Style="{StaticResource lcAxisX }"></lc:Axis>
+                            </lc:CartesianChart.AxisX>
+                            <lc:CartesianChart.AxisY>
+                                <lc:Axis Style="{StaticResource lcAxisYMain}"></lc:Axis>
+                                <lc:Axis Style="{StaticResource lcAxisYSec}"></lc:Axis>
+                            </lc:CartesianChart.AxisY>
+                            
+                            <lc:CartesianChart.Series>
+                                <lc:LineSeries Name="speedAX1" Title="速度" Values="{Binding speedAx1}" ScalesYAt="0" Fill="Transparent"></lc:LineSeries>
+                                <lc:LineSeries Name="refSpeedAX1" Title="参考速度" Values="{Binding refSpeedAx1}" ScalesYAt="0" Fill="Transparent"></lc:LineSeries>
+
+                                <lc:LineSeries Name="bcp1AX1" Title="bcp1" Values="{Binding bcp1Ax1}" ScalesYAt="1" Fill="Transparent"></lc:LineSeries>
+                                <lc:LineSeries Name="bcp2AX1" Title="bcp2" Values="{Binding bcp2Ax1}" ScalesYAt="1" Fill="Transparent"></lc:LineSeries>
+                                <lc:LineSeries Name="loadAX1" Title="载荷" Values="{Binding loadAx1}" ScalesYAt="1" Fill="Transparent"></lc:LineSeries>
+                            </lc:CartesianChart.Series>
+                            <lc:CartesianChart.ChartLegend>
+                                <lc:DefaultLegend >
+                                </lc:DefaultLegend>
+                            </lc:CartesianChart.ChartLegend>
+                            <lc:CartesianChart.DataTooltip>
+                                <lc:DefaultTooltip SelectionMode="OnlySender"></lc:DefaultTooltip>
+                            </lc:CartesianChart.DataTooltip>
+                        </lc:CartesianChart>-->
+                        <dxc:ChartControl Name="chartControlAX1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="400"
+                                          MouseMove="chartControlAX1_MouseMove" >
+                            <dxc:ChartControl.CrosshairOptions>
+                                <dxc:CrosshairOptions/>
+                            </dxc:ChartControl.CrosshairOptions>
+                            <dxc:ChartControl.Legends>
+                                <dxc:Legend BorderBrush="{x:Null}"/>
+                            </dxc:ChartControl.Legends>
+                            <dxc:XYDiagram2D Name="chartDiagramAX1">
+                                <dxc:XYDiagram2D.SecondaryAxesY>
+                                    <dxc:SecondaryAxisY2D Visible="True" Name="y2" MinorCount="20" Foreground="Red">
+                                        <dxc:SecondaryAxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YSecondColor}"/>
+                                        </dxc:SecondaryAxisY2D.Brush>
+                                        <dxc:SecondaryAxisY2D.Title>
+                                            <dxc:AxisTitle Content="压力kpa" Foreground="#FFF10C0C"/>
+                                        </dxc:SecondaryAxisY2D.Title>
+                                        <dxc:SecondaryAxisY2D.VisualRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.VisualRange>
+                                        <dxc:SecondaryAxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.WholeRange>
+                                    </dxc:SecondaryAxisY2D>
+                                </dxc:XYDiagram2D.SecondaryAxesY>
+                                <dxc:XYDiagram2D.AxisY>
+                                    <dxc:AxisY2D MinorCount="10">
+                                        <dxc:AxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YMainCOlor}"/>
+                                        </dxc:AxisY2D.Brush>
+                                        <dxc:AxisY2D.Title>
+                                            <dxc:AxisTitle Content="速度km/h"/>
+                                        </dxc:AxisY2D.Title>
+                                        <dxc:AxisY2D.VisualRange>
+                                            <dxc:Range MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.VisualRange>
+                                        <dxc:AxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.WholeRange>
+                                    </dxc:AxisY2D>
+                                </dxc:XYDiagram2D.AxisY>
+                                <dxc:XYDiagram2D.AxisX>
+                                    <dxc:AxisX2D MinorCount="10" Brush="Black">
+                                        <dxc:AxisX2D.DateTimeScaleOptions>
+                                            <dxc:ContinuousDateTimeScaleOptions GridAlignment="Second"/>
+                                        </dxc:AxisX2D.DateTimeScaleOptions>
+                                        <dxc:AxisX2D.Title>
+                                            <dxc:AxisTitle Content="运行时间"/>
+                                        </dxc:AxisX2D.Title>
+                                        <dxc:AxisX2D.WholeRange>
+                                            <dxc:Range MaxValue="60" AutoSideMargins="False" MinValue="0"/>
+                                        </dxc:AxisX2D.WholeRange>
+                                        <dxc:AxisX2D.VisualRange>
+                                            <dxc:Range MaxValue="60" MinValue="0" AutoSideMargins="False"/>
+                                        </dxc:AxisX2D.VisualRange>
+                                    </dxc:AxisX2D>
+                                </dxc:XYDiagram2D.AxisX>
+
+                                <dxc:LineSeries2D DisplayName="速度" Name="speedAX1"/>
+                                <dxc:LineSeries2D DisplayName="参考速度" Name="refSpeedAX1"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP1压力" Name="bcp1AX1" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2}"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP2压力" Name="bcp2AX1" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2}"></dxc:LineSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+
+                        <!--1架的数字显示-->
+                        <Grid Grid.Column="1" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Foreground="DodgerBlue" Grid.Column="0">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="1">值</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="2">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="3">值</Label>
+                            </Grid>
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0" Grid.Row="0">速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="1">参考速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="2">载荷</Label>
+                                    <Label Grid.Column="2" Grid.Row="0">BCP1压力</Label>
+                                    <Label Grid.Column="2" Grid.Row="1">BCP2压力</Label>
+
+                                    <Label Grid.Column="1" Grid.Row="0" Name="row_0_column_1_Ax1">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="1" Name="row_1_column_1_Ax1">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="2" Name="row_2_column_1_Ax1">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="0" Name="row_0_column_3_Ax1">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="1" Name="row_1_column_3_Ax1">0.00</Label>
+
+                                </Grid>
+                            </ScrollViewer>
+                        </Grid>
+
+                    </Grid>
+
+
+
+                    <!--2架的曲线显示-->
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <dxc:ChartControl Name="chartControlAX2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="400">
+                            <dxc:ChartControl.Legends>
+                                <dxc:Legend BorderBrush="{x:Null}"/>
+                            </dxc:ChartControl.Legends>
+                            <dxc:XYDiagram2D Name="chartDiagramAX2">
+                                <dxc:XYDiagram2D.SecondaryAxesY>
+                                    <dxc:SecondaryAxisY2D Visible="True" Name="y2_2" MinorCount="20">
+                                        <dxc:SecondaryAxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YSecondColor}"/>
+                                        </dxc:SecondaryAxisY2D.Brush>
+                                        <dxc:SecondaryAxisY2D.Title>
+                                            <dxc:AxisTitle Content="压力kpa" Foreground="#FFF10C0C"/>
+                                        </dxc:SecondaryAxisY2D.Title>
+                                        <dxc:SecondaryAxisY2D.VisualRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.VisualRange>
+                                        <dxc:SecondaryAxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.WholeRange>
+                                    </dxc:SecondaryAxisY2D>
+                                </dxc:XYDiagram2D.SecondaryAxesY>
+                                <dxc:XYDiagram2D.AxisY>
+                                    <dxc:AxisY2D MinorCount="10">
+                                        <dxc:AxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YMainCOlor}"/>
+                                        </dxc:AxisY2D.Brush>
+                                        <dxc:AxisY2D.Title>
+                                            <dxc:AxisTitle Content="速度km/h"/>
+                                        </dxc:AxisY2D.Title>
+                                        <dxc:AxisY2D.VisualRange>
+                                            <dxc:Range MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.VisualRange>
+                                        <dxc:AxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.WholeRange>
+                                    </dxc:AxisY2D>
+                                </dxc:XYDiagram2D.AxisY>
+                                <dxc:XYDiagram2D.AxisX>
+                                    <dxc:AxisX2D MinorCount="10" Brush="Black">
+                                        <dxc:AxisX2D.Title>
+                                            <dxc:AxisTitle Content="运行时间"/>
+                                        </dxc:AxisX2D.Title>
+                                        <dxc:AxisX2D.WholeRange>
+                                            <dxc:Range MaxValue="60" AutoSideMargins="False" MinValue="0"/>
+                                        </dxc:AxisX2D.WholeRange>
+                                        <dxc:AxisX2D.VisualRange>
+                                            <dxc:Range MaxValue="60" MinValue="0" AutoSideMargins="False"/>
+                                        </dxc:AxisX2D.VisualRange>
+                                    </dxc:AxisX2D>
+                                </dxc:XYDiagram2D.AxisX>
+
+                                <dxc:LineSeries2D DisplayName="速度" Name="speedAX2"/>
+                                <dxc:LineSeries2D DisplayName="参考速度" Name="refSpeedAX2"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP1压力" Name="bcp1AX2" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2_2}"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP2压力" Name="bcp2AX2" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2_2}"></dxc:LineSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+                        <!--2架数字显示-->
+                        <Grid Grid.Column="1" Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Foreground="DodgerBlue" Grid.Column="0">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="1">值</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="2">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="3">值</Label>
+                            </Grid>
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0" Grid.Row="0">速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="1">参考速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="2">载荷</Label>
+                                    <Label Grid.Column="2" Grid.Row="0">BCP1压力</Label>
+                                    <Label Grid.Column="2" Grid.Row="1">BCP2压力</Label>
+
+                                    <Label Grid.Column="1" Grid.Row="0" Name="row_0_column_1_Ax2">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="1" Name="row_1_column_1_Ax2">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="2" Name="row_2_column_1_Ax2">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="0" Name="row_0_column_3_Ax2">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="1" Name="row_1_column_3_Ax2">0.00</Label>
+
+                                </Grid>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+
+
+
+
+                    <!--3架曲线显示-->
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <dxc:ChartControl Name="chartControlAX3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="400">
+                            <dxc:ChartControl.Legends>
+                                <dxc:Legend BorderBrush="{x:Null}"/>
+                            </dxc:ChartControl.Legends>
+                            <dxc:XYDiagram2D Name="chartDiagramAX3">
+                                <dxc:XYDiagram2D.SecondaryAxesY>
+                                    <dxc:SecondaryAxisY2D Visible="True" Name="y2_3" MinorCount="20">
+                                        <dxc:SecondaryAxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YSecondColor}"/>
+                                        </dxc:SecondaryAxisY2D.Brush>
+                                        <dxc:SecondaryAxisY2D.Title>
+                                            <dxc:AxisTitle Content="压力kpa" Foreground="#FFF10C0C"/>
+                                        </dxc:SecondaryAxisY2D.Title>
+                                        <dxc:SecondaryAxisY2D.VisualRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.VisualRange>
+                                        <dxc:SecondaryAxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.WholeRange>
+                                    </dxc:SecondaryAxisY2D>
+                                </dxc:XYDiagram2D.SecondaryAxesY>
+                                <dxc:XYDiagram2D.AxisY>
+                                    <dxc:AxisY2D MinorCount="10">
+                                        <dxc:AxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YMainCOlor}"/>
+                                        </dxc:AxisY2D.Brush>
+                                        <dxc:AxisY2D.Title>
+                                            <dxc:AxisTitle Content="速度km/h"/>
+                                        </dxc:AxisY2D.Title>
+                                        <dxc:AxisY2D.VisualRange>
+                                            <dxc:Range MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.VisualRange>
+                                        <dxc:AxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.WholeRange>
+                                    </dxc:AxisY2D>
+                                </dxc:XYDiagram2D.AxisY>
+                                <dxc:XYDiagram2D.AxisX>
+                                    <dxc:AxisX2D MinorCount="10" Brush="Black">
+                                        <dxc:AxisX2D.Title>
+                                            <dxc:AxisTitle Content="运行时间"/>
+                                        </dxc:AxisX2D.Title>
+                                        <dxc:AxisX2D.WholeRange>
+                                            <dxc:Range MaxValue="60" AutoSideMargins="False" MinValue="0"/>
+                                        </dxc:AxisX2D.WholeRange>
+                                        <dxc:AxisX2D.VisualRange>
+                                            <dxc:Range MaxValue="60" MinValue="0" AutoSideMargins="False"/>
+                                        </dxc:AxisX2D.VisualRange>
+                                    </dxc:AxisX2D>
+                                </dxc:XYDiagram2D.AxisX>
+
+                                <dxc:LineSeries2D DisplayName="速度" Name="speedAX3"/>
+                                <dxc:LineSeries2D DisplayName="参考速度" Name="refSpeedAX3"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP1压力" Name="bcp1AX3" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2_3}"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP2压力" Name="bcp2AX3" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2_3}"></dxc:LineSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+
+                        <!--3架数字显示-->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Foreground="DodgerBlue" Grid.Column="0">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="1">值</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="2">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="3">值</Label>
+                            </Grid>
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0" Grid.Row="0">速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="1">参考速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="2">载荷</Label>
+                                    <Label Grid.Column="2" Grid.Row="0">BCP1压力</Label>
+                                    <Label Grid.Column="2" Grid.Row="1">BCP2压力</Label>
+
+                                    <Label Grid.Column="1" Grid.Row="0" Name="row_0_column_1_Ax3">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="1" Name="row_1_column_1_Ax3">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="2" Name="row_2_column_1_Ax3">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="0" Name="row_0_column_3_Ax3">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="1" Name="row_1_column_3_Ax3">0.00</Label>
+
+                                </Grid>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+
+
+                    <!--4架曲线显示-->
+                    <Grid Grid.Row="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <dxc:ChartControl Name="chartControlAX4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="400">
+                            <dxc:ChartControl.Legends>
+                                <dxc:Legend BorderBrush="{x:Null}"/>
+                            </dxc:ChartControl.Legends>
+                            <dxc:XYDiagram2D Name="chartDiagramAX4">
+                                <dxc:XYDiagram2D.SecondaryAxesY>
+                                    <dxc:SecondaryAxisY2D Visible="True" Name="y2_4" MinorCount="20">
+                                        <dxc:SecondaryAxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YSecondColor}"/>
+                                        </dxc:SecondaryAxisY2D.Brush>
+                                        <dxc:SecondaryAxisY2D.Title>
+                                            <dxc:AxisTitle Content="压力kpa" Foreground="#FFF10C0C"/>
+                                        </dxc:SecondaryAxisY2D.Title>
+                                        <dxc:SecondaryAxisY2D.VisualRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.VisualRange>
+                                        <dxc:SecondaryAxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.WholeRange>
+                                    </dxc:SecondaryAxisY2D>
+                                </dxc:XYDiagram2D.SecondaryAxesY>
+                                <dxc:XYDiagram2D.AxisY>
+                                    <dxc:AxisY2D MinorCount="10">
+                                        <dxc:AxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YMainCOlor}"/>
+                                        </dxc:AxisY2D.Brush>
+                                        <dxc:AxisY2D.Title>
+                                            <dxc:AxisTitle Content="速度km/h"/>
+                                        </dxc:AxisY2D.Title>
+                                        <dxc:AxisY2D.VisualRange>
+                                            <dxc:Range MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.VisualRange>
+                                        <dxc:AxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.WholeRange>
+                                    </dxc:AxisY2D>
+                                </dxc:XYDiagram2D.AxisY>
+                                <dxc:XYDiagram2D.AxisX>
+                                    <dxc:AxisX2D MinorCount="10" Brush="Black">
+                                        <dxc:AxisX2D.Title>
+                                            <dxc:AxisTitle Content="运行时间"/>
+                                        </dxc:AxisX2D.Title>
+                                        <dxc:AxisX2D.WholeRange>
+                                            <dxc:Range MaxValue="60" AutoSideMargins="False" MinValue="0"/>
+                                        </dxc:AxisX2D.WholeRange>
+                                        <dxc:AxisX2D.VisualRange>
+                                            <dxc:Range MaxValue="60" MinValue="0" AutoSideMargins="False"/>
+                                        </dxc:AxisX2D.VisualRange>
+                                    </dxc:AxisX2D>
+                                </dxc:XYDiagram2D.AxisX>
+
+                                <dxc:LineSeries2D DisplayName="速度" Name="speedAX4"/>
+                                <dxc:LineSeries2D DisplayName="参考速度" Name="refSpeedAX4"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP1压力" Name="bcp1AX4" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2_4}"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP2压力" Name="bcp2AX4" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2_4}"></dxc:LineSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+
+                        <!--4架数字显示-->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Foreground="DodgerBlue" Grid.Column="0">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="1">值</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="2">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="3">值</Label>
+                            </Grid>
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0" Grid.Row="0">速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="1">参考速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="2">载荷</Label>
+                                    <Label Grid.Column="2" Grid.Row="0">BCP1压力</Label>
+                                    <Label Grid.Column="2" Grid.Row="1">BCP2压力</Label>
+
+                                    <Label Grid.Column="1" Grid.Row="0" Name="row_0_column_1_Ax4">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="1" Name="row_1_column_1_Ax4">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="2" Name="row_2_column_1_Ax4">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="0" Name="row_0_column_3_Ax4">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="1" Name="row_1_column_3_Ax4">0.00</Label>
+
+                                </Grid>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+
+
+                    <!--5架曲线显示-->
+                    <Grid Grid.Row="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <dxc:ChartControl Name="chartControlAX5" HorizontalAlignment="Left" VerticalAlignment="Top" Height="400">
+                            <dxc:ChartControl.Legends>
+                                <dxc:Legend BorderBrush="{x:Null}"/>
+                            </dxc:ChartControl.Legends>
+                            <dxc:XYDiagram2D Name="chartDiagramAX5">
+                                <dxc:XYDiagram2D.SecondaryAxesY>
+                                    <dxc:SecondaryAxisY2D Visible="True" Name="y2_5" MinorCount="20">
+                                        <dxc:SecondaryAxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YSecondColor}"/>
+                                        </dxc:SecondaryAxisY2D.Brush>
+                                        <dxc:SecondaryAxisY2D.Title>
+                                            <dxc:AxisTitle Content="压力kpa" Foreground="#FFF10C0C"/>
+                                        </dxc:SecondaryAxisY2D.Title>
+                                        <dxc:SecondaryAxisY2D.VisualRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.VisualRange>
+                                        <dxc:SecondaryAxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.WholeRange>
+                                    </dxc:SecondaryAxisY2D>
+                                </dxc:XYDiagram2D.SecondaryAxesY>
+                                <dxc:XYDiagram2D.AxisY>
+                                    <dxc:AxisY2D MinorCount="10">
+                                        <dxc:AxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YMainCOlor}"/>
+                                        </dxc:AxisY2D.Brush>
+                                        <dxc:AxisY2D.Title>
+                                            <dxc:AxisTitle Content="速度km/h"/>
+                                        </dxc:AxisY2D.Title>
+                                        <dxc:AxisY2D.VisualRange>
+                                            <dxc:Range MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.VisualRange>
+                                        <dxc:AxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.WholeRange>
+                                    </dxc:AxisY2D>
+                                </dxc:XYDiagram2D.AxisY>
+                                <dxc:XYDiagram2D.AxisX>
+                                    <dxc:AxisX2D MinorCount="10" Brush="Black">
+                                        <dxc:AxisX2D.Title>
+                                            <dxc:AxisTitle Content="运行时间"/>
+                                        </dxc:AxisX2D.Title>
+                                        <dxc:AxisX2D.WholeRange>
+                                            <dxc:Range MaxValue="60" AutoSideMargins="False" MinValue="0"/>
+                                        </dxc:AxisX2D.WholeRange>
+                                        <dxc:AxisX2D.VisualRange>
+                                            <dxc:Range MaxValue="60" MinValue="0" AutoSideMargins="False"/>
+                                        </dxc:AxisX2D.VisualRange>
+                                    </dxc:AxisX2D>
+                                </dxc:XYDiagram2D.AxisX>
+
+                                <dxc:LineSeries2D DisplayName="速度" Name="speedAX5"/>
+                                <dxc:LineSeries2D DisplayName="参考速度" Name="refSpeedAX5"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP1压力" Name="bcp1AX5" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2_5}"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP2压力" Name="bcp2AX5" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2_5}"></dxc:LineSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+
+
+                        <!--5架数字显示-->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Foreground="DodgerBlue" Grid.Column="0">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="1">值</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="2">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="3">值</Label>
+                            </Grid>
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0" Grid.Row="0">速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="1">参考速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="2">载荷</Label>
+                                    <Label Grid.Column="2" Grid.Row="0">BCP1压力</Label>
+                                    <Label Grid.Column="2" Grid.Row="1">BCP2压力</Label>
+
+                                    <Label Grid.Column="1" Grid.Row="0" Name="row_0_column_1_Ax5">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="1" Name="row_1_column_1_Ax5">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="2" Name="row_2_column_1_Ax5">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="0" Name="row_0_column_3_Ax5">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="1" Name="row_1_column_3_Ax5">0.00</Label>
+
+                                </Grid>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+
+
+                    <Grid Grid.Row="11">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--6架曲线显示-->
+                        <dxc:ChartControl Name="chartControlAX6" HorizontalAlignment="Left" VerticalAlignment="Top" Height="400">
+                            <dxc:ChartControl.Legends>
+                                <dxc:Legend BorderBrush="{x:Null}"/>
+                            </dxc:ChartControl.Legends>
+                            <dxc:XYDiagram2D Name="chartDiagramAX6">
+                                <dxc:XYDiagram2D.SecondaryAxesY>
+                                    <dxc:SecondaryAxisY2D Visible="True" Name="y2_6" MinorCount="20">
+                                        <dxc:SecondaryAxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YSecondColor}"/>
+                                        </dxc:SecondaryAxisY2D.Brush>
+                                        <dxc:SecondaryAxisY2D.Title>
+                                            <dxc:AxisTitle Content="压力kpa" Foreground="#FFF10C0C"/>
+                                        </dxc:SecondaryAxisY2D.Title>
+                                        <dxc:SecondaryAxisY2D.VisualRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.VisualRange>
+                                        <dxc:SecondaryAxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="600" MinValue="0"/>
+                                        </dxc:SecondaryAxisY2D.WholeRange>
+                                    </dxc:SecondaryAxisY2D>
+                                </dxc:XYDiagram2D.SecondaryAxesY>
+                                <dxc:XYDiagram2D.AxisY>
+                                    <dxc:AxisY2D MinorCount="10">
+                                        <dxc:AxisY2D.Brush>
+                                            <SolidColorBrush Color="{DynamicResource YMainCOlor}"/>
+                                        </dxc:AxisY2D.Brush>
+                                        <dxc:AxisY2D.Title>
+                                            <dxc:AxisTitle Content="速度km/h"/>
+                                        </dxc:AxisY2D.Title>
+                                        <dxc:AxisY2D.VisualRange>
+                                            <dxc:Range MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.VisualRange>
+                                        <dxc:AxisY2D.WholeRange>
+                                            <dxc:Range AutoSideMargins="False" MaxValue="120" MinValue="0"/>
+                                        </dxc:AxisY2D.WholeRange>
+                                    </dxc:AxisY2D>
+                                </dxc:XYDiagram2D.AxisY>
+                                <dxc:XYDiagram2D.AxisX>
+                                    <dxc:AxisX2D MinorCount="10" Brush="Black">
+                                        <dxc:AxisX2D.Title>
+                                            <dxc:AxisTitle Content="运行时间"/>
+                                        </dxc:AxisX2D.Title>
+                                        <dxc:AxisX2D.WholeRange>
+                                            <dxc:Range MaxValue="60" AutoSideMargins="False" MinValue="0"/>
+                                        </dxc:AxisX2D.WholeRange>
+                                        <dxc:AxisX2D.VisualRange>
+                                            <dxc:Range MaxValue="60" MinValue="0" AutoSideMargins="False"/>
+                                        </dxc:AxisX2D.VisualRange>
+                                    </dxc:AxisX2D>
+                                </dxc:XYDiagram2D.AxisX>
+
+                                <dxc:LineSeries2D DisplayName="速度" Name="speedAX6"/>
+                                <dxc:LineSeries2D DisplayName="参考速度" Name="refSpeedAX6"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP1压力" Name="bcp1AX6" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2_6}"></dxc:LineSeries2D>
+                                <dxc:LineSeries2D DisplayName="BCP2压力" Name="bcp2AX6" dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=y2_6}"></dxc:LineSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+
+
+                        <!--6架数字显示-->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Foreground="DodgerBlue" Grid.Column="0">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="1">值</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="2">项目</Label>
+                                <Label Foreground="DodgerBlue" Grid.Column="3">值</Label>
+                            </Grid>
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0" Grid.Row="0">速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="1">参考速度</Label>
+                                    <Label Grid.Column="0" Grid.Row="2">载荷</Label>
+                                    <Label Grid.Column="2" Grid.Row="0">BCP1压力</Label>
+                                    <Label Grid.Column="2" Grid.Row="1">BCP2压力</Label>
+
+                                    <Label Grid.Column="1" Grid.Row="0" Name="row_0_column_1_Ax6">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="1" Name="row_1_column_1_Ax6">0.00</Label>
+                                    <Label Grid.Column="1" Grid.Row="2" Name="row_2_column_1_Ax6">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="0" Name="row_0_column_3_Ax6">0.00</Label>
+                                    <Label Grid.Column="3" Grid.Row="1" Name="row_1_column_3_Ax6">0.00</Label>
+
+                                </Grid>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+
+    </DockPanel>
+</Window>

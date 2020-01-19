@@ -1,0 +1,136 @@
+﻿<Window x:Class="DirectConnectionPredictControl.TChartDisplay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:chart="clr-namespace:Steema.TeeChart.WPF;assembly=TeeChart.WPF"
+        xmlns:local="clr-namespace:DirectConnectionPredictControl"
+        mc:Ignorable="d"
+        Title="TChartDisplay" Height="900" Width="1400">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <!--<Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <CheckBox>accValueTChart</CheckBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <CheckBox>refSpeedTChart</CheckBox>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <CheckBox>emergencyHardTChart</CheckBox>
+                    </Grid>
+                </Grid>
+                
+                
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <CheckBox>brakeHardTChart</CheckBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <CheckBox>fastHardTChart</CheckBox>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <CheckBox>enableTrainBrakeForceTChart</CheckBox>
+                    </Grid>
+                </Grid>
+                
+                
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <CheckBox>trainBrakeForceTChart</CheckBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <CheckBox>brakeLevelTChart</CheckBox>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <CheckBox>pressureTChart</CheckBox>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <CheckBox>dcuEbFadeoutTChart</CheckBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <CheckBox>dcu1EbRealValueTChart</CheckBox>
+                    </Grid>
+                </Grid>-->
+                
+            </Grid>
+            <Grid Grid.Row="1">
+                <chart:TChart Name="accValueTChart"></chart:TChart>
+            </Grid>
+            <Grid Grid.Row="2">
+                <chart:TChart Name="refSpeedTChart"></chart:TChart>
+            </Grid>
+            <Grid Grid.Row="3">
+                <chart:TChart Name="emergencyHardTChart"></chart:TChart>
+            </Grid>
+            <Grid Grid.Row="4">
+                <chart:TChart Name="brakeHardTChart"></chart:TChart>
+            </Grid>
+            <Grid Grid.Row="5">
+                <chart:TChart Name="fastHardTChart"></chart:TChart>
+            </Grid>
+            <Grid Grid.Row="6">
+                <chart:TChart Name="enableTrainBrakeForceTChart"></chart:TChart>
+            </Grid>
+            <Grid Grid.Row="7">
+                <chart:TChart Name="trainBrakeForceTChart"></chart:TChart>
+            </Grid>
+            <Grid Grid.Row="8">
+                <chart:TChart Name="brakeLevelTChart"></chart:TChart>
+            </Grid>
+            <Grid Grid.Row="9">
+                <chart:TChart Name="pressureTChart"></chart:TChart>
+            </Grid>
+            <Grid Grid.Row="10">
+                <chart:TChart Name="dcuEbFadeoutTChart"></chart:TChart>
+            </Grid>
+            <Grid Grid.Row="11">
+                <chart:TChart Name="dcu1EbRealValueTChart"></chart:TChart>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Window>

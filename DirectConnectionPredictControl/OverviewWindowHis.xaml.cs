@@ -279,6 +279,308 @@ namespace DirectConnectionPredictControl
             row_7_column_11_sli.Content = container_4.ConnectValveControl;
             row_7_column_12_sli.Content = container_5.ConnectValveControl;
             row_7_column_13_sli.Content = container_6.ConnectValveControl;
+
+            #region 2020-3-25
+
+            #region 1架1、2轴滑移率
+
+            if (container_1.GateValveState) // 1车为主车
+            {
+                // 1轴
+                if ((container_1.RefSpeed - container_1.SpeedA1Shaft1) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_1_sli.Content = 0;
+                    
+                }
+                else
+                {
+                    row_8_column_1_sli.Content = ((container_1.RefSpeed - container_1.SpeedA1Shaft1) / container_1.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_1.RefSpeed - container_1.SpeedA1Shaft2) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_8_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_8_sli.Content = ((container_1.RefSpeed - container_1.SpeedA1Shaft2) / container_1.RefSpeed) * 100;
+                }
+            }
+            else // 6车为主车
+            {
+                // 1轴
+                if ((container_6.RefSpeed - container_1.SpeedA1Shaft1) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_1_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_1_sli.Content = ((container_6.RefSpeed - container_1.SpeedA1Shaft1) / container_6.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_6.RefSpeed - container_1.SpeedA1Shaft2) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_8_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_8_sli.Content = ((container_6.RefSpeed - container_1.SpeedA1Shaft2) / container_6.RefSpeed) * 100;
+                }
+            }
+
+            #endregion
+
+            #region 2架1、2轴滑移率
+
+            if (container_1.GateValveState) // 1车为主车
+            {
+                // 1轴
+                if ((container_1.RefSpeed - container_2.SpeedShaft1) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_2_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_2_sli.Content = ((container_1.RefSpeed - container_2.SpeedShaft1) / container_1.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_1.RefSpeed - container_2.SpeedShaft2) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_9_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_9_sli.Content = ((container_1.RefSpeed - container_2.SpeedShaft2) / container_1.RefSpeed) * 100;
+                }
+            }
+            else // 6车为主车
+            {
+                // 1轴
+                if ((container_6.RefSpeed - container_2.SpeedShaft1) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_2_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_2_sli.Content = ((container_6.RefSpeed - container_2.SpeedShaft1) / container_6.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_6.RefSpeed - container_2.SpeedShaft2) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_9_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_9_sli.Content = ((container_6.RefSpeed - container_2.SpeedShaft2) / container_6.RefSpeed) * 100;
+                }
+            }
+
+            #endregion
+
+            #region 3架1、2轴滑移率
+
+            if (container_1.GateValveState) // 1车为主车
+            {
+                // 1轴
+                if ((container_1.RefSpeed - container_3.SpeedShaft1) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_3_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_3_sli.Content = ((container_1.RefSpeed - container_3.SpeedShaft1) / container_1.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_1.RefSpeed - container_3.SpeedShaft2) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_10_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_10_sli.Content = ((container_1.RefSpeed - container_3.SpeedShaft2) / container_1.RefSpeed) * 100;
+                }
+            }
+            else // 6车为主车
+            {
+                // 1轴
+                if ((container_6.RefSpeed - container_3.SpeedShaft1) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_3_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_3_sli.Content = ((container_6.RefSpeed - container_3.SpeedShaft1) / container_6.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_6.RefSpeed - container_3.SpeedShaft2) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_10_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_10_sli.Content = ((container_6.RefSpeed - container_3.SpeedShaft2) / container_6.RefSpeed) * 100;
+                }
+            }
+
+            #endregion
+
+            #region 4架1、2轴滑移率
+
+            if (container_1.GateValveState) // 1车为主车
+            {
+                // 1轴
+                if ((container_1.RefSpeed - container_4.SpeedShaft1) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_4_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_4_sli.Content = ((container_1.RefSpeed - container_4.SpeedShaft1) / container_1.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_1.RefSpeed - container_4.SpeedShaft2) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_11_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_11_sli.Content = ((container_1.RefSpeed - container_4.SpeedShaft2) / container_1.RefSpeed) * 100;
+                }
+            }
+            else // 6车为主车
+            {
+                // 1轴
+                if ((container_6.RefSpeed - container_4.SpeedShaft1) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_4_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_4_sli.Content = ((container_6.RefSpeed - container_4.SpeedShaft1) / container_6.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_6.RefSpeed - container_4.SpeedShaft2) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_11_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_11_sli.Content = ((container_6.RefSpeed - container_4.SpeedShaft2) / container_6.RefSpeed) * 100;
+                }
+            }
+
+            #endregion
+
+            #region 5架1、2轴滑移率
+
+            if (container_1.GateValveState) // 1车为主车
+            {
+                // 1轴
+                if ((container_1.RefSpeed - container_5.SpeedShaft1) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_5_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_5_sli.Content = ((container_1.RefSpeed - container_5.SpeedShaft1) / container_1.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_1.RefSpeed - container_5.SpeedShaft2) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_12_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_12_sli.Content = ((container_1.RefSpeed - container_5.SpeedShaft2) / container_1.RefSpeed) * 100;
+                }
+            }
+            else // 6车为主车
+            {
+                // 1轴
+                if ((container_6.RefSpeed - container_5.SpeedShaft1) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_5_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_5_sli.Content = ((container_6.RefSpeed - container_5.SpeedShaft1) / container_6.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_6.RefSpeed - container_5.SpeedShaft2) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_12_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_12_sli.Content = ((container_6.RefSpeed - container_5.SpeedShaft2) / container_6.RefSpeed) * 100;
+                }
+            }
+
+            #endregion
+
+            #region 6架1、2轴滑移率
+
+            if (container_1.GateValveState) // 1车为主车
+            {
+                // 1轴
+                if ((container_1.RefSpeed - container_6.SpeedA1Shaft1) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_6_sli.Content = 0;
+
+                }
+                else
+                {
+                    row_8_column_6_sli.Content = ((container_1.RefSpeed - container_6.SpeedA1Shaft1) / container_1.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_1.RefSpeed - container_6.SpeedA1Shaft2) < 0 || container_1.RefSpeed < 3)
+                {
+                    row_8_column_13_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_13_sli.Content = ((container_1.RefSpeed - container_6.SpeedA1Shaft2) / container_1.RefSpeed) * 100;
+                }
+            }
+            else // 6车为主车
+            {
+                // 1轴
+                if ((container_6.RefSpeed - container_6.SpeedA1Shaft1) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_6_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_6_sli.Content = ((container_6.RefSpeed - container_6.SpeedA1Shaft1) / container_6.RefSpeed) * 100;
+                }
+
+                // 2轴
+                if ((container_6.RefSpeed - container_6.SpeedA1Shaft2) < 0 || container_6.RefSpeed < 3)
+                {
+                    row_8_column_13_sli.Content = 0;
+                }
+                else
+                {
+                    row_8_column_13_sli.Content = ((container_6.RefSpeed - container_6.SpeedA1Shaft2) / container_6.RefSpeed) * 100;
+                }
+            }
+
+            #endregion
+
+            #endregion
+
+
         }
 
         // 2020-1-15

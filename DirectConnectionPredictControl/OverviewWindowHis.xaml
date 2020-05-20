@@ -1875,8 +1875,8 @@
                         <Label Grid.Row="2" Grid.Column="0">DCU1电网电压</Label>
                         <Label Grid.Row="3" Grid.Column="0">DCU2电网电压</Label>
                         <Label Grid.Row="4" Grid.Column="0">轴1减速度</Label>
-                        <Label Grid.Row="5" Grid.Column="0">1轴速度传感器故障明细</Label>
-                        <Label Grid.Row="6" Grid.Column="0">2轴速度传感器故障明细</Label>
+                        <Label Grid.Row="5" Grid.Column="0" FontSize="10">1轴速度传感器故障明细</Label>
+                        <Label Grid.Row="6" Grid.Column="0" FontSize="10">2轴速度传感器故障明细</Label>
 
                         <Label Grid.Row="4" Grid.Column="7">轴2减速度</Label>
                         <Label Grid.Row="2" Grid.Column="7">DCU3电网电压</Label>
@@ -1884,6 +1884,23 @@
                         <Label Grid.Row="5" Grid.Column="7">轴1WSP目标值</Label>
                         <Label Grid.Row="6" Grid.Column="7">轴2WSP目标值</Label>
                         <Label Grid.Row="7" Grid.Column="7">连接阀控制命令</Label>
+                        
+                        <!-- 2020-3-25 -->
+                        <Label Grid.Row="8" Grid.Column="0">1轴滑移率</Label>
+                        <Label Grid.Row="8" Grid.Column="1" Name="row_8_column_1_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="2" Name="row_8_column_2_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="3" Name="row_8_column_3_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="4" Name="row_8_column_4_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="5" Name="row_8_column_5_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="6" Name="row_8_column_6_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="7">2轴滑移率</Label>
+                        <Label Grid.Row="8" Grid.Column="8" Name="row_8_column_8_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="9" Name="row_8_column_9_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="10" Name="row_8_column_10_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="11" Name="row_8_column_11_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="12" Name="row_8_column_12_sli">0</Label>
+                        <Label Grid.Row="8" Grid.Column="13" Name="row_8_column_13_sli">0</Label>
+
 
                         <Label Grid.Row="1" Grid.Column="1" Name="row_1_column_1_sli"></Label>
                         <Label Grid.Row="1" Grid.Column="2" Name="row_1_column_2_sli"></Label>

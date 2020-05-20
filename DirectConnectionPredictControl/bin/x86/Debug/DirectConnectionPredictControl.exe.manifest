@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DirectConnectionPredictControl.exe" size="3275264">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DirectConnectionPredictControl.exe" size="3281408">
       <assemblyIdentity name="DirectConnectionPredictControl" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>04d+0jdM73nZhnux/M30SDLCQs6YZ/yPbr1h4wjcG6g=</dsig:DigestValue>
+        <dsig:DigestValue>ultKZiC/h6dGT4C/Y521U5LDD16ERr37QeFqN7GpilI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

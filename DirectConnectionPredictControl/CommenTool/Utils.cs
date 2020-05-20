@@ -30,7 +30,7 @@ namespace DirectConnectionPredictControl.CommenTool
             //string fileName = Path.GetFileName(relativePath);
             htmlPath = Path.GetFullPath(relativePath);
         }
-        public static int timeInterval = 1000;
+        public static int timeInterval = 100; // 2020-5-20：修改每个页面的刷新时间
         public static string formatN1 = "{0:N1}";
         public static DataTable ToDataTable<T>(List<T> items)
         {
